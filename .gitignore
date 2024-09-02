@@ -11,12 +11,12 @@ capybara-*.html
 *.orig
 rerun.txt
 pickle-email-*.html
+/test/reports
 
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
 !/log/.keep
-!/tmp/.keep
 
 # TODO Comment out this rule if you are OK with secrets being uploaded to the repo
 config/initializers/secret_token.rb
@@ -29,6 +29,7 @@ config/master.key
 # TODO Comment out these rules if environment variables can be committed
 .env
 .env*.local
+.envrc
 
 ## Environment normalization:
 /.bundle
@@ -59,6 +60,8 @@ node_modules/
 /public/packs
 /public/packs-test
 /public/assets
+/app/assets/builds/*
+!/app/assets/builds/.keep
 
 # Ignore yarn files
 /yarn-error.log
@@ -67,12 +70,10 @@ yarn-debug.log*
 
 # Ignore uploaded files in development
 /public/uploads
+storage/
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-
-/app/assets/builds/*
-!/app/assets/builds/.keep
 
 # Another
 /*.pdf
