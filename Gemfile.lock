@@ -197,6 +197,7 @@ GEM
     regexp_parser (2.9.2)
     reline (0.5.9)
       io-console (~> 0.5)
+    rexml (3.3.7)
     rubocop (1.66.0)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
@@ -233,6 +234,10 @@ GEM
       actionpack (>= 3.1)
       railties (>= 3.1)
       slim (>= 3.0, < 6.0, != 5.0.0)
+    slim_lint (0.29.0)
+      rexml (~> 3.2)
+      rubocop (>= 1.0, < 2.0)
+      slim (>= 3.0, < 6.0)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -277,6 +282,7 @@ DEPENDENCIES
   rubocop-performance
   rubocop-rails
   slim-rails
+  slim_lint
   sprockets-rails
   tzinfo-data
 
