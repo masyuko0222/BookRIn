@@ -1,0 +1,49 @@
+require:
+  - rubocop-minitest
+  - rubocop-capybara
+  - rubocop-performance
+  - rubocop-rails
+
+AllCops:
+  TargetRubyVersion: 3.3
+  NewCops: disable
+  SuggestExtensions: false
+  Exclude:
+    - '**/templates/**/*'
+    - '**/vendor/**/*'
+    - 'app/views/**/*'
+    - 'config/**/*'
+    - 'config.ru'
+    - 'node_modules/**/*'
+    - 'db/migrate/*'
+    - 'db/schema.rb'
+    - 'storage/**/*'
+    - 'tmp/**/*'
+    - 'bin/**/*'
+
+Metrics/ClassLength:
+  Exclude:
+    - test/**/*
+
+Metrics/MethodLength:
+  Exclude:
+    - test/**/*
+
+Performance:
+  Exclude:
+    - '**/test/**/*'
+
+Style/Documentation:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/AsciiComments:
+  Enabled: false
+
+Lint/UnusedMethodArgument:
+  AutoCorrect: false
+
+Style/NegatedIf:
+  Enabled: false
