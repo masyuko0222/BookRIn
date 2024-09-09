@@ -31,12 +31,16 @@ gem 'cssbundling-rails'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[windows jruby]
 
+# For View
+gem 'slim-rails'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri windows]
 end
 
 group :development do
+  gem 'html2slim', require: false, github: 'slim-template/html2slim'
   gem 'rubocop', require: false
   gem 'rubocop-capybara', require: false
   gem 'rubocop-fjord', '~> 0.3.0', require: false
