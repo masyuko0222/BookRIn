@@ -6,6 +6,13 @@ import eslintConfigPrettier from "eslint-config-prettier"
 export default [
   { files: ["**/*.{js,mjs,cjs,jsx}"] },
   {
+    settings: {
+      react: {
+        version: 'detect',
+      }
+    }
+  },
+  {
     languageOptions:
     {
       globals: {
