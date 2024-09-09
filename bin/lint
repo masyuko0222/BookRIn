@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e
+bundle exec rubocop -a
+bundle exec slim-lint app/views -c .slim-lint.yml
+
+# TODO output errors more human-friendly.
+npm run lint
