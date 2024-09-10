@@ -12,7 +12,7 @@
 		"prettier": "3.3.3"
 	},
 	"scripts": {
-		"lint": "run-p lint:*",
+		"lint": "run-s lint:*",
 		"lint:eslint": "eslint 'app/javascript/**/*.{js,jsx}' --max-warnings=0",
 		"lint:prettier": "prettier app/javascript/**/*.{js,jsx} --check",
 		"build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets --loader:.js=jsx",
