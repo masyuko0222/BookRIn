@@ -1,0 +1,50 @@
+name: Ruby
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  ruby:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        ports:
+          - "5432:5432"
+        env:
+          POSTGRES_DB: rindokukainote_test
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test_password
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: "postgres://test:test_password@localhost:5432/rindokukainote_test"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+
+      - name: Install dependencies
+        run: bundle install
+
+      - name: Run rubocop
+        run: bundle exec rubocop -a
+
+      - name: Run slim-lint
+        run: bundle exec slim-lint app/views -c .slim-lint.yml
+
+      - name: Set up database schema
+        run:  bin/rails db:schema:load
+
+      - name: Set up data
+        run: bin/rails db:seed
+
+      - name: Run test
+        run: bin/rails test:all
