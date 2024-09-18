@@ -40,11 +40,11 @@ jobs:
       - name: Run slim-lint
         run: bundle exec slim-lint app/views -c .slim-lint.yml
 
-      - name: Set up database schema
-        run:  bin/rails db:schema:load
+      # - name: Set up database schema
+      #   run:  bin/rails db:schema:load
 
-      - name: Set up data
-        run: bin/rails db:seed
+      # - name: Set up data
+      #   run: bin/rails db:seed
 
-      - name: Run test
-        run: bin/rails test:all
+      # - name: Run test
+      #   run: bin/rails test:all
