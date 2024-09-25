@@ -37,7 +37,7 @@ class UserTest < ActiveSupport::TestCase
       oauth_user = User.find_or_create_from_discord_info(@new_user_info)
 
       assert_equal 'discord', oauth_user.provider
-      assert_equal 987654321, oauth_user.uid # rubocop:disable Style/NumericLiterals
+      assert_equal '987654321', oauth_user.uid
       assert_equal 'NewTestMan', oauth_user.name
     end
   end
