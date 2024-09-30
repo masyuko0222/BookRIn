@@ -16,6 +16,7 @@ class SessionsController < ApplicationController
   end
 
   def failure
-    redirect_to login_path # TODO: failure message
+    # TODO: failure message
+    redirect_to login_path
   end
 end
