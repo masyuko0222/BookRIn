@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
+  include SessionHelper
+
   def new; end
 
   def callback
@@ -8,7 +10,7 @@ class SessionsController < ApplicationController
 
     if user.persisted?
       reset_session
-      session[:user_id] = user.id
+      login(user)
       redirect_to root_path # TODO: flash message
     else
       redirect_to login_path # TODO: error message
