@@ -13,17 +13,13 @@ default: &default
 development:
   <<: *default
   database: rindokukainote_development
-  username: development
-  password: development_password
 
 test:
   <<: *default
   database: rindokukainote_test
-  username: test
-  password: test_password
 
 production:
   <<: *default
-  database: rindokukainote_production
+  database: <%= ENV["DB_NAME"] %>
   username: <%= ENV["DB_USERNAME"] %>
   password: <%= ENV["DB_PASSWORD"] %>
