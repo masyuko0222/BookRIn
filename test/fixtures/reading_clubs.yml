@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+<% (1..20).each do |i| %>
+reading_club<%= i %>:
+  title: OpenClub <%= i %>
+  finished: false
+  template: null
+  read_me: null
+  updated_at: <%= (20 - i).minutes.ago %> # 20のupdated_atが最新、1が最古になる
+<% end %>
+
+<% (1..20).each do |i| %>
+finished_reading_club<%= i %>:
+  title: FinishedClub <%= i %>
+  finished: true
+  template: null
+  read_me: null
+  updated_at: <%= (20 - i).minutes.ago %>
+<% end %>
