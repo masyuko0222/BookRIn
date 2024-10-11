@@ -35,13 +35,3 @@ User.create!(
   name: 'TestMan2',
   provider: 'discord'
 )
-
-Participant.create!(
-  user_id: 1,
-  reading_club_id: 100
-)
-
-Participant.create!(
-  user_id: 2,
-  reading_club_id: 100
-)
