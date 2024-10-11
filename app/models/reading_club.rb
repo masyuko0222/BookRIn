@@ -6,4 +6,6 @@ class ReadingClub < ApplicationRecord
 
   has_many :participants, dependent: :destroy
   has_many :users, through: :participants
+
+  paginates_per 15
 end
