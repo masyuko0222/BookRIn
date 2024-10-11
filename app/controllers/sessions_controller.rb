@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
-  include SessionHelper
+  skip_before_action :require_user_login, only: %i[new callback failure]
 
   def new; end
 
