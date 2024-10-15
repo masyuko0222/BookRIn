@@ -331,7 +331,6 @@ GEM
     stimulus-rails (1.3.4)
       railties (>= 6.0.0)
     stringio (3.1.1)
-    table_print (1.5.7)
     temple (0.10.3)
     thor (1.3.2)
     tilt (2.4.0)
@@ -386,7 +385,6 @@ DEPENDENCIES
   slim-rails
   slim_lint
   sprockets-rails
-  table_print
   tzinfo-data
 
 RUBY VERSION
