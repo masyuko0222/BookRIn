@@ -35,6 +35,7 @@ gem 'tzinfo-data', platforms: %i[windows jruby]
 gem 'hotwire-rails'
 gem 'redcarpet'
 gem 'slim-rails'
+gem 'tailwindcss-rails', '~> 3.0'
 
 # env
 gem 'dotenv-rails'
@@ -48,6 +49,7 @@ gem 'kaminari'
 
 # for search
 gem 'ransack'
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
