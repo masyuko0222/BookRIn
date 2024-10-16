@@ -1,0 +1,13 @@
+= search_form_for(@q, url:, enforce_utf8: false) do |f|
+  = f.search_field :title_cont, placeholder: '輪読会のタイトルで検索', class: 'form-control'
+  br
+  = f.label :finished_eq, '開催状態'
+  br
+  label
+    = f.radio_button :finished_eq, false, id: 'q_finished_eq_false', checked: true
+    | 開催中
+  label
+    = f.radio_button :finished_eq, true, id: 'q_finished_eq_true'
+    | 終了
+  br
+  = f.submit '検索', class: 'btn btn-primary'
