@@ -25,14 +25,14 @@ class UserTest < ActiveSupport::TestCase
     )
   end
 
-  test '#find_or_create_from_discord_info is used as find method if user is exist' do
+  test '.find_or_create_from_discord_info is used as find method if user is exist' do
     oauth_user = User.find_or_create_from_discord_info(@exist_user_info)
     exist_user = users(:user1)
 
     assert_equal oauth_user, exist_user
   end
 
-  test '#find_or_create_from_discord_info is used as create method if user is new' do
+  test '.find_or_create_from_discord_info is used as create method if user is new' do
     assert_difference 'User.count', +1 do
       oauth_user = User.find_or_create_from_discord_info(@new_user_info)
 

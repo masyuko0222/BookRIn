@@ -78,9 +78,6 @@ storage/
 # Another
 /*.pdf
 
-# ransack log
-/q
-
 ### react ###
 .DS_*
 *.log
