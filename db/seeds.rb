@@ -13,25 +13,27 @@
 100.times do |n|
   ReadingClub.create!(
     title: "OpeningTitle#{n + 1}",
-    finished: false
+    finished: false,
+    read_me: "# Opening Club #{n + 1}\n\nThis is the **opening club** description in markdown format."
   )
 end
 
 100.times do |n|
   ReadingClub.create!(
     title: "FinishedTitle#{n + 1}",
-    finished: true
+    finished: true,
+    read_me: "# Finished Club #{n + 1}\n\nThis is the **finished club** description in markdown format."
   )
 end
 
 User.create!(
-  uid: 12345678,
+  uid: 12345678, # rubocop:disable Style/NumericLiterals
   name: 'TestMan1',
   provider: 'discord'
 )
 
 User.create!(
-  uid: 87654321,
+  uid: 87654321, # rubocop:disable Style/NumericLiterals
   name: 'TestMan2',
   provider: 'discord'
 )
