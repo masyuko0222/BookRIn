@@ -7,7 +7,7 @@ class ReadingClubsTest < ApplicationSystemTestCase
     @user = users(:user1)
   end
 
-  test 'The initial display shows opening reading_clubs orderd by updated_at desc' do
+  test 'Opening reading_clubs ordered by updated_at desc are shown initially.' do
     @user.participating_reading_clubs.destroy_all
 
     visit_with_auth(reading_clubs_path, @user)
@@ -15,15 +15,17 @@ class ReadingClubsTest < ApplicationSystemTestCase
 
     titles = page.all('ul li').map { |li| li.find('a', match: :first).text }
 
-    per_page = ReadingClub.default_per_page
+    per_page = ReadingClub.default_per_page # １ページに15件表示される設定
+
     start_number = 20
     end_number = start_number - per_page + 1
-    expected_titles = (end_number..start_number).to_a.reverse.map { |i| "OpenClub #{i}" } # OpenClub 20..5
+    # OpenClub 20..5の順で並ぶ
+    expected_titles = (end_number..start_number).to_a.reverse.map { |i| "OpenClub #{i}" }
 
     assert_equal expected_titles, titles
   end
 
-  test 'reading_clubs current user is participating are sorted at the top if user chooses opening clubs' do
+  test 'Opening reading_clubs that the current user is participating in are sorted at the top' do
     participating_reading_clubs =
       [
         reading_clubs(:reading_club1),
@@ -38,7 +40,8 @@ class ReadingClubsTest < ApplicationSystemTestCase
     visit_with_auth(reading_clubs_path, @user)
 
     titles = page.all('ul li').map { |li| li.find('a', match: :first).text }
-    expected_top_titles = ['OpenClub 20', 'OpenClub 5', 'OpenClub 1'] # 新しく参加した順
+    # 最近参加した輪読会から順に出力される
+    expected_top_titles = ['OpenClub 20', 'OpenClub 5', 'OpenClub 1']
 
     assert_equal expected_top_titles, titles.first(3)
   end
