@@ -13,7 +13,7 @@ class ReadingClubsTest < ApplicationSystemTestCase
     visit_with_auth(reading_clubs_path, @user)
     assert_selector 'h1', text: '輪読会一覧'
 
-    titles = page.all('ul li').map(&:text)
+    titles = page.all('ul li').map { |li| li.find('a', match: :first).text }
 
     per_page = ReadingClub.default_per_page
     start_number = 20
@@ -37,7 +37,7 @@ class ReadingClubsTest < ApplicationSystemTestCase
 
     visit_with_auth(reading_clubs_path, @user)
 
-    titles = page.all('ul li').map(&:text)
+    titles = page.all('ul li').map { |li| li.find('a', match: :first).text }
     expected_top_titles = ['OpenClub 20', 'OpenClub 5', 'OpenClub 1'] # 新しく参加した順
 
     assert_equal expected_top_titles, titles.first(3)
