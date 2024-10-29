@@ -32,6 +32,8 @@ gem 'cssbundling-rails'
 gem 'tzinfo-data', platforms: %i[windows jruby]
 
 # For View
+gem 'hotwire-rails'
+gem 'redcarpet'
 gem 'slim-rails'
 
 # env
@@ -46,8 +48,6 @@ gem 'kaminari'
 
 # for search
 gem 'ransack'
-
-gem 'hotwire-rails'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
