@@ -6,13 +6,6 @@ h1 輪読会一覧
 
 ul
   - @reading_clubs.each do |reading_club|
-    li
-      = reading_club.title
-
-    - unless reading_club.finished
-      - if (participant = reading_club.participants.find_by(user: current_user))
-        = link_to '参加取消', participant_path(participant), data: { turbo_method: :delete }
-      - else
-        = link_to '参加', reading_club_participants_path(reading_club), data: { turbo_method: :post }
+    = render 'reading_club', reading_club:
 
 = paginate @reading_clubs
