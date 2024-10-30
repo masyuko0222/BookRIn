@@ -37,3 +37,31 @@ User.create!(
   name: 'TestMan2',
   provider: 'discord'
 )
+
+# 以下はnoteの仮seed。そのうちきれいにする。
+opening_club = ReadingClub.find_by(title: 'OpeningTitle100')
+
+10.times do |n|
+  opening_club.notes.create!(
+    held_on: Time.zone.today - n,
+    title: ((n % 3).zero? ? nil : "Note #{n + 1}"),
+    content: case n % 4
+             when 0, 2
+               <<~MARKDOWN
+                 ## 第#{n + 1}回
+                 ### 読んだところ
+                 - 「序章」から「第一章」まで
+                 ### 疑問点や気づき、学んだこと
+                 - **田中** 新しい視点で物事を見つめる大切さ
+                 - **鈴木** 読みやすい構成の工夫
+                 - **佐藤** 理解を深める質問が良い
+                 ### 近況、今の気分など
+                 - **高橋** 少し疲れ気味だが、読書が楽しい
+                 - **山田** このクラブに参加できてよかった
+                 - **中村** さらに次の章が楽しみ
+               MARKDOWN
+             when 1, 3
+               nil # contentがnil
+             end
+  )
+end

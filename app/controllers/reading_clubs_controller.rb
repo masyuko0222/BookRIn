@@ -14,6 +14,7 @@ class ReadingClubsController < ApplicationController
     reading_club = ReadingClub.find(params[:id])
 
     @read_me = reading_club.read_me
+    @notes = reading_club.notes
   end
 
   private

@@ -2,3 +2,7 @@ h1 OverView
 
 .markdown-content
   = to_html(@read_me)
+
+.reading-notes
+  - @notes.each do |note|
+    p = note.held_on
