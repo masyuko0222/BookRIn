@@ -10,6 +10,13 @@ class ReadingClubsController < ApplicationController
     @reading_clubs = Kaminari.paginate_array(sort_reading_clubs(params[:q])).page(params[:page])
   end
 
+  def overview
+    reading_club = ReadingClub.find(params[:id])
+
+    @read_me = reading_club.read_me
+    @notes = reading_club.notes
+  end
+
   private
 
   def sort_reading_clubs(search_query)
