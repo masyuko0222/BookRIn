@@ -3,20 +3,26 @@
 require 'test_helper'
 
 class ReadingClubTest < ActiveSupport::TestCase
-  test '#opening_clubs_participated_by(user)' do
-    user = users(:user1)
+  setup do
+    @user = users(:user1)
 
-    r1 = reading_clubs(:reading_club1)
-    r3 = reading_clubs(:reading_club3)
-    r20 = reading_clubs(:reading_club20)
-
-    [r1, r3, r20].each do |r|
-      user.participants.create!(reading_club: r)
+    [
+      reading_clubs(:reading_club1),
+      reading_clubs(:reading_club3),
+      reading_clubs(:reading_club20)
+    ].each do |club|
+      @user.participants.create!(reading_club: club)
     end
+  end
 
-    clubs = ReadingClub.opening_clubs_participated_by(user)
+  test '#opening_clubs_participated_by(user)' do
+    expected_clubs = [
+      reading_clubs(:reading_club20),
+      reading_clubs(:reading_club3),
+      reading_clubs(:reading_club1)
+    ]
 
-    assert_equal 3, clubs.count
-    assert_equal [r20, r3, r1], clubs.first(3) # 後から参加したものが先頭にくる
+    # 参加日時降順
+    assert_equal expected_clubs, ReadingClub.opening_clubs_participated_by(@user)
   end
 end
