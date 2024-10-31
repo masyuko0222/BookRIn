@@ -20,9 +20,10 @@ class ReadingClub < ApplicationRecord
     end
 
     def opening_clubs_participated_by(user)
-      (ReadingClub.open & user.participating_reading_clubs)
-        .sort_by { |club| club.participants.last.updated_at }
-        .reverse
+      ReadingClub.open
+                 .joins(:participants)
+                 .where(participants: { user_id: user.id })
+                 .order('participants.updated_at DESC')
     end
   end
 end
