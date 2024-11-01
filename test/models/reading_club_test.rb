@@ -3,20 +3,24 @@
 require 'test_helper'
 
 class ReadingClubTest < ActiveSupport::TestCase
-  test '#opening_clubs_participated_by(user)' do
-    user = users(:user1)
+  setup do
+    @user = users(:user1)
 
-    r1 = reading_clubs(:reading_club1)
-    r3 = reading_clubs(:reading_club3)
-    r20 = reading_clubs(:reading_club20)
+    @r2 = reading_clubs(:reading_club1)
+    @r5 = reading_clubs(:reading_club5)
+    @r12 = reading_clubs(:reading_club10)
+    @r20 = reading_clubs(:reading_club20)
 
-    [r1, r3, r20].each do |r|
-      user.participants.create!(reading_club: r)
-    end
+    @user.participants.create!(reading_club: @r12, created_at: 1.day.ago)
+    @user.participants.create!(reading_club: @r5, created_at: 2.days.ago)
+    @user.participants.create!(reading_club: @r2, created_at: 3.days.ago)
+  end
+  test '.sort_participating_first' do
+    # '2'の文字列にヒットするもの
+    hit_clubs = [@r2, @r12, @r20]
 
-    clubs = ReadingClub.opening_clubs_participated_by(user)
+    expected_sorted_clubs = [@r12, @r2, @r20]
 
-    assert_equal 3, clubs.count
-    assert_equal [r20, r3, r1], clubs.first(3) # 後から参加したものが先頭にくる
+    assert_equal expected_sorted_clubs, ReadingClub.sort_participating_first(hit_clubs, @user)
   end
 end

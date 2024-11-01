@@ -12,11 +12,7 @@ class User < ApplicationRecord
     def find_or_create_from_discord_info(discord_info)
       user_info = user_discord_info(discord_info)
 
-      where(user_info).first_or_create do |user|
-        user.uid = user_info[:uid]
-        user.name = user_info[:name]
-        user.provider = user_info[:provider]
-      end
+      where(user_info).first_or_create(user_info)
     end
 
     private
