@@ -10,7 +10,7 @@ class ReadingClubsTest < ApplicationSystemTestCase
       [
         reading_clubs(:reading_club1),
         reading_clubs(:reading_club5),
-        reading_clubs(:reading_club20)
+        reading_clubs(:reading_club10)
       ]
 
     @participating_reading_clubs.each do |reading_club|
@@ -35,9 +35,26 @@ class ReadingClubsTest < ApplicationSystemTestCase
     assert_selector 'h1', text: '輪読会一覧'
 
     club_titles = page.all('ul li').map { |li| li.find('a', match: :first).text }
-    expected_top_titles = ['OpenClub 20', 'OpenClub 5', 'OpenClub 1'] # 参加日降順
+    expected_top_titles = ['OpenClub 10', 'OpenClub 5', 'OpenClub 1'] # 参加日降順
 
     assert_equal expected_top_titles, club_titles.first(3)
+  end
+
+  test 'Opening reading_clubs with searching title' do
+    visit_with_auth(reading_clubs_path, @user)
+    assert_selector 'h1', text: '輪読会一覧'
+    fill_in '輪読会のタイトルで検索', with: '1'
+    choose '開催中'
+    click_button '検索'
+
+    assert_selector 'h1', text: '輪読会一覧'
+    club_titles = page.all('ul li').map { |li| li.find('a', match: :first).text }
+
+    hit_participating_clubs = [reading_clubs(:reading_club10), reading_clubs(:reading_club1)]
+    hit_all_clubs = ReadingClub.open.where('title ILIKE ?', '%1%').order(updated_at: :desc)
+    expected_titles = (hit_participating_clubs + hit_all_clubs).uniq(&:id).map(&:title)
+
+    assert_equal expected_titles, club_titles
   end
 
   test 'Finished reading_clubs does not have participant links' do
