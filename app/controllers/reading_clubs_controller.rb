@@ -27,7 +27,10 @@ class ReadingClubsController < ApplicationController
     if search_query[:finished_eq] == 'true' || search_query[:title_cont].present?
       result
     else
-      (ReadingClub.opening_clubs_participated_by(current_user) + result)
+      open_and_participating_clubs =
+        current_user.participating_reading_clubs.open.order('participants.created_at DESC')
+
+      (open_and_participating_clubs + result)
         .uniq(&:id)
     end
   end

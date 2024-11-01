@@ -18,12 +18,5 @@ class ReadingClub < ApplicationRecord
     def ransackable_attributes(_auth_object = nil)
       %w[title finished]
     end
-
-    def opening_clubs_participated_by(user)
-      ReadingClub.open
-                 .joins(:participants)
-                 .where(participants: { user_id: user.id })
-                 .order('participants.updated_at DESC')
-    end
   end
 end
