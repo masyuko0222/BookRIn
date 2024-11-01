@@ -3,9 +3,17 @@
 class ReadingClubsController < ApplicationController
   def index
     set_default_params
-    @q = ReadingClub.ransack(params[:q])
 
-    @reading_clubs = Kaminari.paginate_array(sort_reading_clubs(params[:q])).page(params[:page])
+    @q = ReadingClub.ransack(params[:q])
+    hit_clubs = @q.result.includes(:participants).order(created_at: :desc)
+
+    reading_clubs = if params[:q][:finished_eq] == 'true'
+                      hit_clubs
+                    else
+                      ReadingClub.sort_participating_first(hit_clubs, current_user)
+                    end
+
+    @reading_clubs = Kaminari.paginate_array(reading_clubs).page(params[:page])
   end
 
   def overview
@@ -19,19 +27,5 @@ class ReadingClubsController < ApplicationController
 
   def set_default_params
     params[:q] ||= { finished_eq: false }
-  end
-
-  def sort_reading_clubs(search_query)
-    result = @q.result.order(updated_at: :desc)
-
-    if search_query[:finished_eq] == 'true' || search_query[:title_cont].present?
-      result
-    else
-      open_and_participating_clubs =
-        current_user.participating_reading_clubs.open.order('participants.created_at DESC')
-
-      (open_and_participating_clubs + result)
-        .uniq(&:id)
-    end
   end
 end
