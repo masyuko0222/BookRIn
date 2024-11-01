@@ -2,6 +2,8 @@
 
 module MarkdownParserHelper
   def to_html(md_text)
+    return unless md_text
+
     renderer = Redcarpet::Render::HTML.new
     markdown = Redcarpet::Markdown.new(renderer)
     html_text = markdown.render(md_text)
