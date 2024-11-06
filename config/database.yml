@@ -12,11 +12,11 @@ default: &default
 
 development:
   <<: *default
-  database: rindokukainote_development
+  database: booklin_development
 
 test:
   <<: *default
-  database: rindokukainote_test
+  database: booklin_test
 
 production:
   <<: *default
