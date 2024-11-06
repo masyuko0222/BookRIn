@@ -48,6 +48,7 @@ class ReadingClubsTest < ApplicationSystemTestCase
     click_button '検索'
 
     assert_selector 'h1', text: '輪読会一覧'
+    assert_selector 'ul li'
     club_titles = page.all('ul li').map { |li| li.find('a', match: :first).text }
 
     hit_participating_clubs = [reading_clubs(:reading_club10), reading_clubs(:reading_club1)]
