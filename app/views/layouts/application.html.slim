@@ -8,7 +8,10 @@ html
     = csp_meta_tag
     = stylesheet_link_tag 'tailwind', 'inter-font', 'data-turbo-track': 'reload'
     = javascript_include_tag 'application', 'data-turbo-track': 'reload', type: 'module'
+    link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&display=swap"
 
     = favicon_link_tag('favicon.ico')
-  body
-    = yield
+  body.bg-base
+    = render 'application/header'
+    main
+      = yield
