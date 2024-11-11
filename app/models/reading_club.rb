@@ -23,14 +23,25 @@ class ReadingClub < ApplicationRecord
       %w[notes participants users]
     end
 
+    def sort_by_participations(clubs, user, is_requested_open:)
+      if is_requested_open
+        sort_participating_first(clubs, user)
+      else
+        clubs.order(created_at: :desc)
+      end.to_a
+    end
+
+    private
+
     def sort_participating_first(clubs, user)
-      all_participating_clubs = user.participating_reading_clubs.order('participants.created_at DESC')
-      sorted_clubs = clubs.sort_by(&:updated_at).reverse
+      user_participating_clubs = user.participating_reading_clubs
+                                     .where(id: clubs.pluck(:id))
+                                     .order('participants.created_at DESC')
+                                     .to_a
 
-      first_sorted_clubs = (all_participating_clubs & sorted_clubs).uniq(&:id)
-      other_clubs = (sorted_clubs - all_participating_clubs)
+      non_participating_clubs = (clubs - user_participating_clubs).sort_by(&:updated_at).reverse
 
-      first_sorted_clubs + other_clubs
+      user_participating_clubs + non_participating_clubs
     end
   end
 end
