@@ -13,6 +13,8 @@ module.exports = {
     './app/javascript/**/*.js'
   ],
   theme: {
-    colors: colors
+    extend: {
+      colors: colors
+    }
   } 
 }

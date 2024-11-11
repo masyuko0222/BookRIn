@@ -1,4 +1,15 @@
-/ TODO: Design
-h1 Sessions#new
+.flex.items-center.justify-center.min-h-screen
+  .p-8.border-2.border-gray-300.rounded-lg.bg-white.shadow-lg.text-center.max-w-md.min-h-64.min-w-[24rem]
+    = image_tag 'logo_212x212.png', class: 'h-32 w-auto mx-auto mb-4'
 
-= button_to 'Login with Discord', '/auth/discord', method: :post, data: { turbo: false }
+    p.text-base.text-black.text-opacity-100.p-4.rounded-md.mb-6
+      | 輪読会の記録を残しましょう！
+
+    = button_to '/auth/discord',
+      method: :post,
+      data: { turbo: false },
+      class: 'flex items-center bg-white border border-gray-300 rounded-lg shadow-md px-6 py-2' \
+             ' text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none' \
+             ' focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mx-auto' do
+        = image_tag 'discord.svg', class: 'h-6 w-6 mr-2'
+        span Login with Discord
