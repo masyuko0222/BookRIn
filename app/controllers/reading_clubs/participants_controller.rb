@@ -7,15 +7,18 @@ class ReadingClubs::ParticipantsController < ApplicationController
     participant = current_user.participants.new(participant_params)
 
     if participant.save
-      redirect_to reading_clubs_path # TODO: success message
+      flash[:notice] = '輪読会に参加しました！'
+      redirect_to reading_clubs_path
     else
-      render 'reading_clubs/index' # TODO: failure message
+      flash[:alert] = '輪読会の参加に失敗しました 時間を空けて再度お試しください'
+      render 'reading_clubs/index'
     end
   end
 
   def destroy
     @participant.destroy
-    redirect_to reading_clubs_path # TODO: success message
+    flash[:alert] = '輪読会の参加を取り消しました'
+    redirect_to reading_clubs_path
   end
 
   private
