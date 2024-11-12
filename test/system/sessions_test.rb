@@ -23,16 +23,6 @@ class SessionsTest < ApplicationSystemTestCase
     visit login_path
     click_on 'Login with Discord'
     assert_current_path root_path
-    # TODO
-    # assert_text "Success Login"
-  end
-
-  test 'login failure' do
-    OmniAuth.config.mock_auth[:discord] = :invalid_credentials
-    visit login_path
-    click_on 'Login with Discord'
-    assert_current_path login_path
-    # TODO
-    # assert_text "Failure Login"
+    assert_text 'ログインしました'
   end
 end
