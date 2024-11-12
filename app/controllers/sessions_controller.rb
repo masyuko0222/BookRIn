@@ -11,14 +11,16 @@ class SessionsController < ApplicationController
     if user.persisted?
       reset_session
       login(user)
-      redirect_to root_path # TODO: flash message
+      flash[:notice] = 'ログインしました'
+      redirect_to root_path
     else
-      redirect_to login_path # TODO: error message
+      flash[:alert] = 'ログインに失敗しました 再度お試しください。'
+      redirect_to login_path
     end
   end
 
   def failure
-    # TODO: failure message
+    flash[:alert] = '認証に失敗しました 時間を空けてもう一度お試しください。'
     redirect_to login_path
   end
 end

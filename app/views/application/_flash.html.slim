@@ -1,0 +1,8 @@
+- flash.each do |type, message|
+  #flash
+    div class="fixed top-4 right-4 z-50 flex items-center rounded-lg shadow-lg
+               px-4 py-3 text-white
+               #{bg_color_by_message_type(type)}"
+      p.font-semibold.mr-2
+        = message
+      = button_tag '×', type: 'button', class: 'ml-auto text-lg font-bold cursor-pointer', onclick: 'closeFlash()'
