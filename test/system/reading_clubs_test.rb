@@ -26,7 +26,7 @@ class ReadingClubsTest < ApplicationSystemTestCase
     end
     assert_text '輪読会に参加しました！'
 
-    within(find('li', text: 'OpenClub 20')) do
+    within(find('li', text: 'OpenClub 9')) do
       click_link '参加'
       click_link '参加取消'
     end
