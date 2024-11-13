@@ -22,9 +22,9 @@ class ReadingClubTest < ActiveSupport::TestCase
     result = search_query.result.includes(:participants)
 
     expected = [
-      reading_clubs(:finished_reading_club2),
+      reading_clubs(:finished_reading_club20),
       reading_clubs(:finished_reading_club12),
-      reading_clubs(:finished_reading_club20)
+      reading_clubs(:finished_reading_club2)
     ]
 
     actual =
