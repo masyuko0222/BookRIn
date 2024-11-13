@@ -27,7 +27,7 @@ class ReadingClub < ApplicationRecord
       if is_requested_open
         sort_participating_first(clubs, user)
       else
-        clubs.order(created_at: :desc)
+        clubs.order(updated_at: :desc)
       end.to_a
     end
 
