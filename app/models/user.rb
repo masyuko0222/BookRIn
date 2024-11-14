@@ -9,6 +9,14 @@ class User < ApplicationRecord
   has_many :participating_reading_clubs, through: :participants, source: :reading_club
 
   class << self
+    def ransackable_attributes(_auth_object = nil)
+      %w[uid]
+    end
+
+    def ransackable_associations(_auth_object = nil)
+      %w[participants reading_clubs]
+    end
+
     def find_or_create_from_discord_info(discord_info)
       user_info = user_discord_info(discord_info)
 

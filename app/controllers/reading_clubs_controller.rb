@@ -5,7 +5,7 @@ class ReadingClubsController < ApplicationController
     set_default_params
 
     @q = ReadingClub.ransack(params[:q])
-    result = @q.result.includes(:participants)
+    result = @q.result.includes(:participants, :users)
 
     sorted_clubs =
       ReadingClub.sort_by_participations(
