@@ -27,7 +27,6 @@ class ReadingClubsController < ApplicationController
 
   def set_default_params(user)
     params[:q] ||= {}
-    params[:q][:users_uid_cont] ||= user.participants.any? ? current_user.uid : ''
     params[:q][:finished_eq] ||= 'false'
   end
 

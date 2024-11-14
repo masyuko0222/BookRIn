@@ -4,11 +4,11 @@
   field_set
     legend 参加状態
     label
-      = f.radio_button :users_uid_cont, current_user.uid, id: 'q_users_uid_cont_current_user_id', checked: true
-      | 参加中のみ
-    label
-      = f.radio_button :users_uid_cont, '', id: 'q_users_uid_cont_all'
+      = f.radio_button :users_uid_cont, '', id: 'q_users_uid_cont_all', checked: true
       | すべて
+    label
+      = f.radio_button :users_uid_cont, current_user.uid, id: 'q_users_uid_cont_current_user_id'
+      | 参加中のみ
   br
   field_set
     legend 開催状態
