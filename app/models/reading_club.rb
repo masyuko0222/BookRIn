@@ -20,7 +20,7 @@ class ReadingClub < ApplicationRecord
     end
 
     def ransackable_associations(_auth_object = nil)
-      %w[notes participants users]
+      %w[participants users]
     end
 
     def sort_by_participations(clubs, user, is_requested_open:)
