@@ -27,8 +27,8 @@ class ReadingClubsTest < ApplicationSystemTestCase
   test 'Search title' do
     visit_with_auth(reading_clubs_path, @user)
     fill_in '輪読会のタイトルで検索', with: 'OpenClub 20'
-    within("#participating_status") { choose('すべて') }
-    within("#finished_status") { choose('すべて') }
+    within('#participating_status') { choose('すべて') }
+    within('#finished_status') { choose('すべて') }
     click_button '検索'
 
     assert_selector 'h1', text: '輪読会一覧'

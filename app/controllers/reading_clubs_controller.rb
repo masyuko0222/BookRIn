@@ -2,7 +2,7 @@
 
 class ReadingClubsController < ApplicationController
   def index
-    set_default_params(current_user)
+    initialize_default_params
 
     @q = ReadingClub.ransack(params[:q])
     result = @q.result.includes(:participants, :users)
@@ -26,7 +26,7 @@ class ReadingClubsController < ApplicationController
 
   private
 
-  def set_default_params(user)
+  def initialize_default_params
     params[:q] ||= {}
     params[:q][:finished_eq] ||= 'false'
   end
