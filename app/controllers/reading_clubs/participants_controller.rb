@@ -8,7 +8,7 @@ class ReadingClubs::ParticipantsController < ApplicationController
 
     if participant.save
       flash[:notice] = '輪読会に参加しました！'
-      redirect_to reading_clubs_path
+      redirect_back_or_to reading_clubs_path
     else
       flash[:alert] = '輪読会の参加に失敗しました 時間を空けて再度お試しください'
       render 'reading_clubs/index'
@@ -18,7 +18,7 @@ class ReadingClubs::ParticipantsController < ApplicationController
   def destroy
     @participant.destroy
     flash[:alert] = '輪読会の参加を取り消しました'
-    redirect_to reading_clubs_path
+    redirect_back_or_to reading_clubs_path
   end
 
   private

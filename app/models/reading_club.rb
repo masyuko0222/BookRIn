@@ -20,28 +20,7 @@ class ReadingClub < ApplicationRecord
     end
 
     def ransackable_associations(_auth_object = nil)
-      %w[notes participants users]
-    end
-
-    def sort_by_participations(clubs, user, is_requested_open:)
-      if is_requested_open
-        sort_participating_first(clubs, user)
-      else
-        clubs.order(updated_at: :desc)
-      end.to_a
-    end
-
-    private
-
-    def sort_participating_first(clubs, user)
-      user_participating_clubs = user.participating_reading_clubs
-                                     .where(id: clubs.pluck(:id))
-                                     .order('participants.created_at DESC')
-                                     .to_a
-
-      non_participating_clubs = (clubs - user_participating_clubs).sort_by(&:updated_at).reverse
-
-      user_participating_clubs + non_participating_clubs
+      %w[participants users]
     end
   end
 end
