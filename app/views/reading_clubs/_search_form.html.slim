@@ -1,7 +1,7 @@
 = search_form_for(@q, url:, enforce_utf8: false) do |f|
   = f.search_field :title_cont, placeholder: '輪読会のタイトルで検索', class: 'form-control'
   br
-  field_set
+  field_set#participating_status
     legend 参加状態
     label
       = f.radio_button :users_uid_cont, '', id: 'q_users_uid_cont_all', checked: true
@@ -10,7 +10,7 @@
       = f.radio_button :users_uid_cont, current_user.uid, id: 'q_users_uid_cont_current_user_id'
       | 参加中のみ
   br
-  field_set
+  field_set#finished_status
     legend 開催状態
     label
       = f.radio_button :finished_eq, false, id: 'q_finished_eq_false', checked: true
