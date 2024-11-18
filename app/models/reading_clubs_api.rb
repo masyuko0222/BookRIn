@@ -15,6 +15,30 @@ class ReadingClubsApi
       JSON.parse(res.body)
     end
 
+    def update_club(latest_clubs)
+      latest_clubs.each do |club|
+        attributes = club.slice('id', 'title', 'finished', 'updated_at')
+        exist = ReadingClub.find_by(id: club['id'])
+
+        exist.update!(attributes) if exist && exist.updated_at != club['updated_at']
+      end
+    end
+
+    def create_club(latest_clubs)
+      latest_clubs.each do |club|
+        attributes = club.slice('id', 'title', 'finished', 'updated_at')
+        exist = ReadingClub.find_by(id: club['id'])
+
+        ReadingClub.create!(attributes) unless exist
+      end
+    end
+
+    def destroy_club(latest_clubs)
+      latset_club_ids = latest_clubs.map { |club| club['id'] }
+      destroyed_clubs = ReadingClub.where.not(id: latset_club_ids)
+      destroyed_clubs.destroy_all
+    end
+
     private
 
     def create_token(login_name, password)
