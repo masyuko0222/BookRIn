@@ -5,7 +5,6 @@ require 'application_system_test_case'
 class ReadingClubsTest < ApplicationSystemTestCase
   setup do
     @user = users(:user1)
-    
     @user.participants.create!(reading_club: reading_clubs(:reading_club1))
   end
 
