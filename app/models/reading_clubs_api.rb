@@ -15,27 +15,27 @@ class ReadingClubsApi
       JSON.parse(res.body)
     end
 
-    def update_club(latest_clubs)
-      latest_clubs.each do |club|
-        attributes = club.slice('id', 'title', 'finished', 'updated_at')
-        exist = ReadingClub.find_by(id: club['id'])
+    def update_clubs(fetched_data)
+      fetched_data.each do |data|
+        attributes = data.slice('id', 'title', 'finished', 'updated_at')
+        exist = ReadingClub.find_by(id: data['id'])
 
-        exist.update!(attributes) if exist && exist.updated_at != club['updated_at']
+        exist.update!(attributes) if exist && exist.updated_at != data['updated_at']
       end
     end
 
-    def create_club(latest_clubs)
-      latest_clubs.each do |club|
-        attributes = club.slice('id', 'title', 'finished', 'updated_at')
-        exist = ReadingClub.find_by(id: club['id'])
+    def create_clubs(fetched_data)
+      fetched_data.each do |data|
+        attributes = data.slice('id', 'title', 'finished', 'updated_at')
+        exist = ReadingClub.find_by(id: data['id'])
 
         ReadingClub.create!(attributes) unless exist
       end
     end
 
-    def destroy_club(latest_clubs)
-      latset_club_ids = latest_clubs.map { |club| club['id'] }
-      destroyed_clubs = ReadingClub.where.not(id: latset_club_ids)
+    def destroy_clubs(fetched_data)
+      fetched_ids = fetched_data.map { |data| data['id'] }
+      destroyed_clubs = ReadingClub.where.not(id: fetched_ids)
       destroyed_clubs.destroy_all
     end
 

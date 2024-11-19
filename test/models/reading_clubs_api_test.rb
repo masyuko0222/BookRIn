@@ -31,7 +31,7 @@ class ReadingClubsApiTest < ActiveSupport::TestCase
       ]
     }
 
-    @latest_clubs = data['reading_circles']
+    @fetched_data = data['reading_circles']
   end
 
   test '.fetch' do
@@ -43,8 +43,8 @@ class ReadingClubsApiTest < ActiveSupport::TestCase
     end
   end
 
-  test '.update_club' do
-    ReadingClubsApi.update_club(@latest_clubs)
+  test '.update_clubs' do
+    ReadingClubsApi.update_clubs(@fetched_data)
 
     updated_club = ReadingClub.find(1000)
     assert_equal 'UpdatedClub', updated_club.title
@@ -52,8 +52,8 @@ class ReadingClubsApiTest < ActiveSupport::TestCase
     assert_equal Time.zone.parse('2024-01-01'), updated_club.updated_at
   end
 
-  test '.create_club' do
-    ReadingClubsApi.create_club(@latest_clubs)
+  test '.create_clubs' do
+    ReadingClubsApi.create_clubs(@fetched_data)
 
     new_club = ReadingClub.find(4000)
     assert_equal 'NewClub', new_club.title
@@ -61,8 +61,8 @@ class ReadingClubsApiTest < ActiveSupport::TestCase
     assert_equal Time.zone.parse('2030-01-01'), new_club.updated_at
   end
 
-  test '.destroy_club' do
-    ReadingClubsApi.destroy_club(@latest_clubs)
+  test '.destroy_clubs' do
+    ReadingClubsApi.destroy_clubs(@fetched_data)
 
     assert_raises(ActiveRecord::RecordNotFound) { ReadingClub.find(2000) }
   end
