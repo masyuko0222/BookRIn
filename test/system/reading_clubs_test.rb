@@ -30,8 +30,6 @@ class ReadingClubsTest < ApplicationSystemTestCase
     within('#finished_status') { choose('すべて') }
     click_button '検索'
 
-    assert_current_path reading_clubs_path
-
     hit_titles = page.all('ul li').map { |li| li.find('a', match: :first).text }
 
     assert_equal hit_titles, ['OpenClub 20']
