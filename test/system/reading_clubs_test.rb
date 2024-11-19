@@ -10,7 +10,7 @@ class ReadingClubsTest < ApplicationSystemTestCase
 
   test 'Click participant button' do
     visit_with_auth(reading_clubs_path, @user)
-    assert_selector 'h1', text: '輪読会一覧'
+    assert_current_path reading_clubs_path
 
     within(find('li', text: 'OpenClub 20')) do
       click_link '参加'
@@ -30,7 +30,7 @@ class ReadingClubsTest < ApplicationSystemTestCase
     within('#finished_status') { choose('すべて') }
     click_button '検索'
 
-    assert_selector 'h1', text: '輪読会一覧'
+    assert_current_path reading_clubs_path
 
     hit_titles = page.all('ul li').map { |li| li.find('a', match: :first).text }
 

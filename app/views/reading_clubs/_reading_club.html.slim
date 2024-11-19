@@ -1,8 +1,15 @@
-li
-  = link_to reading_club.title, overview_reading_club_path(reading_club), class: 'reading-club-title'
+- card_classes = reading_club.finished? ? 'bg-gray-300 hover:bg-gray-400' : 'bg-blue-50 hover:bg-blue-100'
 
-  div
+li.p-4.shadow-md.border.rounded-md.transition-all.hover:shadow-lg class=card_classes
+  h2.text-lg.font-semibold.mb-2
+    = link_to reading_club.title, overview_reading_club_path(reading_club), class: 'text-blue-600 hover:text-blue-800'
+
+  .mt-4.flex.items-center.space-x-4
     - if (participant = reading_club.participants.find_by(user: current_user))
-      = link_to '参加取消', participant_path(participant), data: { turbo_method: :delete }
+      = link_to '参加取消', participant_path(participant),
+        data: { turbo_method: :delete },
+        class: 'bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 shadow-md transition-all'
     - else
-      = link_to '参加', reading_club_participants_path(reading_club), data: { turbo_method: :post }
+      = link_to '参加', reading_club_participants_path(reading_club),
+        data: { turbo_method: :post },
+        class: 'bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 shadow-md transition-all'
