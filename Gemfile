@@ -32,10 +32,11 @@ gem 'cssbundling-rails'
 gem 'tzinfo-data', platforms: %i[windows jruby]
 
 # For View
-gem 'hotwire-rails'
 gem 'redcarpet'
 gem 'slim-rails'
+gem 'stimulus-rails'
 gem 'tailwindcss-rails', '~> 3.0'
+gem 'turbo-rails'
 
 # env
 gem 'dotenv-rails'
