@@ -15,28 +15,10 @@ class ReadingClubsApi
       JSON.parse(res.body)
     end
 
-    def update_clubs(fetched_data)
-      fetched_data.each do |data|
-        attributes = data.slice('id', 'title', 'finished', 'updated_at')
-        exist = ReadingClub.find_by(id: data['id'])
-
-        exist.update!(attributes) if exist && exist.updated_at != data['updated_at']
-      end
-    end
-
-    def create_clubs(fetched_data)
-      fetched_data.each do |data|
-        attributes = data.slice('id', 'title', 'finished', 'updated_at')
-        exist = ReadingClub.find_by(id: data['id'])
-
-        ReadingClub.create!(attributes) unless exist
-      end
-    end
-
-    def destroy_clubs(fetched_data)
-      fetched_ids = fetched_data.map { |data| data['id'] }
-      destroyed_clubs = ReadingClub.where.not(id: fetched_ids)
-      destroyed_clubs.destroy_all
+    def update_records(latest_clubs)
+      update_clubs(latest_clubs)
+      create_clubs(latest_clubs)
+      destroy_clubs(latest_clubs)
     end
 
     private
@@ -48,6 +30,30 @@ class ReadingClubsApi
 
       res = Net::HTTP.start(uri.host, uri.port, use_ssl: true) { |http| http.request(req) }
       JSON.parse(res.body)['token']
+    end
+
+    def update_clubs(latest_clubs)
+      latest_clubs.each do |club|
+        attributes = club.slice('id', 'title', 'finished', 'updated_at')
+        exist = ReadingClub.find_by(id: club['id'])
+
+        exist.update!(attributes) if exist && exist.updated_at != club['updated_at']
+      end
+    end
+
+    def create_clubs(latest_clubs)
+      latest_clubs.each do |club|
+        attributes = club.slice('id', 'title', 'finished', 'updated_at')
+        exist = ReadingClub.find_by(id: club['id'])
+
+        ReadingClub.create!(attributes) unless exist
+      end
+    end
+
+    def destroy_clubs(latest_clubs)
+      fetched_ids = latest_clubs.map { |club| club['id'] }
+      destroyed_clubs = ReadingClub.where.not(id: fetched_ids)
+      destroyed_clubs.destroy_all
     end
   end
 end

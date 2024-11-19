@@ -10,28 +10,13 @@ class ReadingClubsApiTest < ActiveSupport::TestCase
 
     data = {
       'reading_circles' => [
-        {
-          'id' => 1000,
-          'title' => 'UpdatedClub',
-          'finished' => true,
-          'updated_at' => Time.zone.parse('2024-01-01')
-        },
-        {
-          'id' => 3000,
-          'title' => 'NoChangeClub',
-          'finished' => false,
-          'updated_at' => Time.zone.parse('2000-01-01')
-        },
-        {
-          'id' => 4000,
-          'title' => 'NewClub',
-          'finished' => false,
-          'updated_at' => Time.zone.parse('2030-01-01')
-        }
+        { 'id' => 1000, 'title' => 'UpdatedClub', 'finished' => true, 'updated_at' => Time.zone.parse('2024-01-01') },
+        { 'id' => 3000, 'title' => 'NoChangeClub', 'finished' => false, 'updated_at' => Time.zone.parse('2000-01-01') },
+        { 'id' => 4000, 'title' => 'NewClub', 'finished' => false, 'updated_at' => Time.zone.parse('2030-01-01') }
       ]
     }
 
-    @fetched_data = data['reading_circles']
+    @latest_clubs = data['reading_circles']
   end
 
   test '.fetch' do
@@ -43,27 +28,19 @@ class ReadingClubsApiTest < ActiveSupport::TestCase
     end
   end
 
-  test '.update_clubs' do
-    ReadingClubsApi.update_clubs(@fetched_data)
+  test '.update_records' do
+    ReadingClubsApi.update_records(@latest_clubs)
 
     updated_club = ReadingClub.find(1000)
     assert_equal 'UpdatedClub', updated_club.title
     assert updated_club.finished
     assert_equal Time.zone.parse('2024-01-01'), updated_club.updated_at
-  end
 
-  test '.create_clubs' do
-    ReadingClubsApi.create_clubs(@fetched_data)
+    assert_raises(ActiveRecord::RecordNotFound) { ReadingClub.find(2000) }
 
     new_club = ReadingClub.find(4000)
     assert_equal 'NewClub', new_club.title
     assert_not new_club.finished
     assert_equal Time.zone.parse('2030-01-01'), new_club.updated_at
-  end
-
-  test '.destroy_clubs' do
-    ReadingClubsApi.destroy_clubs(@fetched_data)
-
-    assert_raises(ActiveRecord::RecordNotFound) { ReadingClub.find(2000) }
   end
 end
