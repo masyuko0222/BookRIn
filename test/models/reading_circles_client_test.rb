@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class ReadingClubsApiTest < ActiveSupport::TestCase
+class ReadingCirclesClientTest < ActiveSupport::TestCase
   setup do
     reading_clubs(:to_update_reading_club)
     reading_clubs(:to_destroy_reading_club)
@@ -20,16 +20,16 @@ class ReadingClubsApiTest < ActiveSupport::TestCase
   end
 
   test '.fetch' do
-    VCR.use_cassette('fetch_reading_clubs') do
-      result = ReadingClubsApi.fetch
+    VCR.use_cassette('fetch_reading_circles') do
+      result = ReadingCirclesClient.fetch
       expect = JSON.parse(File.read('test/fixtures/reading_clubs_api.json'))
 
       assert_equal expect, result
     end
   end
 
-  test '.update_records' do
-    ReadingClubsApi.update_records(@latest_clubs)
+  test '.save' do
+    ReadingCirclesClient.save(@latest_clubs)
 
     updated_club = ReadingClub.find(1000)
     assert_equal 'UpdatedClub', updated_club.title
