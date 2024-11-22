@@ -8,15 +8,13 @@ class ReadingCirclesClientTest < ActiveSupport::TestCase
     reading_clubs(:to_destroy_reading_club)
     reading_clubs(:no_change_reading_club)
 
-    data = {
+    @data = {
       'reading_circles' => [
         { 'id' => 1000, 'title' => 'UpdatedClub', 'finished' => true, 'updated_at' => Time.zone.parse('2024-01-01') },
         { 'id' => 3000, 'title' => 'NoChangeClub', 'finished' => false, 'updated_at' => Time.zone.parse('2000-01-01') },
         { 'id' => 4000, 'title' => 'NewClub', 'finished' => false, 'updated_at' => Time.zone.parse('2030-01-01') }
       ]
     }
-
-    @latest_clubs = data['reading_circles']
   end
 
   test '.fetch' do
@@ -29,17 +27,34 @@ class ReadingCirclesClientTest < ActiveSupport::TestCase
   end
 
   test '.save' do
-    ReadingCirclesClient.save(@latest_clubs)
+    to_update_club = ReadingClub.create!(
+      title: 'ToUpdateClub', finished: false,
+      template: nil, read_me: nil,
+      updated_at: Time.zone.parse('2000-01-01')
+      )
 
-    updated_club = ReadingClub.find(1000)
-    assert_equal 'UpdatedClub', updated_club.title
+    to_destroy_club = ReadingClub.create!(
+      title: 'ToDestroyClub', finished: true,
+      template: nil, read_me: nil,
+      updated_at: Time.zone.parse('2000-01-01')
+      )
+
+    no_change_club = ReadingClub.create!(
+      title: 'NoChangeClub', finished: false,
+      template: nil, read_me: nil,
+      updated_at: Time.zone.parse('2000-01-01')
+      )
+
+    latest_clubs = @data['reading_circles']
+    ReadingCirclesClient.save(latest_clubs)
+
+    updated_club = ReadingClub.find_by(title: 'UpdatedClub')
     assert updated_club.finished
     assert_equal Time.zone.parse('2024-01-01'), updated_club.updated_at
 
-    assert_raises(ActiveRecord::RecordNotFound) { ReadingClub.find(2000) }
+    assert_nil ReadingClub.find_by(title: 'ToDestroyClub')
 
-    new_club = ReadingClub.find(4000)
-    assert_equal 'NewClub', new_club.title
+    new_club = ReadingClub.find_by(title: 'NewClub')
     assert_not new_club.finished
     assert_equal Time.zone.parse('2030-01-01'), new_club.updated_at
   end
