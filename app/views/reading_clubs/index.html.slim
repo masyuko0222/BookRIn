@@ -1,6 +1,6 @@
 = render 'search_form', url: reading_clubs_path
 
-ul.grid.grid-cols-1.sm:grid-cols-2.md:grid-cols-3.gap-6
+ul class='grid.grid-cols-1'
   - @reading_clubs.each do |reading_club|
     = render 'reading_club', reading_club:
 

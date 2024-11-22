@@ -1,39 +1,53 @@
-.border.border-gray-200.bg-white.p-4.rounded-lg.shadow-md.hover:shadow-lg.transition-all.mb-6
-  = search_form_for(@q, url:, enforce_utf8: false, class: 'space-y-3') do |f|
-    .grid.grid-cols-1.sm:grid-cols-2.gap-4
-      .flex.flex-col.space-y-2
+div class='
+      mb-6 p-4 \
+      border border-gray-200 rounded-lg shadow-md \
+      bg-white \
+      transition-all hover:shadow-lg
+    '
+  = search_form_for(@q, url:, enforce_utf8: false) do |f|
+    .flex.flex-col
+      .w-full.mb-4
         = f.search_field :title_cont,
           placeholder: '輪読会のタイトルで検索',
-          class: 'w-full border border-gray-300 rounded-md \
-                  px-3 py-2 focus:outline-none focus:ring \
-                  focus:ring-blue-200 transition-all'
+          class: 'w-full \
+                  px-3 py-2 \
+                  border border-gray-300 rounded-md \
+                  transition-all focus:outline-none focus:ring'
 
-      .flex.flex-col.space-y-3
-        fieldset#participating_status.space-y-2
-          legend.text-sm.font-semibold.text-gray-600.mb-2 開催状態
-          .flex.space-x-6
-            label.inline-flex.items-center.space-x-2
+      .flex.flex-col.space-y-4
+        fieldset#participating_status
+          legend class='mb-2 text-sm font-semibold text-gray-600'
+            | 開催状態
+          .flex.space-x-3
+            label class='inline-flex items-center space-x-1'
               = f.radio_button :finished_eq, false, id: 'q_finished_eq_false', checked: true
-              span.text-sm.text-gray-700 開催中
-            label.inline-flex.items-center.space-x-2
+              span class='text-sm text-gray-700'
+                | 開催中
+            label class='inline-flex items-center space-x-1'
               = f.radio_button :finished_eq, true, id: 'q_finished_eq_true'
-              span.text-sm.text-gray-700 終了
-            label.inline-flex.items-center.space-x-2
+              span class='text-sm text-gray-700'
+                | 終了
+            label class='inline-flex items-center space-x-1'
               = f.radio_button :finished_eq, '', id: 'q_finished_eq_all'
-              span.text-sm.text-gray-700 すべて
+              span class='text-sm text-gray-700'
+                | すべて
 
-        fieldset#finished_status.space-y-2
-          legend.text-sm.font-semibold.text-gray-600.mb-2 参加状態
-          .flex.space-x-6
-            label.inline-flex.items-center.space-x-2
+        fieldset#finished_status
+          legend class='mb-2 text-sm font-semibold text-gray-600'
+            | 参加状態
+          .flex.space-x-3
+            label class='inline-flex items-center space-x-1'
               = f.radio_button :users_uid_cont, '', id: 'q_users_uid_cont_all', checked: true
-              span.text-sm.text-gray-700 すべて
-            label.inline-flex.items-center.space-x-2
+              span class='text-sm text-gray-700'
+                | すべて
+            label class='inline-flex items-center space-x-1'
               = f.radio_button :users_uid_cont, current_user.uid, id: 'q_users_uid_cont_current_user_id'
-              span.text-sm.text-gray-700 参加中のみ
+              span class='text-sm text-gray-700'
+                | 参加中のみ
 
     .text-center
       = f.submit '検索',
-        class: 'bg-blue-600 text-white px-5 py-2 \
-                rounded-lg shadow-md hover:bg-blue-700 \
-                transition-all focus:outline-none focus:ring focus:ring-blue-200'
+        class: 'px-5 py-2 \
+                rounde-lg shadow-md
+                bg-blue-600 text-white \
+                transition-all hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-200'
