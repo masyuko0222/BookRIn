@@ -29,6 +29,7 @@ class ReadingClubsTest < ApplicationSystemTestCase
     within('#participating_status') { choose('すべて') }
     within('#finished_status') { choose('すべて') }
     click_button '検索'
+    assert_text 'OpenClub 20' # sleepの代わり
 
     hit_titles = page.all('ul li').map { |li| li.find('a', match: :first).text }
 
