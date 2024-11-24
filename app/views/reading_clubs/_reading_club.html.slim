@@ -1,7 +1,7 @@
 li class="
     m-1 p-4 \
     shadow-md border rounded-md \
-    #{card_color(reading_club)} \
+    #{reading_club.finished ? 'bg-gray-300 hover:bg-gray-400' : 'bg-blue-50 hover:bg-blue-100'} \
     transition-all hover:shadow-lg
   "
   h2 class="mb-2 text-lg font-semibold"
@@ -9,4 +9,6 @@ li class="
       class: 'text-blue-600 hover:text-blue-800'
 
   .flex.items-center.mt-4
-    = participant_link(reading_club)
+    = render 'participant_link',
+      participant: reading_club.participants.find_by(user: current_user),
+      reading_club:

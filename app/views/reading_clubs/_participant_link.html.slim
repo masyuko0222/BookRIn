@@ -1,4 +1,4 @@
-- if (participant = reading_club.participants.find_by(user: current_user))
+- if participant
   = link_to '参加取消', participant_path(participant),
     data: { turbo_method: :delete },
     class: 'bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 shadow-md transition-all'
