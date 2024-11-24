@@ -14,7 +14,7 @@ class ReadingCirclesClientTest < ActiveSupport::TestCase
 
   test '.save as update' do
     ReadingClub.create!(
-      id: 10000,
+      id: 1000,
       title: 'ToUpdateClub', finished: false,
       template: nil, read_me: nil,
       updated_at: Time.zone.parse('2000-01-01')
@@ -23,7 +23,7 @@ class ReadingCirclesClientTest < ActiveSupport::TestCase
     api_data = {
       'reading_circles' => [
         {
-          'id' => 10000,
+          'id' => 1000,
           'title' => 'UpdatedClub',
           'finished' => true,
           'updated_at' => Time.zone.parse('2024-01-01')
@@ -34,7 +34,7 @@ class ReadingCirclesClientTest < ActiveSupport::TestCase
     latest_clubs = api_data['reading_circles']
     ReadingCirclesClient.save(latest_clubs)
 
-    updated_club = ReadingClub.find(10000)
+    updated_club = ReadingClub.find(1000)
     assert_equal 'UpdatedClub', updated_club.title
     assert updated_club.finished
     assert_equal Time.zone.parse('2024-01-01'), updated_club.updated_at
@@ -44,7 +44,7 @@ class ReadingCirclesClientTest < ActiveSupport::TestCase
     api_data = {
       'reading_circles' => [
         {
-          'id' => 20000,
+          'id' => 2000,
           'title' => 'NewClub',
           'finished' => false,
           'updated_at' => Time.zone.parse('2024-01-01')
@@ -62,7 +62,7 @@ class ReadingCirclesClientTest < ActiveSupport::TestCase
 
   test '.save as destroy' do
     ReadingClub.create!(
-      id: 30000,
+      id: 3000,
       title: 'ToDestroyClub', finished: true,
       template: nil, read_me: nil,
       updated_at: Time.zone.parse('2000-01-01')
@@ -76,7 +76,7 @@ class ReadingCirclesClientTest < ActiveSupport::TestCase
     ReadingCirclesClient.save(latest_clubs)
 
     assert_raises(ActiveRecord::RecordNotFound) do
-      ReadingClub.find(30000)
+      ReadingClub.find(3000)
     end
   end
 end
