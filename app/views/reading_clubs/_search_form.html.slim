@@ -14,36 +14,7 @@ div class='
                   border border-gray-300 rounded-md \
                   transition-all focus:outline-none focus:ring'
 
-      .flex.flex-col.space-y-4
-        fieldset data-test-id='participating-status'
-          legend class='mb-2 text-sm font-semibold text-gray-600'
-            | 開催状態
-          .flex.space-x-3
-            label class='inline-flex items-center space-x-1'
-              = f.radio_button :finished_eq, false, id: 'q_finished_eq_false', checked: true
-              span class='text-sm text-gray-700'
-                | 開催中
-            label class='inline-flex items-center space-x-1'
-              = f.radio_button :finished_eq, true, id: 'q_finished_eq_true'
-              span class='text-sm text-gray-700'
-                | 終了
-            label class='inline-flex items-center space-x-1'
-              = f.radio_button :finished_eq, '', id: 'q_finished_eq_all'
-              span class='text-sm text-gray-700'
-                | すべて
-
-        fieldset data-test-id='finished-status'
-          legend class='mb-2 text-sm font-semibold text-gray-600'
-            | 参加状態
-          .flex.space-x-3
-            label class='inline-flex items-center space-x-1'
-              = f.radio_button :users_uid_cont, '', id: 'q_users_uid_cont_all', checked: true
-              span class='text-sm text-gray-700'
-                | すべて
-            label class='inline-flex items-center space-x-1'
-              = f.radio_button :users_uid_cont, current_user.uid, id: 'q_users_uid_cont_current_user_id'
-              span class='text-sm text-gray-700'
-                | 参加中のみ
+      = render 'status_radio_button', f:
 
     .text-center
       = f.submit '検索',
