@@ -18,27 +18,3 @@ finished_reading_club<%= i %>:
   read_me: null
   updated_at: <%= (20 - i).minutes.ago %>
 <% end %>
-
-to_update_reading_club:
-  id: 1000
-  title: UpdateClub
-  finished: false
-  template: null
-  read_me: null
-  updated_at: <%= Time.zone.parse('2000-01-01') %>
-
-to_destroy_reading_club:
-  id: 2000
-  title: DestroyClub
-  finished: true
-  template: null
-  read_me: null
-  updated_at: <%= Time.zone.parse('2000-01-01') %>
-
-no_change_reading_club:
-  id: 3000
-  title: NoChangeClub
-  finished: false
-  template: null
-  read_me: null
-  updated_at: <%= Time.zone.parse('2000-01-01') %>

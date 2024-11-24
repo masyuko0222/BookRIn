@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ReadingClubsApi
+class ReadingCirclesClient
   API_URL = 'https://bootcamp.fjord.jp/api/reading_circles.json'
   SESSION_URL = 'https://bootcamp.fjord.jp/api/session'
   class << self
@@ -15,7 +15,7 @@ class ReadingClubsApi
       JSON.parse(res.body)
     end
 
-    def update_records(latest_clubs)
+    def save(latest_clubs)
       update_clubs(latest_clubs)
       create_clubs(latest_clubs)
       destroy_clubs(latest_clubs)

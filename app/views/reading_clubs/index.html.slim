@@ -1,10 +1,6 @@
-h1 輪読会一覧
-
-= paginate @reading_clubs
-
 = render 'search_form', url: reading_clubs_path
 
-ul
+ul class='grid.grid-cols-1'
   - @reading_clubs.each do |reading_club|
     = render 'reading_club', reading_club:
 
