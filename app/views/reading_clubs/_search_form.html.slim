@@ -15,7 +15,7 @@ div class='
                   transition-all focus:outline-none focus:ring'
 
       .flex.flex-col.space-y-4
-        fieldset#participating_status
+        fieldset data-test-id='participating-status'
           legend class='mb-2 text-sm font-semibold text-gray-600'
             | 開催状態
           .flex.space-x-3
@@ -32,7 +32,7 @@ div class='
               span class='text-sm text-gray-700'
                 | すべて
 
-        fieldset#finished_status
+        fieldset data-test-id='finished-status'
           legend class='mb-2 text-sm font-semibold text-gray-600'
             | 参加状態
           .flex.space-x-3
