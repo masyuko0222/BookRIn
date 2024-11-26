@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :fetch do
   desc 'Fetch latest reading circles(this app calls reading clubs) from FBC API.'
   task reading_clubs: :environment do
