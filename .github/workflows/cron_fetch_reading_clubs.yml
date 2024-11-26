@@ -1,0 +1,33 @@
+name: Fetch Latest Reading Clubs
+
+on:
+  push:
+    branches: [ feature/cron_fetch_reading_circles_from_api ]
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * *"
+
+jobs:
+  fetch-reading-clubs:
+    runs-on: ubuntu-latest
+
+    env:
+      RAILS_ENV: development
+      SUPABASE_DEVELOPMENT_DB_URI: ${{ secrets.SUPABASE_DEVELOPMENT_DB_URI }}
+      FBC_LOGIN_NAME: ${{ secrets.FBC_LOGIN_NAME }}
+      FBC_PASSWORD: ${{ secrets.FBC_PASSWORD }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3.0'
+
+      - name: Install dependencies
+        run: bundle install
+
+      - name: Run rake fetch task
+        run: rake fetch:reading_clubs

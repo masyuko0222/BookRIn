@@ -34,19 +34,17 @@ class ReadingCirclesClient
 
     def update_clubs(latest_clubs)
       latest_clubs.each do |club|
-        attributes = club.slice('id', 'title', 'finished', 'updated_at')
         exist = ReadingClub.find_by(id: club['id'])
 
-        exist.update!(attributes) if exist && exist.updated_at != club['updated_at']
+        exist.update!(club) if exist && exist.updated_at != club['updated_at']
       end
     end
 
     def create_clubs(latest_clubs)
       latest_clubs.each do |club|
-        attributes = club.slice('id', 'title', 'finished', 'updated_at')
         exist = ReadingClub.find_by(id: club['id'])
 
-        ReadingClub.create!(attributes) unless exist
+        ReadingClub.create!(club) unless exist
       end
     end
 

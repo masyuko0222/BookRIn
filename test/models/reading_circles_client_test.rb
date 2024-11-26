@@ -18,7 +18,7 @@ class ReadingCirclesClientTest < ActiveSupport::TestCase
       title: 'ToUpdateClub', finished: false,
       template: nil, read_me: nil,
       updated_at: Time.zone.parse('2000-01-01')
-      )
+    )
 
     api_data = {
       'reading_circles' => [
@@ -66,7 +66,7 @@ class ReadingCirclesClientTest < ActiveSupport::TestCase
       title: 'ToDestroyClub', finished: true,
       template: nil, read_me: nil,
       updated_at: Time.zone.parse('2000-01-01')
-      )
+    )
 
     api_data = {
       'reading_circles' => []
