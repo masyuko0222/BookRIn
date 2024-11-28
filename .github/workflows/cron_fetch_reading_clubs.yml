@@ -1,11 +1,10 @@
 name: Fetch Latest Reading Clubs
 
-on:
-  push:
-    branches: [ feature/cron_fetch_reading_circles_from_api ]
-  workflow_dispatch:
-  schedule:
-    - cron: "0 3 * * *"
+# on:
+#   push:
+#   workflow_dispatch:
+#   schedule:
+#     - cron: "0 21 * * *"
 
 jobs:
   fetch-reading-clubs:
