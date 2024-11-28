@@ -12,7 +12,7 @@ default: &default
 
 development:
   <<: *default
-  url: <%= ENV["SUPABASE_DEVELOPMENT_DB_URI"] %>
+  database: booklin_development
 
 test:
   <<: *default
