@@ -2,7 +2,7 @@
   fieldset data-test-id='participating-status'
     legend class='mb-2 text-sm font-semibold text-gray-600'
       | 開催状態
-    .flex.space-x-3
+    .flex.space-x-3.mb-4
       = radio_button_with_label(\
           f, :finished_eq, false,
           { id: 'q_finished_eq_false', checked: true, label_text: '開催中' }\
