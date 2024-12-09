@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ReadingClubsController < ApplicationController
+  before_action :set_reading_club, only: %i[overview]
+
   def index
     initialize_default_params
 
@@ -17,14 +19,13 @@ class ReadingClubsController < ApplicationController
     @reading_clubs = sorted_clubs.page(params[:page])
   end
 
-  def overview
-    reading_club = ReadingClub.find(params[:id])
-
-    @read_me = reading_club.read_me
-    @notes = reading_club.notes
-  end
+  def overview; end
 
   private
+
+  def set_reading_club
+    @reading_club = ReadingClub.find(params[:id])
+  end
 
   def initialize_default_params
     params[:q] ||= {}
