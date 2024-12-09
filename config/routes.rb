@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   resources :reading_clubs, only: [:index] do
     get 'overview', on: :member
     resources :participants, only: [:create, :destroy], shallow: true, controller: 'reading_clubs/participants'
+    resource :read_me, only: [:edit, :update], controller: 'reading_clubs/read_me'
   end
 end
