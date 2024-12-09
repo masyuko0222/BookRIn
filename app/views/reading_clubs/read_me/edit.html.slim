@@ -1,0 +1,5 @@
+= turbo_frame_tag 'read-me' do
+  = form_with model: @reading_club, url: reading_club_read_me_path(@reading_club), method: :patch do |f|
+    = f.text_area :read_me, class: 'w-full h-full'
+    = f.submit '保存'
+    = link_to 'キャンセル', overview_reading_club_path(@reading_club)
