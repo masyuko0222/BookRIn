@@ -1,23 +1,21 @@
 # frozen_string_literal: true
 
 class ReadingClubs::ParticipantsController < ApplicationController
+  # 一目で参加/参加取消できたかわかるので、フラッシュは表示させない
   before_action :set_participant, only: :destroy
 
   def create
     participant = current_user.participants.new(participant_params)
 
     if participant.save
-      flash[:notice] = '輪読会に参加しました！'
       redirect_back_or_to reading_clubs_path
     else
-      flash[:alert] = '輪読会の参加に失敗しました 時間を空けて再度お試しください'
-      render 'reading_clubs/index'
+      render 'reading_clubs/index', status: :unprocessable_entity
     end
   end
 
   def destroy
     @participant.destroy
-    flash[:alert] = '輪読会の参加を取り消しました'
     redirect_back_or_to reading_clubs_path
   end
 
