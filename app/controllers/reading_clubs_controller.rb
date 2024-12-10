@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ReadingClubsController < ApplicationController
+
   def index
     initialize_default_params
 
@@ -15,13 +16,6 @@ class ReadingClubsController < ApplicationController
       end
 
     @reading_clubs = sorted_clubs.page(params[:page])
-  end
-
-  def overview
-    reading_club = ReadingClub.find(params[:id])
-
-    @read_me = reading_club.read_me
-    @notes = reading_club.notes
   end
 
   private
