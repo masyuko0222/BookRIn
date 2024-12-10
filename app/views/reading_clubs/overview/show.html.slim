@@ -1,0 +1,22 @@
+.container.mx-auto.m-6
+  .flex.items-center.justify-end.mb-4
+    = link_to '輪読会一覧に戻る', reading_clubs_path,
+      class: 'inline-flex items-center \
+        px-4 py-2 \
+        text-black bg-gray \
+        border border-[#336699] rounded-lg shadow-md \
+        transition-all hover:bg-[#336699]'
+
+.grid.grid-cols-2.gap-4
+  .left-panel
+    div class='
+          ml-2 p-7 \
+          border border-black rounded-lg shadow-md \
+          bg-white
+        '
+      div data-test-id = 'read-me'
+        = render '/reading_clubs/read_me/read_me'
+
+  .right-panel data-test-id = 'reading-club-notes'
+    - @reading_club.notes.each do |note|
+      p = note.title

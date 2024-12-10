@@ -14,13 +14,13 @@ class ReadingClubsTest < ApplicationSystemTestCase
 
     within(find('li', text: 'OpenClub 20')) do
       click_link '参加'
+      assert_selector 'a', text: '参加取消'
     end
-    assert_text '輪読会に参加しました！'
 
     within(find('li', text: 'OpenClub 20')) do
       click_link '参加取消'
+      assert_selector 'a', text: '参加'
     end
-    assert_text '輪読会の参加を取り消しました'
   end
 
   test 'Search title' do

@@ -1,0 +1,17 @@
+= turbo_frame_tag "read_me_#{@reading_club.id}" do
+  = form_with model: @reading_club, url: reading_club_read_me_path(@reading_club), method: :patch do |f|
+    = f.text_area :read_me, rows: 15,
+      class: 'p-2 w-full border rounded-md'
+    .flex.items-center.space-x-4.mt-4
+      = f.submit '保存',
+        class: 'inline-flex items-center \
+          px-4 py-2 \
+          text-white bg-blue-600 \
+          border border-blue-600 rounded-lg shadow-md \
+          transition-all hover:bg-blue-700'
+      = link_to 'キャンセル', :back,
+        class: 'inline-flex items-center \
+          px-3 py-1 \
+          text-gray-600 bg-gray-100 \
+          border border-gray-300 rounded-lg shadow-sm \
+          transition-all hover:bg-gray-200'

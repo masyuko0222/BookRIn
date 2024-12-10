@@ -14,5 +14,7 @@ html
   body
     = render 'application/header'
     main
-      = render 'application/flash'
+      #flash
+        = render 'application/flash'
+      .mb-2
       = yield
