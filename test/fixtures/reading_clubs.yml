@@ -10,6 +10,16 @@ reading_club<%= i %>:
   updated_at: <%= (20 - i).minutes.ago %> # 20のupdated_atが最新、1が最古になる
 <% end %>
 
+reading_club_with_read_me:
+  title: Read Meがある輪読会
+  finished: false
+  template: null
+  read_me: |-
+    # Welcome to Markdown
+
+    This is a **test** of the Markdown functionality.
+  updated_at: <%= Time.zone.now %>
+
 <% (1..20).each do |i| %>
 finished_reading_club<%= i %>:
   title: FinishedClub <%= i %>
