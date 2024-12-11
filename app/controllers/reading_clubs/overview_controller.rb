@@ -3,7 +3,9 @@
 class ReadingClubs::OverviewController < ApplicationController
   before_action :set_reading_club, only: :show
 
-  def show; end
+  def show
+    @notes = @reading_club.notes
+  end
 
   private
 
