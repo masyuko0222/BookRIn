@@ -1,9 +1,9 @@
-= turbo_frame_tag "read_me_#{@reading_club.id}" do
+= turbo_frame_tag "read_me_#{reading_club.id}" do
   .prose.prose-sm.prose-blue.prose-li:marker:text-black
-    = to_html(@reading_club.read_me)
+    = to_html(reading_club.read_me)
 
   .border-t.border-gray-400.my-4
-  = link_to '編集', edit_reading_club_read_me_path(@reading_club),
+  = link_to '編集', edit_reading_club_read_me_path(reading_club),
     class: 'inline-flex items-center \
       px-4 py-2 \
       text-white bg-blue-600 \
