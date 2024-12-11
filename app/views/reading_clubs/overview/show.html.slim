@@ -18,5 +18,4 @@
         = render '/reading_clubs/overview/read_me', reading_club: @reading_club
 
   .right-panel data-test-id = 'reading-club-notes'
-    - @reading_club.notes.each do |note|
-      p = note.title
+    = render '/reading_clubs/overview/notes', reading_club: @reading_club
