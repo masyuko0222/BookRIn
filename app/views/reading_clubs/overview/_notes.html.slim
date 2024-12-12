@@ -1,2 +1,16 @@
-- notes.each do |n|
-  p = "#{n.held_on.strftime('%-m月%-d日')} #{n.title}"
+= search_form_for(search, url: request.path, html: { data: { turbo_frame: "notes_#{reading_club.id}" } } ) do |f|
+  = f.date_field :held_on_gteq
+  span
+    | ~
+  = f.date_field :held_on_lteq
+
+  = f.search_field :title_cont, placeholder: '輪読会のタイトルで検索'
+
+  = link_to 'クリア', reading_club_overview_path
+  = f.submit '検索'
+
+= turbo_frame_tag "notes_#{reading_club.id}" do
+  = sort_link(search, :held_on, '開催日')
+  - notes.each do |n|
+    p = title_with_held_on(n)
+  = paginate notes
