@@ -44,7 +44,35 @@ reading_clubs = [
     template: nil,
     read_me: nil,
     updated_at: Time.current
-  }
+  },
+  {
+    title: '空の輪読会2',
+    finished: false,
+    template: nil,
+    read_me: nil,
+    updated_at: Time.current - 2.day
+  },
+  {
+    title: '空の輪読会3',
+    finished: false,
+    template: nil,
+    read_me: nil,
+    updated_at: Time.current - 3.day
+  },
+  {
+    title: '空の輪読会4',
+    finished: false,
+    template: nil,
+    read_me: nil,
+    updated_at: Time.current - 4.day
+  },
+  {
+    title: '空の輪読会5',
+    finished: false,
+    template: nil,
+    read_me: nil,
+    updated_at: Time.current - 5.day
+  },
 ]
 
 reading_clubs.each do |reading_club|
