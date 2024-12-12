@@ -5,7 +5,7 @@ reading_club = ReadingClub.find_by(title: 'プログラミング基礎読書会'
 start_date = Time.zone.today - 26 * 7 # 半年前
 end_date = Time.zone.today
 (start_date..end_date).step(7).each_with_index do |held_on, i|
-  title = "#{held_on.strftime('%-m月%-d日')} - 第#{i + 1}回 今日はXXXを学んだ"
+  title = "第#{i + 1}回 今日はXXXを学んだ"
   content = <<~MARKDOWN
     ## 学んだこと
     - **Aさん**: 「変数について」

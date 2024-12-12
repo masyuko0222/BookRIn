@@ -1,2 +1,2 @@
-- notes.each do |note|
-  p = note.title
+- notes.each do |n|
+  p = "#{n.held_on.strftime('%-m月%-d日')} #{n.title}"
