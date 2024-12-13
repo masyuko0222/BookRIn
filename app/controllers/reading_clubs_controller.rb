@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class ReadingClubsController < ApplicationController
-
   def index
     initialize_default_params
 
