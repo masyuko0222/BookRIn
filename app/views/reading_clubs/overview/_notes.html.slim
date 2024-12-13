@@ -1,4 +1,13 @@
-= search_form_for(search, url: request.path, html: { data: { turbo_frame: "notes_#{reading_club.id}" } } ) do |f|
+= search_form_for( \
+    search, url: request.path, \
+    html: { \
+      data: { \
+        turbo_frame: "notes_#{reading_club.id}",
+        controller: 'form', \
+        action: 'input->form#search' \
+      }\
+    } \
+  ) do |f|
   = f.date_field :held_on_gteq
   span
     | ~
@@ -7,7 +16,6 @@
   = f.search_field :title_cont, placeholder: '輪読会のタイトルで検索'
 
   = link_to 'クリア', reading_club_overview_path
-  = f.submit '検索'
 
 = turbo_frame_tag "notes_#{reading_club.id}" do
   = sort_link(search, :held_on, '開催日')
