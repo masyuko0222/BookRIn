@@ -1,6 +1,6 @@
 = render 'reading_clubs/overview/notes/search_form', reading_club:, search:
 
-= turbo_frame_tag "notes_#{reading_club.id}" do
+= turbo_frame_tag("notes_#{reading_club.id}") do
   = sort_link(search, :held_on, '開催日')
   - notes.each do |n|
     p = title_with_held_on(n)
