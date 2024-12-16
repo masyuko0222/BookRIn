@@ -3,18 +3,19 @@
 = turbo_frame_tag("notes_#{reading_club.id}", data: { turbo_action: :advance }) do
   .flex.items-center.justify-between.mb-1.mr-2
     = sort_link(search, :held_on, '開催日', class: 'text-gray-600 hover:text-blue-500')
+
     = link_to '新規ノート作成', new_reading_club_note_path(reading_club),
       data: { turbo: false },
       class: 'px-4 py-2 \
-        text-white bg-blue-500 text-sm font-medium \
-        rounded shadow-lg \
-        hover:bg-blue-600 focus:ring focus:ring-blue-300'
+              text-white bg-blue-500 text-sm font-medium \
+              rounded shadow-lg \
+              hover:bg-blue-600 focus:ring focus:ring-blue-300'
   ul
     - notes.each do |n|
       li.mb-2
         = link_to title_with_held_on(n), note_path(n),
           data: { turbo: false },
           class: 'px-2 py-1 block \
-            text-black underline \
-            hover:text-blue-600'
+                  text-black underline \
+                  hover:text-blue-600'
   = paginate notes
