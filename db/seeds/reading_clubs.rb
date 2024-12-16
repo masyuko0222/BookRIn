@@ -72,6 +72,13 @@ reading_clubs = [
     template: nil,
     read_me: nil,
     updated_at: Time.current - 5.days
+  },
+  {
+    title: '終わった輪読会',
+    finished: true,
+    template: nil,
+    read_me: nil,
+    updated_at: Time.current - 5.days
   }
 ]
 
