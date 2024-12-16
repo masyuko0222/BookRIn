@@ -1,7 +1,12 @@
 = render 'reading_clubs/overview/notes/search_form', reading_club:, search:
 
-= turbo_frame_tag("notes_#{reading_club.id}") do
+= turbo_frame_tag("notes_#{reading_club.id}", data: { turbo_action: :advance }) do
+  = link_to '新規ノート作成', new_reading_club_note_path(reading_club), data: { turbo: false }
+
   = sort_link(search, :held_on, '開催日')
-  - notes.each do |n|
-    p = title_with_held_on(n)
+  ul
+    - notes.each do |n|
+      li
+        = link_to title_with_held_on(n), note_path(n),
+          data: { turbo: false }
   = paginate notes
