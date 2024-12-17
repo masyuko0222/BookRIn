@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_29_124313) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_17_075358) do
+  # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "notes", force: :cascade do |t|
@@ -36,7 +37,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_29_124313) do
     t.string "title", null: false
     t.boolean "finished", null: false
     t.text "template"
-    t.text "read_me"
+    t.text "read_me", default: "# READ ME\n**輪読会のルールや読んで欲しいことを書きましょう！**\n\n## 開催日時\n- 毎週月曜日 20:00~\n- 毎週水曜日 20:00~\n- 祝日はお休みです\n\n## Discordリンク\n[リンク](https://example.com/)\n"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
