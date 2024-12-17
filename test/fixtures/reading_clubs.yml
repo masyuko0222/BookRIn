@@ -20,7 +20,7 @@ reading_club_with_read_me:
     This is a **test** of the Markdown functionality.
   updated_at: <%= Time.zone.now %>
 
-reading_club_with_read_notes:
+reading_club_with_notes:
   title: Noteがある輪読会
   finished: false
   template: null
