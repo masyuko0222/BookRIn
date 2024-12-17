@@ -18,7 +18,11 @@
         = render '/reading_clubs/overview/read_me', reading_club: @reading_club
 
   .right-panel data-test-id = 'reading-club-notes'
-    = render '/reading_clubs/overview/notes/notes',
-      reading_club: @reading_club,
-      notes: @notes,
-      search: @search
+    - if @notes.present?
+      = render '/reading_clubs/overview/notes/notes',
+        reading_club: @reading_club,
+        notes: @notes,
+        search: @search
+    - else
+      = render '/reading_clubs/overview/notes/blank',
+        reading_club: @reading_club
