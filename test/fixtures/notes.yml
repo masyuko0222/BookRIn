@@ -3,7 +3,7 @@ note<%= i + 1 %>:
   held_on: <%= Date.today - i.days %>
   title: "Note <%= i + 1 %>"
   content: "Content for note <%= i + 1 %>"
-  reading_club: reading_club_with_read_notes
+  reading_club: reading_club_with_notes
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
 <% end %>

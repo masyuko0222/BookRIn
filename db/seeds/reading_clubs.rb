@@ -42,42 +42,36 @@ reading_clubs = [
     title: '空の輪読会',
     finished: false,
     template: nil,
-    read_me: nil,
     updated_at: Time.current
   },
   {
     title: '空の輪読会2',
     finished: false,
     template: nil,
-    read_me: nil,
     updated_at: Time.current - 2.days
   },
   {
     title: '空の輪読会3',
     finished: false,
     template: nil,
-    read_me: nil,
     updated_at: Time.current - 3.days
   },
   {
     title: '空の輪読会4',
     finished: false,
     template: nil,
-    read_me: nil,
     updated_at: Time.current - 4.days
   },
   {
     title: '空の輪読会5',
     finished: false,
     template: nil,
-    read_me: nil,
     updated_at: Time.current - 5.days
   },
   {
     title: '終わった輪読会',
     finished: true,
     template: nil,
-    read_me: nil,
     updated_at: Time.current - 5.days
   }
 ]

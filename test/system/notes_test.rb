@@ -5,7 +5,7 @@ require 'application_system_test_case'
 class NotesTest < ApplicationSystemTestCase
   setup do
     @user = users(:user1)
-    @reading_club = reading_clubs(:reading_club_with_read_me)
+    @reading_club = reading_clubs(:reading_club_with_notes)
     @note = notes(:note1)
   end
 

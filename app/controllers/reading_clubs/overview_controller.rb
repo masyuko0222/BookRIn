@@ -4,7 +4,7 @@ class ReadingClubs::OverviewController < ApplicationController
   before_action :set_reading_club, only: :show
 
   def show
-    @search = Note.ransack(params[:q])
+    @search = @reading_club.notes.ransack(params[:q])
     @notes = @search.result.order(held_on: :desc).page(params[:page])
   end
 
