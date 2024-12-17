@@ -1,0 +1,35 @@
+= search_form_for( \
+    search, url: request.path, \
+    html: { \
+      data: { \
+        turbo_frame: "notes_#{reading_club.id}",
+        controller: 'form', \
+        action: 'input->form#search' \
+      }\
+    } \
+  ) do |f|
+
+  .mr-2.mb-2.p-3.bg-gray-100.rounded-md.shadow-md
+    .flex.flex-col.md:flex-row.gap-1
+      = f.date_field :held_on_gteq,
+        class: 'mt-1 rounded-md shadow-sm'
+
+      span.items-center.text-gray-500.text-xl.font-bold
+        | ~
+
+      = f.date_field :held_on_lteq,
+        class: 'mt-1 rounded-md shadow-sm'
+
+      = f.search_field :title_cont,
+        placeholder: '輪読会のタイトルで検索',
+        class: 'mr-1 flex-grow h-8 p-2 \
+                border-gray-300 rounded-md shadow-sm \
+                focus:border-blue-500 focus:ring focus:ring-blue-200'
+
+      .flex.justify-end
+        = link_to 'クリア',
+          reading_club_overview_path,
+          class: 'p-2 \
+                  text-white text-xs \
+                  bg-gray-400 rounded-md shadow-sm \
+                  hover:bg-red-600 focus:ring focus:ring-red-200'
