@@ -1,5 +1,5 @@
 = turbo_frame_tag(note) do
-  li.mb-2.flex.items-center
+  li.mb-2.flex.items-center.group
     = link_to title_with_held_on(note), note_path(note),
       data: { turbo: false },
       class: 'px-2 py-1 block \
@@ -7,4 +7,4 @@
               hover:text-blue-600'
     = link_to '×', note_path(note),
       data: {turbo_method: :delete, turbo_confirm: 'ノートを削除しますか？'},
-      class: 'ml-2 text-gray-500 hover:text-red-700'
+      class: 'hidden pb-1 text-xl text-red-500 hover:text-red-700 group-hover:block'
