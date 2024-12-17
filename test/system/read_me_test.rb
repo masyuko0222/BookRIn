@@ -2,7 +2,7 @@
 
 require 'application_system_test_case'
 
-class ReadingClub::ReadMeTest < ApplicationSystemTestCase
+class ReadMeTest < ApplicationSystemTestCase
   setup do
     @user = users(:user1)
     @reading_club = reading_clubs(:reading_club_with_read_me)
