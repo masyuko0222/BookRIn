@@ -92,4 +92,30 @@ class ReadingCirclesClientTest < ActiveSupport::TestCase
       ReadingClub.find(3000)
     end
   end
+
+  test '.save as update does not overwrite tempalte and read_me' do
+    ReadingClub.create!(
+      id: 4000,
+      title: 'テンプレートとREAD MEがある輪読会',
+      finished: true,
+      updated_at: Time.zone.parse('2000-01-01'),
+      template: 'This is template.',
+      read_me: 'This is READ ME'
+    )
+
+    latest_clubs = [{
+      'id' => 4000,
+      'title' => 'アップデートされた輪読会',
+      'finished' => false,
+      'updated_at' => Time.zone.parse('2024-01-01')
+      # templateとread_meはAPIデータには存在しない
+    }]
+
+    ReadingCirclesClient.save(latest_clubs)
+
+    updated_club = ReadingClub.find(4000)
+    assert_equal 'アップデートされた輪読会', updated_club.title
+    assert_equal 'This is template.', updated_club.template
+    assert_equal 'This is READ ME', updated_club.read_me
+  end
 end
