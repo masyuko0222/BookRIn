@@ -2,11 +2,11 @@
 
 require 'test_helper'
 
-class MarkdownParserHelperTest < ActiveSupport::TestCase
-  include MarkdownParserHelper
+class ReadingClubHelperTest < ActiveSupport::TestCase
+  include ReadingClubHelper
   include ActionView::Helpers::SanitizeHelper
 
-  test '.to_html convert to HTML from Markdown' do
+  test '.read_me_to_html convert to HTML from Markdown' do
     md_text = <<~MARKDOWN
       # プログラミング基礎読書会
 
@@ -49,6 +49,6 @@ class MarkdownParserHelperTest < ActiveSupport::TestCase
       <p><a href="https://example.com/">リンク</a></p>
     HTML
 
-    assert_equal expected_html, to_html(md_text)
+    assert_equal expected_html, read_me_to_html(md_text)
   end
 end
