@@ -39,7 +39,7 @@ class ReadingCirclesClientTest < ActiveSupport::TestCase
       finished: true,
       updated_at: Time.zone.parse('2000-01-01'),
       template: nil,
-      read_me: nil,
+      read_me: nil
     )
 
     original_club = ReadingClub.find(1000)
@@ -79,7 +79,7 @@ class ReadingCirclesClientTest < ActiveSupport::TestCase
       finished: true,
       updated_at: Time.zone.parse('2000-01-01'),
       template: nil,
-      read_me: nil,
+      read_me: nil
     )
 
     assert ReadingClub.find(3000)

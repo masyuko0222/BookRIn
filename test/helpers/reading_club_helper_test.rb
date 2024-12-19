@@ -6,7 +6,7 @@ class ReadingClubHelperTest < ActiveSupport::TestCase
   include ReadingClubHelper
   include ActionView::Helpers::SanitizeHelper
 
-  test '.read_me_to_html convert to HTML from Markdown' do
+  test '.read_me_to_html convert to HTML from Markdown' do # rubocop:disable Metrics/BlockLength
     md_text = <<~MARKDOWN
       # プログラミング基礎読書会
 
@@ -24,7 +24,6 @@ class ReadingClubHelperTest < ActiveSupport::TestCase
 
       [リンク](https://example.com/)
     MARKDOWN
-
 
     expected_html = <<~HTML
       <h1>プログラミング基礎読書会</h1>
