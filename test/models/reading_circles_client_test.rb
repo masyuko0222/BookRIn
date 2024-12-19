@@ -10,17 +10,13 @@ class ReadingCirclesClientTest < ActiveSupport::TestCase
           'id' => 1000,
           'title' => 'アップデートされた輪読会',
           'finished' => false,
-          'updated_at' => Time.zone.parse('2024-01-01'),
-          template: nil,
-          read_me: nil,
+          'updated_at' => Time.zone.parse('2024-01-01')
         },
         {
           'id' => 2000,
           'title' => '新規作成輪読会',
           'finished' => false,
-          'updated_at' => Time.zone.parse('2025-01-01'),
-          template: nil,
-          read_me: nil,
+          'updated_at' => Time.zone.parse('2025-01-01')
         }
         # id 3000の輪読会は削除
       ]
