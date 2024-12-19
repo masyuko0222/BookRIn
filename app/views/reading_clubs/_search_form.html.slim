@@ -1,8 +1,8 @@
 div class='
       ml-2 mr-2 mb-6 p-4 \
-      border border-gray-200 rounded-lg shadow-md \
+      border border-gray-200 rounded-lg \
       bg-white \
-      transition-all hover:shadow-lg
+      transition-all
     '
   = search_form_for(@q, url:, enforce_utf8: false) do |f|
     .flex.flex-col
@@ -19,6 +19,6 @@ div class='
     .text-center
       = f.submit '検索',
         class: 'px-5 py-2 \
-                rounded-lg shadow-md \
+                rounded-lg \
                 bg-blue-600 text-white \
                 transition-all hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-200'
