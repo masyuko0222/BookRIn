@@ -1,9 +1,9 @@
 <% 20.times do |i| %>
 note<%= i + 1 %>:
-  held_on: <%= Date.today - i.days %>
+  held_on: <%= Date.new(2024, 1, 1) + i.days %>
   title: "Note <%= i + 1 %>"
   content: "Content for note <%= i + 1 %>"
   reading_club: reading_club_with_notes
-  created_at: <%= Time.zone.now %>
-  updated_at: <%= Time.zone.now %>
+  created_at: <%= Time.zone.local(2024, 1, 1) + i.days %>
+  updated_at: <%= Time.zone.local(2024, 1, 1) + i.days %>
 <% end %>
