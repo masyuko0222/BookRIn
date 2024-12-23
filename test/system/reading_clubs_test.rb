@@ -26,10 +26,8 @@ class ReadingClubsTest < ApplicationSystemTestCase
   test 'Search title' do
     visit_with_auth(reading_clubs_path, @user)
     fill_in '輪読会のタイトルで検索', with: 'OpenClub 20'
-    within("[data-test-id='participating-status']") { choose('すべて') }
+    within("[data-test-id='participating-status']") { choose('開催中') }
     within("[data-test-id='finished-status']") { choose('すべて') }
-    click_button '検索'
-    assert_text 'OpenClub 20' # sleepの代わり
 
     hit_titles = page.all('ul li').map { |li| li.find('a', match: :first).text }
 
