@@ -39,42 +39,21 @@ reading_clubs = [
     updated_at: Time.current
   },
   {
-    title: '空の輪読会',
-    finished: false,
-    template: nil,
-    updated_at: Time.current
-  },
-  {
-    title: '空の輪読会2',
-    finished: false,
-    template: nil,
-    updated_at: Time.current - 2.days
-  },
-  {
-    title: '空の輪読会3',
-    finished: false,
-    template: nil,
-    updated_at: Time.current - 3.days
-  },
-  {
-    title: '空の輪読会4',
-    finished: false,
-    template: nil,
-    updated_at: Time.current - 4.days
-  },
-  {
-    title: '空の輪読会5',
-    finished: false,
-    template: nil,
-    updated_at: Time.current - 5.days
-  },
-  {
     title: '終わった輪読会',
     finished: true,
     template: nil,
     updated_at: Time.current - 5.days
   }
 ]
+
+40.times do |i|
+  reading_clubs << {
+    title: "空の輪読会#{i + 1}",
+    finished: false,
+    template: nil,
+    updated_at: Time.current - i.days
+  }
+end
 
 reading_clubs.each do |reading_club|
   ReadingClub.find_or_create_by!(title: reading_club[:title]) do |club|
