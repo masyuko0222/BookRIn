@@ -10,7 +10,7 @@
    ) do |f|
 
   .flex.flex-col
-    .w-full.mb-4
+    .mb-4
       = f.search_field :title_cont,
         placeholder: '輪読会のタイトルで検索',
         class: 'w-full \
@@ -22,7 +22,7 @@
       fieldset data-test-id='participating-status'
         legend class='mb-2 text-sm font-semibold text-gray-600'
           | 開催状態
-        .flex.space-x-2.mb-4
+        .flex.space-x-2
           label.inline-flex.items-center.space-x-1
             = f.radio_button :finished_eq, false, id: 'q_finished_eq_false', checked: true
             span.text-sm.text-gray-700 開催中
@@ -33,7 +33,7 @@
       fieldset data-test-id='finished-status'
         legend class='mb-2 text-sm font-semibold text-gray-600'
           | 参加状態
-        .flex.space-x-2.mb-4
+        .flex.space-x-2
           label.inline-flex.items-center.space-x-1
             = f.radio_button :users_uid_cont, current_user.uid,id: 'q_users_uid_cont_current_user_id', checked: true
             span.text-sm.text-gray-700 参加中のみ
