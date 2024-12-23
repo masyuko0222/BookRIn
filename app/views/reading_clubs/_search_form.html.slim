@@ -1,5 +1,5 @@
  = search_form_for(\
-     search, url: , enforce_utf8: false,\
+     search, url:, enforce_utf8: false,\
      html: {\
        data: {\
          turbo_frame: 'reading_clubs',\
@@ -35,7 +35,7 @@
           | 参加状態
         .flex.space-x-2
           label.inline-flex.items-center.space-x-1
-            = f.radio_button :users_uid_cont, current_user.uid,id: 'q_users_uid_cont_current_user_id', checked: true
+            = f.radio_button :users_uid_cont, current_user.uid, id: 'q_users_uid_cont_current_user_id', checked: true
             span.text-sm.text-gray-700 参加中のみ
           label.inline-flex.items-center.space-x-1
             = f.radio_button :users_uid_cont, '', id: 'q_users_uid_cont_all'

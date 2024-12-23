@@ -8,7 +8,7 @@ div class='
     search: @search,
     url: reading_clubs_path
 
-= turbo_frame_tag('reading_clubs', data: { turbo_action: :advance } ) do
+= turbo_frame_tag('reading_clubs', data: { turbo_action: :advance }) do
   ul class='grid.grid-cols-1'
     - @reading_clubs.each do |reading_club|
       = render 'reading_club', reading_club:
