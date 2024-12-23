@@ -2,8 +2,8 @@
 
 class ReadingClubsController < ApplicationController
   def index
-    @q = ReadingClub.ransack(params[:q])
-    result = @q.result.includes(:participants, :users)
+    @search = ReadingClub.ransack(params[:q])
+    result = @search.result.includes(:participants, :users)
 
     sorted_clubs =
       if requseted_only_participating?

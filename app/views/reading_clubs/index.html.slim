@@ -4,8 +4,9 @@ div class='
       bg-white \
       transition-all
     '
+
   = search_form_for(\
-      @q, url: reading_clubs_path, enforce_utf8: false,\
+      @search, url: reading_clubs_path, enforce_utf8: false,\
       html: {\
         data: {\
           turbo_frame: 'reading_clubs',\
