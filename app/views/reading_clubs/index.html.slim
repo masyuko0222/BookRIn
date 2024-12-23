@@ -5,48 +5,9 @@ div class='
       transition-all
     '
 
-  = search_form_for(\
-      @search, url: reading_clubs_path, enforce_utf8: false,\
-      html: {\
-        data: {\
-          turbo_frame: 'reading_clubs',\
-          controller: 'form',\
-          action: 'input->form#search'\
-        }\
-      }\
-    ) do |f|
-
-    .flex.flex-col
-      .w-full.mb-4
-        = f.search_field :title_cont,
-          placeholder: '輪読会のタイトルで検索',
-          class: 'w-full \
-                  px-3 py-2 \
-                  border border-gray-300 rounded-md \
-                  transition-all focus:outline-none focus:ring'
-
-      .flex.flex-col.space-y-4
-        fieldset data-test-id='participating-status'
-          legend class='mb-2 text-sm font-semibold text-gray-600'
-            | 開催状態
-          .flex.space-x-2.mb-4
-            label.inline-flex.items-center.space-x-1
-              = f.radio_button :finished_eq, false, id: 'q_finished_eq_false', checked: true
-              span.text-sm.text-gray-700 開催中
-            label.inline-flex.items-center.space-x-1
-              = f.radio_button :finished_eq, true, id: 'q_finished_eq_true'
-              span.text-sm.text-gray-700 終了
-
-        fieldset data-test-id='finished-status'
-          legend class='mb-2 text-sm font-semibold text-gray-600'
-            | 参加状態
-          .flex.space-x-2.mb-4
-            label.inline-flex.items-center.space-x-1
-              = f.radio_button :users_uid_cont, '', id: 'q_users_uid_cont_all', checked: true
-              span.text-sm.text-gray-700 すべて
-            label.inline-flex.items-center.space-x-1
-              = f.radio_button :users_uid_cont, current_user.uid, id: 'q_users_uid_cont_current_user_id'
-              span.text-sm.text-gray-700 参加中のみ
+  = render 'search_form',
+    search: @search,
+    url: reading_clubs_path
 
 = turbo_frame_tag('reading_clubs', data: { turbo_action: :advance } ) do
   ul class='grid.grid-cols-1'
