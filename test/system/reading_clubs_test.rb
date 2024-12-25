@@ -25,12 +25,12 @@ class ReadingClubsTest < ApplicationSystemTestCase
 
   test 'Search title' do
     visit_with_auth(reading_clubs_path, @user)
-    fill_in '輪読会のタイトルで検索', with: 'OpenClub 20'
+    fill_in '輪読会のタイトルで検索', with: 'OpenClub 9'
     within("[data-test-id='participating-status']") { choose('開催中') }
     within("[data-test-id='finished-status']") { choose('すべて') }
 
     hit_titles = page.all('ul li').map { |li| li.find('a', match: :first).text }
 
-    assert_equal hit_titles, ['OpenClub 20']
+    assert_equal hit_titles, ['OpenClub 9']
   end
 end
