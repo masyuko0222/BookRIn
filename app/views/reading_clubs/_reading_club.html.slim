@@ -6,7 +6,8 @@ li class="
   "
   h2 class="mb-2 text-lg font-semibold"
     = link_to reading_club.title, reading_club_overview_path(reading_club),
-      class: 'text-blue-600 hover:text-blue-800'
+      class: 'text-blue-600 hover:text-blue-800',
+      data: { turbo: false }
 
   .flex.items-center.mt-4
     - participant = reading_club.participants.find_by(user: current_user)
