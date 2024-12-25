@@ -14,7 +14,7 @@ class ReadingClubsController < ApplicationController
         result.order(updated_at: :desc)
       end
 
-    @reading_clubs = sorted_clubs.page(params[:page])
+    @reading_clubs = sorted_clubs.page(params[:page]).per(16)
   end
 
   private
