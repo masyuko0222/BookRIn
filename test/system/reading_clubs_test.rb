@@ -11,6 +11,8 @@ class ReadingClubsTest < ApplicationSystemTestCase
   test 'Click participant button' do
     visit_with_auth(reading_clubs_path, @user)
     assert_current_path reading_clubs_path
+    within("[data-test-id='participating-status']") { choose('開催中') }
+    within("[data-test-id='finished-status']") { choose('すべて') }
 
     within(find('li', text: 'OpenClub 20')) do
       click_link '参加'

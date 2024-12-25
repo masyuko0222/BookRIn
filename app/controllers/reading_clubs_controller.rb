@@ -2,6 +2,8 @@
 
 class ReadingClubsController < ApplicationController
   def index
+    set_default_params
+
     @search = ReadingClub.ransack(params[:q])
     result = @search.result.includes(:participants, :users)
 
@@ -16,6 +18,12 @@ class ReadingClubsController < ApplicationController
   end
 
   private
+
+  def set_default_params
+    params[:q] ||= {}
+    params[:q][:finished_eq] ||= 'false'
+    params[:q][:users_uid_cont] ||= current_user.uid
+  end
 
   def requseted_only_participating?
     params.dig(:q, :users_uid_cont) == current_user.uid.to_s
