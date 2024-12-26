@@ -6,7 +6,7 @@ class User < ApplicationRecord
   validates :provider, presence: true
 
   has_many :participants, dependent: :destroy
-  has_many :participating_reading_clubs, through: :participants, source: :reading_club
+  has_many :reading_clubs, through: :participants
 
   class << self
     def ransackable_attributes(_auth_object = nil)
