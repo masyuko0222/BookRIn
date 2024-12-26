@@ -7,7 +7,7 @@
   - if @reading_clubs.blank?
     = render 'blank'
   - else
-    ul class='grid grid-cols-1 md:grid-cols-4'
+    ul class='grid grid-cols-1 md:grid-cols-3'
       - @reading_clubs.each do |reading_club|
         = render 'reading_club', reading_club:
 

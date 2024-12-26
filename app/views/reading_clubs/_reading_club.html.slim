@@ -1,8 +1,8 @@
 li class="
     mx-3 my-3 p-4 \
-    border border-black rounded-md \
-    #{reading_club.finished ? 'bg-gray-300' : 'bg-blue-50'} \
-    transition-all
+    border border-2 border-gray rounded-md \
+    transition-all \
+    #{current_user.participating?(reading_club) ? 'bg-blue-200 border-none' : 'bg-gray-100'} \
   "
   h2 class="mb-2 text-lg font-semibold"
     = link_to reading_club.title, reading_club_overview_path(reading_club),
@@ -14,8 +14,16 @@ li class="
     - if participant
       = link_to '参加取消', participant_path(participant),
         data: { turbo_method: :delete },
-        class: 'bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-all'
+        class: 'inline-flex items-center \
+                px-3 py-1 \
+                text-gray-600 bg-gray-100 \
+                border border-gray-300 rounded-lg \
+                hover:bg-gray-200'
     - else
       = link_to '参加', reading_club_participants_path(reading_club),
         data: { turbo_method: :post },
-        class: 'bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-all'
+        class: 'inline-flex items-center \
+                px-3 py-1 \
+                text-white bg-blue-600 \
+                border border-blue-600 rounded-lg \
+                cursor-pointer hover:bg-blue-700'
