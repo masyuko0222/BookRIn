@@ -8,6 +8,14 @@ class UserTest < ActiveSupport::TestCase
     @new_user_info = build_discord_auth_hash(uid: '987654321', name: 'NewTestMan')
   end
 
+  test '#participating?(reading_club)' do
+    user = users(:user1)
+    reading_club = reading_clubs(:reading_club1)
+    Participant.create!(user:, reading_club:)
+
+    assert user.participating?(reading_club)
+  end
+
   test '.find_or_create_from_discord_info finds existing user' do
     oauth_user = User.find_or_create_from_discord_info(@exist_user_info)
     exist_user = users(:user1)

@@ -8,6 +8,10 @@ class User < ApplicationRecord
   has_many :participants, dependent: :destroy
   has_many :reading_clubs, through: :participants
 
+  def participating?(reading_club)
+    reading_clubs.include?(reading_club) 
+  end
+
   class << self
     def ransackable_attributes(_auth_object = nil)
       %w[uid]
