@@ -1,6 +1,6 @@
 = turbo_frame_tag "read_me_#{reading_club.id}" do
   .prose.prose-sm.prose-blue.prose-li:marker:text-black
-    = read_me_to_html(reading_club.read_me)
+    = sanitize(to_html(reading_club.read_me))
 
   .border-t.border-gray-400.my-4
   = link_to '編集', edit_reading_club_read_me_path(reading_club),
