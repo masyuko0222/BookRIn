@@ -6,6 +6,7 @@ class ReadingClubHelperTest < ActiveSupport::TestCase
   include ReadingClubHelper
   include ActionView::Helpers::SanitizeHelper
 
+  # ほぼRedcarpet gemの挙動確認しているに等しいから、消してもいいかも。検討。
   test '.read_me_to_html convert to HTML from Markdown' do # rubocop:disable Metrics/BlockLength
     md_text = <<~MARKDOWN
       # プログラミング基礎読書会
