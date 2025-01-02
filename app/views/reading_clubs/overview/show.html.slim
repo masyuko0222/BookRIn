@@ -1,10 +1,12 @@
 .container.ml-2.my-4
-  .flex.items-center.justify-start.mb-4
+  .flex.items-center.justify-between.mb-4
     = link_to '輪読会一覧に戻る', reading_clubs_path,
       class: 'inline-flex items-center \
               px-4 py-2 \
               border border-link-border rounded-lg \
               hover:bg-link-hover'
+
+    = participant_link(current_user, @reading_club)
 
 .grid.grid-cols-2.gap-4
   .left-panel
