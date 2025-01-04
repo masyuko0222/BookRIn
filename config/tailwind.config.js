@@ -11,6 +11,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        'main-color': '#336699',
         'link-border': '#e0dfe1',
         'link-hover': 'rgba(224, 223, 225, 0.8)',
       },
