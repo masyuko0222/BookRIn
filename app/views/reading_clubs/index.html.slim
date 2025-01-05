@@ -5,7 +5,7 @@
 
 = turbo_frame_tag('reading_clubs', data: { turbo_action: :advance }) do
   - if @reading_clubs.blank?
-    = render 'blank'
+    = render 'blank_participating_clubs'
   - else
     ul class='grid grid-cols-1 md:grid-cols-3'
       - @reading_clubs.each do |reading_club|
