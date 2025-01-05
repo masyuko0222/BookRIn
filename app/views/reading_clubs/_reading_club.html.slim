@@ -1,14 +1,10 @@
 li class="
-    mx-2 my-1 p-4 \
-    border rounded-md \
-    #{reading_club.finished ? 'bg-gray-300 hover:bg-gray-400' : 'bg-blue-50 hover:bg-blue-100'} \
-    transition-all
+    mx-3 my-3 p-4 \
+    border border-2 border-gray rounded-md \
+    transition-all \
+    bg-blue-200 border-none \
   "
   h2 class="mb-2 text-lg font-semibold"
     = link_to reading_club.title, reading_club_overview_path(reading_club),
-      class: 'text-blue-600 hover:text-blue-800'
-
-  .flex.items-center.mt-4
-    = render 'participant_link',
-      participant: reading_club.participants.find_by(user: current_user),
-      reading_club:
+      class: 'text-blue-600 hover:text-blue-800',
+      data: { turbo: false }

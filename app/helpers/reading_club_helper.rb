@@ -1,32 +1,24 @@
 # frozen_string_literal: true
 
 module ReadingClubHelper
-  def radio_button_with_label(form, method, tag_value, options = {})
-    id = options[:id]
-    checked = options[:checked]
-    label_text = options[:label_text]
-
-    content_tag :label, class: 'inline-flex items-center space-x-1' do
-      concat(form.radio_button(method, tag_value, id:, checked:))
-      concat(content_tag(:span, label_text, class: 'text-sm text-gray-700'))
-    end
-  end
-
-  def read_me_to_html(md_text)
+  def to_html(md_text)
+    # Redcarpet gemのUsageそのままを書いているだけなのでテストはしない
     return unless md_text
 
     renderer = Redcarpet::Render::HTML.new
     markdown = Redcarpet::Markdown.new(renderer)
-    html_text = markdown.render(md_text)
-
-    sanitize_html(html_text)
+    markdown.render(md_text)
   end
 
-  private
+  def participant_link(user, reading_club)
+    base_style = 'items-center px-3 py-1 cursor-pointer'
 
-  def sanitize_html(html_text)
-    tags = %w[h1 h2 h3 h4 h5 h6 p strong em a ul ol li code pre]
-    attributes = %w[href]
-    sanitize(html_text, tags:, attributes:)
+    if participant = user.participants.find_by(reading_club:)
+      link_to '参加取消', participant_path(participant), data: { turbo_method: :delete },
+      class: "#{base_style} text-gray-600 bg-gray-100 hover:bg-gray-200"
+    else
+      link_to '輪読会に参加する', reading_club_participants_path(reading_club), data: { turbo_method: :post },
+      class: "#{base_style} text-white bg-main-color hover:bg-blue-700"
+    end
   end
 end

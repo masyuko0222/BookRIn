@@ -1,12 +1,12 @@
-= search_form_for( \
-    search, url: request.path, \
-    html: { \
-      data: { \
+= search_form_for(\
+    search, url: request.path,\
+    html: {\
+      data: {\
         turbo_frame: "notes_#{reading_club.id}",
-        controller: 'form', \
-        action: 'input->form#search' \
+        controller: 'form',\
+        action: 'input->form#search'\
       }\
-    } \
+    }\
   ) do |f|
 
   .mr-2.mb-2.p-3.bg-gray-100.rounded-md

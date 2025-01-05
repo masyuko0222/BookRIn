@@ -1,7 +1,15 @@
-= render 'search_form', url: reading_clubs_path
+.my-6
+  = render 'search_form',
+    search: @search,
+    url: reading_clubs_path
 
-ul class='grid.grid-cols-1'
-  - @reading_clubs.each do |reading_club|
-    = render 'reading_club', reading_club:
+= turbo_frame_tag('reading_clubs', data: { turbo_action: :advance }) do
+  - if @reading_clubs.blank?
+    = render 'blank'
+  - else
+    ul class='grid grid-cols-1 md:grid-cols-3'
+      - @reading_clubs.each do |reading_club|
+        = render 'reading_club', reading_club:
 
-= paginate @reading_clubs
+  div data-turbo='false'
+    = paginate @reading_clubs

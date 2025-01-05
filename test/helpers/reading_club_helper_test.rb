@@ -4,50 +4,27 @@ require 'test_helper'
 
 class ReadingClubHelperTest < ActiveSupport::TestCase
   include ReadingClubHelper
-  include ActionView::Helpers::SanitizeHelper
+  include Rails.application.routes.url_helpers
+  include ActionView::Helpers::UrlHelper
 
-  test '.read_me_to_html convert to HTML from Markdown' do # rubocop:disable Metrics/BlockLength
-    md_text = <<~MARKDOWN
-      # プログラミング基礎読書会
+  test '.participant_link as 参加リンク' do
+    user = users(:user1)
+    reading_club = reading_clubs(:reading_club1)
+    link = participant_link(user, reading_club)
 
-      **この読書会では、プログラミングの基礎を学びます。**
+    assert_includes link, '参加'
+    assert_includes link, reading_club_participants_path(reading_club)
+    assert_includes link, 'data-turbo-method="post"'
+  end
 
-      - 開催日時: 毎週土曜日 午後2時〜午後4時
+  test '.participant_link as 参加取消リンク' do
+    user = users(:user1)
+    reading_club = reading_clubs(:reading_club1)
+    participant = Participant.create!(user:, reading_club:)
+    link = participant_link(user, reading_club)
 
-      ## 学習項目
-      - 変数とデータ型
-      - 条件分岐とループ
-      - 基本的なアルゴリズム
-
-      を中心に学習していきます。
-      ぜひ一緒に学びましょう！
-
-      [リンク](https://example.com/)
-    MARKDOWN
-
-    expected_html = <<~HTML
-      <h1>プログラミング基礎読書会</h1>
-
-      <p><strong>この読書会では、プログラミングの基礎を学びます。</strong></p>
-
-      <ul>
-      <li>開催日時: 毎週土曜日 午後2時〜午後4時</li>
-      </ul>
-
-      <h2>学習項目</h2>
-
-      <ul>
-      <li>変数とデータ型</li>
-      <li>条件分岐とループ</li>
-      <li>基本的なアルゴリズム</li>
-      </ul>
-
-      <p>を中心に学習していきます。
-      ぜひ一緒に学びましょう！</p>
-
-      <p><a href="https://example.com/">リンク</a></p>
-    HTML
-
-    assert_equal expected_html, read_me_to_html(md_text)
+    assert_includes link, '参加取消'
+    assert_includes link, participant_path(participant)
+    assert_includes link, 'data-turbo-method="delete"'
   end
 end

@@ -2,10 +2,10 @@
 
 class ReadingClubsController < ApplicationController
   def index
-    initialize_default_params
+    set_default_params
 
-    @q = ReadingClub.ransack(params[:q])
-    result = @q.result.includes(:participants, :users)
+    @search = ReadingClub.ransack(params[:q])
+    result = @search.result.includes(:participants, :users)
 
     sorted_clubs =
       if requseted_only_participating?
@@ -14,14 +14,15 @@ class ReadingClubsController < ApplicationController
         result.order(updated_at: :desc)
       end
 
-    @reading_clubs = sorted_clubs.page(params[:page])
+    @reading_clubs = sorted_clubs.page(params[:page]).per(16)
   end
 
   private
 
-  def initialize_default_params
+  def set_default_params
     params[:q] ||= {}
     params[:q][:finished_eq] ||= 'false'
+    params[:q][:users_uid_cont] ||= current_user.uid
   end
 
   def requseted_only_participating?
