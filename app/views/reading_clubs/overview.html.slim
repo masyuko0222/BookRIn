@@ -15,14 +15,14 @@
           bg-white
         '
       div data-test-id = 'read-me'
-        = render '/reading_clubs/overview/read_me/read_me', reading_club: @reading_club
+        = render '/reading_clubs/read_me/read_me', reading_club: @reading_club
 
   .right-panel data-test-id = 'reading-club-notes'
     - if @notes.present?
-      = render '/reading_clubs/overview/notes/notes',
+      = render '/reading_clubs/notes/notes',
         reading_club: @reading_club,
         notes: @notes,
         search: @search
     - else
-      = render '/reading_clubs/overview/notes/blank',
+      = render '/reading_clubs/notes/blank',
         reading_club: @reading_club

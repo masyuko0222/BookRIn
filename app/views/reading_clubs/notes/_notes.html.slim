@@ -1,4 +1,4 @@
-= render 'reading_clubs/overview/notes/search_form', reading_club:, search:
+= render 'reading_clubs/notes/search_form', reading_club:, search:
 
 = turbo_frame_tag("notes_#{reading_club.id}", data: { turbo_action: :advance }) do
   mb-1.mx-2.flex.items-center.justify-between
@@ -12,5 +12,5 @@
               hover:bg-link-hover'
   ul
     - notes.each do |n|
-      = render 'reading_clubs/overview/notes/note', note: n
+      = render 'reading_clubs/notes/note', note: n
   = paginate notes
