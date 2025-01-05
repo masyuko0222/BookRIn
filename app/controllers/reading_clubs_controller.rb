@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ReadingClubsController < ApplicationController
+  before_action :set_reading_club, only: :overview
+
   def index
     set_default_params
 
@@ -17,6 +19,11 @@ class ReadingClubsController < ApplicationController
     @reading_clubs = sorted_clubs.page(params[:page]).per(16)
   end
 
+  def overview
+    @search = @reading_club.notes.ransack(params[:q])
+    @notes = @search.result.order(held_on: :desc).page(params[:page])
+  end
+
   private
 
   def set_default_params
@@ -28,4 +35,9 @@ class ReadingClubsController < ApplicationController
   def requseted_only_participating?
     params.dig(:q, :users_uid_cont) == current_user.uid.to_s
   end
+
+  def set_reading_club
+    @reading_club = ReadingClub.find(params[:id])
+  end
+
 end

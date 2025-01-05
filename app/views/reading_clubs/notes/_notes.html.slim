@@ -1,0 +1,19 @@
+= render 'reading_clubs/notes/search_form', reading_club:, search:
+
+- if notes.present?
+  = turbo_frame_tag("notes_#{reading_club.id}", data: { turbo_action: :advance }) do
+    mb-1.mx-2.flex.items-center.justify-between
+      = sort_link(search, :held_on, '開催日', class: 'text-gray-600 hover:text-blue-500')
+
+      = link_to '新規ノート作成', new_reading_club_note_path(reading_club),
+        data: { turbo: false },
+        class: 'px-4 py-2 \
+                border border-link-border rounded-lg \
+                text-sm \
+                hover:bg-link-hover'
+    ul
+      - notes.each do |n|
+        = render 'reading_clubs/notes/note', note: n
+    = paginate notes
+- else
+  = render '/reading_clubs/notes/blank_notes', reading_club:
