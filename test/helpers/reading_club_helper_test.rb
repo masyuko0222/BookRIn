@@ -14,7 +14,7 @@ class ReadingClubHelperTest < ActiveSupport::TestCase
 
     assert_includes link, '参加'
     assert_includes link, reading_club_participants_path(reading_club)
-    assert_includes link, "data-turbo-method=\"post\""
+    assert_includes link, 'data-turbo-method="post"'
   end
 
   test '.participant_link as 参加取消リンク' do
@@ -25,6 +25,6 @@ class ReadingClubHelperTest < ActiveSupport::TestCase
 
     assert_includes link, '参加取消'
     assert_includes link, participant_path(participant)
-    assert_includes link, "data-turbo-method=\"delete\""
+    assert_includes link, 'data-turbo-method="delete"'
   end
 end
