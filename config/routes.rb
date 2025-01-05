@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get '/auth/failure', to: redirect('/login')
 
   resources :reading_clubs, only: [:index] do
-    resource :overview, only: [:show], controller: 'reading_clubs/overview'
+    get 'overview', on: :member
     resources :participants, only: [:create, :destroy], shallow: true, controller: 'reading_clubs/participants'
     resource :read_me, only: [:edit, :update], controller: 'reading_clubs/read_me'
     resources :notes, shallow: true, controller: 'notes'

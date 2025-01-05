@@ -9,7 +9,7 @@ class OverviewTest < ApplicationSystemTestCase
   end
 
   test 'click participant link' do
-    visit_with_auth(reading_club_overview_path(@reading_club), @user)
+    visit_with_auth(overview_reading_club_path(@reading_club), @user)
 
     assert_difference 'Participant.count', 1 do
       click_link '輪読会に参加する'

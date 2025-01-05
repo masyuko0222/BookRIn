@@ -15,7 +15,7 @@
           bg-white
         '
       div data-test-id = 'read-me'
-        = render '/reading_clubs/overview/read_me', reading_club: @reading_club
+        = render '/reading_clubs/overview/read_me/read_me', reading_club: @reading_club
 
   .right-panel data-test-id = 'reading-club-notes'
     - if @notes.present?
