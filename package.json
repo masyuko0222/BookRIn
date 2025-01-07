@@ -12,6 +12,7 @@
 		"prettier": "3.3.3"
 	},
 	"scripts": {
+		"prettier:write": "prettier app/javascript/**/*.{js,jsx} --write",
 		"lint": "run-s lint:*",
 		"lint:eslint": "eslint 'app/javascript/**/*.{js,jsx}' --max-warnings=0",
 		"lint:prettier": "prettier app/javascript/**/*.{js,jsx} --check",
