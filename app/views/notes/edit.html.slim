@@ -1,6 +1,15 @@
-p
-  = @note.held_on
-  = @note.title
-br
-p
-  = @note.content
+= turbo_frame_tag @note do
+  = form_with model: @note do |f|
+    = f.label :held_on
+    = f.date_field :held_on
+    br
+
+    = f.label :title
+    = f.text_field :title
+    br
+
+    = f.label :content
+    = f.text_area :content
+    br
+
+    = f.submit 'Save Note'
