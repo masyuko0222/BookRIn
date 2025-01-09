@@ -1,15 +1,12 @@
-= turbo_frame_tag @note do
-  = form_with model: @note do |f|
-    = f.label :held_on
-    = f.date_field :held_on
-    br
+= form_with model: @note do |f|
+  = f.date_field :held_on
+  br
 
-    = f.label :title
-    = f.text_field :title
-    br
+  = f.text_field :title
+  br
 
-    = f.label :content
-    = f.text_area :content
-    br
+  = content_tag :div, '', id: 'note-editor', data: { content: @note.content }
+  = f.hidden_field :content, id: 'note-editor-hidden', value: @note.content
+  br
 
-    = f.submit 'Save Note'
+  = f.submit 'Save Note'
