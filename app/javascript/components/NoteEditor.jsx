@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { useEditor, EditorContent } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
 
 const NoteEditor = ({ content }) => {
-	const [initialContent, setInitialContent] = useState(content);
+	const editor = useEditor({
+		extensions: [StarterKit],
+		content: content,
+	});
 
-	const handleChange = (e) => {
-		setInitialContent(e.target.value);
-		document.getElementById('note-editor-hidden').value = e.target.value;
-	};
+	editor.on('update', ({ editor }) => {
+		const updatedContent = editor.getHTML();
+		document.getElementById('note-editor-hidden').value = updatedContent;
+	});
 
-	return <textarea value={initialContent} onChange={handleChange} />;
+	return <EditorContent editor={editor} />;
 };
 
 NoteEditor.propTypes = {
