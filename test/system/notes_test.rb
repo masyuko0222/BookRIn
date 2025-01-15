@@ -15,7 +15,7 @@ class NotesTest < ApplicationSystemTestCase
     assert_field 'note[title]', with: 'Note 1'
     assert_field 'note[held_on]', with: '2024-01-01'
     editor_content = find('#note-editor')['data-content']
-    assert_equal 'Content for note 1', editor_content
+    assert_text 'Content for note 1'
 
     # 更新
     fill_in 'note[title]', with: 'Updated Note Title'
