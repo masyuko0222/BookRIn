@@ -1,14 +1,27 @@
-= link_to 'ノート一覧へ戻る', overview_reading_club_path(@note.reading_club)
+.mx-2.mt-4.mb-8
+  = link_to 'ノート一覧へ戻る', overview_reading_club_path(@note.reading_club),
+    class: '\
+            px-4 py-2 \
+            border border-link-border rounded-lg \
+            hover:bg-link-hover'
 
 = form_with model: @note do |f|
-  = f.date_field :held_on
-  br
+  .ml-2
+    .flex.items-center.space-x-2
 
-  = f.text_field :title
-  br
+      - input_classes = 'border p-2 border-gray-300 rounded'
 
-  = content_tag :div, '', id: 'note-editor', data: { content: @note.content }
-  = f.hidden_field :content, id: 'note-editor-hidden', value: @note.content
-  br
+      = f.date_field :held_on, class: "#{input_classes} w-36"
+      = f.text_field :title, class: "#{input_classes} w-[24rem]", placeholder: 'タイトルを入力'
 
-  = f.submit 'Save Note'
+    .mt-2
+      = content_tag :div, '', id: 'note-editor', data: { content: to_html(@note.content) }
+      = f.hidden_field :content, id: 'note-editor-hidden', value: @note.content
+
+    .mt-2
+      = f.submit 'ノートを保存',
+        class: 'inline-flex items-center \
+                px-4 py-2 \
+                text-white bg-blue-600 \
+                border border-blue-600 rounded-lg \
+                cursor-pointer hover:bg-blue-700'

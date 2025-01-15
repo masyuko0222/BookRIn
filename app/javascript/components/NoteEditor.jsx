@@ -7,6 +7,12 @@ const NoteEditor = ({ content }) => {
 	const editor = useEditor({
 		extensions: [StarterKit],
 		content: content,
+		editorProps: {
+			attributes: {
+				class: 'mr-2 border border-gray-300 p-4 rounded focus:ring-blue-500',
+				style: 'height: 24rem; overflow: auto;',
+			},
+		},
 	});
 
 	editor.on('update', ({ editor }) => {
