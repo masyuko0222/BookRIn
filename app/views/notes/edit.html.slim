@@ -1,4 +1,4 @@
-.mx-2.mt-4.mb-8
+.mx-2.mt-4.mb-4
   = link_to 'ノート一覧へ戻る', overview_reading_club_path(@note.reading_club),
     class: '\
             px-4 py-2 \
@@ -15,8 +15,9 @@
       = f.text_field :title, class: "#{input_classes} w-[24rem]", placeholder: 'タイトルを入力'
 
     .mt-2
-      = content_tag :div, '', id: 'note-editor', data: { content: to_html(@note.content) }
-      = f.hidden_field :content, id: 'note-editor-hidden', value: @note.content
+      - note_content = to_html(@note.content)
+      = content_tag :div, '', id: 'note-editor', data: { content: note_content }
+      = f.hidden_field :content, id: 'note-editor-hidden', value: note_content
 
     .mt-2
       = f.submit 'ノートを保存',
