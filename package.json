@@ -12,6 +12,7 @@
 		"prettier": "3.3.3"
 	},
 	"scripts": {
+		"prettier:write": "prettier app/javascript/**/*.{js,jsx} --write",
 		"lint": "run-s lint:*",
 		"lint:eslint": "eslint 'app/javascript/**/*.{js,jsx}' --max-warnings=0",
 		"lint:prettier": "prettier app/javascript/**/*.{js,jsx} --check",
@@ -23,6 +24,9 @@
 		"@hotwired/stimulus": "^3.2.2",
 		"@hotwired/turbo-rails": "^8.0.10",
 		"@tailwindcss/typography": "^0.5.15",
+		"@tiptap/pm": "^2.11.2",
+		"@tiptap/react": "^2.11.2",
+		"@tiptap/starter-kit": "^2.11.2",
 		"autoprefixer": "^10.4.20",
 		"postcss": "^8.4.44",
 		"react": "^18.3.1",
