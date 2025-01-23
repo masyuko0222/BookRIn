@@ -16,9 +16,8 @@
       = f.text_field :title, class: "#{input_classes} w-[24rem]", placeholder: 'タイトルを入力'
 
     .mt-2
-      - note_content = to_html(@note.content)
-      = content_tag :div, '', id: 'note-editor', data: { content: note_content }
-      = f.hidden_field :content, id: 'note-editor-hidden', value: note_content
+      = content_tag :div, '', id: 'note-editor', data: { id: @note.id, content: to_html(@note.content) }
+      = f.hidden_field :content, id: 'note-editor-hidden', value: to_html(@note.content)
 
     .mt-2
       = f.submit 'ノートを保存',
