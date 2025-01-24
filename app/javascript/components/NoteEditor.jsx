@@ -1,12 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 
-const NoteEditor = ({ content }) => {
+import Collaboration from '@tiptap/extension-collaboration';
+import { WebsocketProvider } from 'y-websocket';
+import * as Y from 'yjs';
+
+const yDoc = new Y.Doc();
+
+const NoteEditor = ({ id, content }) => {
 	const editor = useEditor({
-		extensions: [StarterKit],
-		content: content,
+		extensions: [
+			StarterKit,
+			Collaboration.configure({
+				document: yDoc,
+			}),
+		],
 		editorProps: {
 			attributes: {
 				class: 'mr-2 border border-gray-300 p-4 rounded focus:ring-blue-500',
@@ -15,16 +24,29 @@ const NoteEditor = ({ content }) => {
 		},
 	});
 
-	editor.on('update', ({ editor }) => {
+	editor?.on('update', ({ editor }) => {
 		const updatedContent = editor.getHTML();
 		document.getElementById('note-editor-hidden').value = updatedContent;
 	});
 
-	return <EditorContent editor={editor} />;
-};
+	useEffect(() => {
+		const wsProvider = new WebsocketProvider('ws://localhost:1234', id, yDoc);
 
-NoteEditor.propTypes = {
-	content: PropTypes.string.isRequired,
+		wsProvider.on('sync', (isSynced) => {
+			if(isSynced){
+				if (!yDoc.getMap('config').get('initialContentLoaded') && editor){
+					yDoc.getMap('config').set('initialContentLoaded', true)
+					editor.commands.setContent(content)
+				}
+			}
+		});
+
+		return () => {
+			wsProvider?.destroy();
+		};
+	}, []);
+
+	return <EditorContent editor={editor} />;
 };
 
 export default NoteEditor;
