@@ -10,11 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	const noteEditor = document.getElementById('note-editor');
 	if (noteEditor) {
 		const root = createRoot(noteEditor);
+		const id = noteEditor.dataset.id;
 		const content = noteEditor.dataset.content;
 
 		root.render(
 			<StrictMode>
-				<NoteEditor content={content} />
+				<NoteEditor id={id} content={content} />
 			</StrictMode>
 		);
 	}

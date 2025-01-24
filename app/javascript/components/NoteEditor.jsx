@@ -6,9 +6,9 @@ import Collaboration from '@tiptap/extension-collaboration';
 import { WebsocketProvider } from 'y-websocket';
 import * as Y from 'yjs';
 
-const yDoc = new Y.Doc();
-
 const NoteEditor = ({ id, content }) => {
+	const yDoc = new Y.Doc();
+
 	const editor = useEditor({
 		extensions: [
 			StarterKit,
@@ -33,10 +33,10 @@ const NoteEditor = ({ id, content }) => {
 		const wsProvider = new WebsocketProvider('ws://localhost:1234', id, yDoc);
 
 		wsProvider.on('sync', (isSynced) => {
-			if(isSynced){
-				if (!yDoc.getMap('config').get('initialContentLoaded') && editor){
-					yDoc.getMap('config').set('initialContentLoaded', true)
-					editor.commands.setContent(content)
+			if (isSynced) {
+				if (!yDoc.getMap('config').get('initialContentLoaded') && editor) {
+					yDoc.getMap('config').set('initialContentLoaded', true);
+					editor.commands.setContent(content);
 				}
 			}
 		});
