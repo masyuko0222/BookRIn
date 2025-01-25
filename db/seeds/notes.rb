@@ -2,8 +2,8 @@
 
 reading_club = ReadingClub.find_by(title: 'プログラミング基礎読書会')
 
-start_date = Time.zone.today - 26 * 7 # 半年前
-end_date = Time.zone.today
+start_date = Date.new(2024, 7, 1)
+end_date = Date.new(2025, 1, 1)
 (start_date..end_date).step(7).each_with_index do |held_on, i|
   title = "第#{i + 1}回 今日はXXXを学んだ"
   content = <<~MARKDOWN
