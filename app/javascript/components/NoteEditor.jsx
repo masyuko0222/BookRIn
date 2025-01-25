@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
@@ -47,6 +48,11 @@ const NoteEditor = ({ id, content }) => {
 	}, []);
 
 	return <EditorContent editor={editor} />;
+};
+
+NoteEditor.propTypes = {
+	id: PropTypes.string,
+	content: PropTypes.string,
 };
 
 export default NoteEditor;
