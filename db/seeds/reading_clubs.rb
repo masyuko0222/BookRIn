@@ -36,13 +36,13 @@ reading_clubs = [
     finished: false,
     template:,
     read_me:,
-    updated_at: Time.current
+    updated_at: Date.new(2025, 1, 1)
   },
   {
     title: '終わった輪読会',
     finished: true,
     template: nil,
-    updated_at: Time.current - 5.days
+    updated_at: Date.new(2024, 12, 1)
   }
 ]
 
@@ -51,7 +51,7 @@ reading_clubs = [
     title: "空の輪読会#{i + 1}",
     finished: false,
     template: nil,
-    updated_at: Time.current - i.days
+    updated_at: Date.new(2024, 12, 1)
   }
 end
 
