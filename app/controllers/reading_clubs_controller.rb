@@ -11,9 +11,9 @@ class ReadingClubsController < ApplicationController
 
     sorted_clubs =
       if requseted_only_participating?
-        result.order('participants.created_at DESC')
+        result.order('participants.created_at DESC, id DESC')
       else
-        result.order(updated_at: :desc)
+        result.order(updated_at: :desc, id: :desc)
       end
 
     @reading_clubs = sorted_clubs.page(params[:page]).per(16)
@@ -21,7 +21,7 @@ class ReadingClubsController < ApplicationController
 
   def overview
     @search = @reading_club.notes.ransack(params[:q])
-    @notes = @search.result.order(held_on: :desc).page(params[:page])
+    @notes = @search.result.order(held_on: :desc, id: :desc).page(params[:page])
   end
 
   private
@@ -39,5 +39,4 @@ class ReadingClubsController < ApplicationController
   def set_reading_club
     @reading_club = ReadingClub.find(params[:id])
   end
-
 end
