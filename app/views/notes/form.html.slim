@@ -24,9 +24,17 @@
       = f.hidden_field :content, id: 'note-editor-hidden', value: to_html(@note.content)
 
     .mt-2
-      = f.submit submit_button_text(@note),
-        class: 'inline-flex items-center \
-                px-4 py-2 \
-                text-white bg-blue-600 \
-                border border-blue-600 rounded-lg \
-                cursor-pointer hover:bg-blue-700'
+      .flex.items-center.space-x-4.mt-4
+        = f.submit submit_button_text(@note),
+          class: 'inline-flex items-center \
+                  px-4 py-2 \
+                  text-white bg-blue-600 \
+                  border border-blue-600 rounded-lg \
+                  cursor-pointer hover:bg-blue-700'
+        - if is_new
+          = link_to 'キャンセル', :back,
+            class: 'inline-flex items-center \
+                    px-3 py-1 \
+                    text-gray-600 bg-gray-100 \
+                    border border-gray-300 rounded-lg \
+                    hover:bg-gray-200'
