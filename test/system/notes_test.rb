@@ -59,4 +59,3 @@ class NotesTest < ApplicationSystemTestCase
   #   assert_text 'Updated content for note 1'
   # end
 end
-

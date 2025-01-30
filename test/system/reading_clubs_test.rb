@@ -8,7 +8,6 @@ class ReadingClubsTest < ApplicationSystemTestCase
     @user.participants.create!(reading_club: reading_clubs(:reading_club1))
   end
 
-
   test 'Search title' do
     visit_with_auth(reading_clubs_path, @user)
     fill_in '輪読会のタイトルで検索', with: 'OpenClub 9'

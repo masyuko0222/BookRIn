@@ -7,7 +7,7 @@
             hover:bg-link-hover'
 
 - is_new = @note.new_record?
-= form_with model: @note, url: (is_new ? reading_club_notes_path(@note.reading_club) : note_path(@note) ) do |f|
+= form_with model: @note, url: (is_new ? reading_club_notes_path(@note.reading_club) : note_path(@note)) do |f|
   .ml-2
     .flex.items-center.space-x-2
 
@@ -18,7 +18,7 @@
 
     .mt-2
       = content_tag :div, '', id: 'note-editor',
-        data: { is_new: is_new,
+        data: { is_new:,
                 id: (is_new ? nil : @note.id),
                 content: to_html(@note.content) }
       = f.hidden_field :content, id: 'note-editor-hidden', value: to_html(@note.content)
