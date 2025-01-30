@@ -6,8 +6,7 @@
             border border-link-border rounded-lg \
             hover:bg-link-hover'
 
-- is_new = @note.new_record?
-= form_with model: @note, url: (is_new ? reading_club_notes_path(@note.reading_club) : note_path(@note)) do |f|
+= form_with model: @note, url: note_form_url(@note) do |f|
   .ml-2
     .flex.items-center.space-x-2
 
@@ -17,6 +16,7 @@
       = f.text_field :title, class: "#{input_classes} w-[24rem]", placeholder: 'タイトルを入力'
 
     .mt-2
+      - is_new = @note.new_record?
       = content_tag :div, '', id: 'note-editor',
         data: { is_new:,
                 id: (is_new ? nil : @note.id),
@@ -24,7 +24,7 @@
       = f.hidden_field :content, id: 'note-editor-hidden', value: to_html(@note.content)
 
     .mt-2
-      = f.submit is_new ? 'ノートを新規作成' : 'ノートを保存',
+      = f.submit submit_button_text(@note),
         class: 'inline-flex items-center \
                 px-4 py-2 \
                 text-white bg-blue-600 \
