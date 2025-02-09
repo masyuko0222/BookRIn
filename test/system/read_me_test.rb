@@ -5,17 +5,18 @@ require 'application_system_test_case'
 class ReadMeTest < ApplicationSystemTestCase
   setup do
     @user = users(:user1)
-    @reading_club = reading_clubs(:reading_club_with_read_me)
+    @reading_club = reading_clubs(:opening_club)
   end
 
   test 'update read me' do
     visit_with_auth(overview_reading_club_path(@reading_club), @user)
     assert_current_path overview_reading_club_path(@reading_club)
+    assert_text "Welcome to Markdown\nThis is a test."
 
     click_link '編集'
     fill_in 'reading_club[read_me]', with: "# Updated Markdown\n\nThis is the updated content."
     click_button '保存'
     assert_text 'READ MEを更新しました'
-    assert_selector 'h1', text: 'Updated Markdown' # MarkdownなのでHTMLに変換される
+    assert_selector 'h1', text: 'Updated Markdown'
   end
 end
