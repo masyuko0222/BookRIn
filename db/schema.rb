@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_17_075358) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_03_134019) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -36,7 +36,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_17_075358) do
   create_table "reading_clubs", force: :cascade do |t|
     t.string "title", null: false
     t.boolean "finished", null: false
-    t.text "template"
+    t.text "template", default: "## これはテンプレート例です\n  - 「テンプレート変更」から輪読会に合わせて変更してください\n\n## 今日読んだ範囲\n   - 「第〇章 p.xx」～「第〇章 p.yy」\n\n## 学んだこと・分かったこと\n  - Aさん\n    - 〇〇というメソッドは、配列を△△したいときに利用する\n  - Bさん\n  - Cさん\n  - Dさん\n\n## ひとこと日記\n  - Aさん\n    - 最近は新しい海外ドラマを見始めました。めちゃくちゃ面白いです♪\n  - Bさん\n  - Cさん\n  - Dさん\n"
     t.text "read_me", default: "# READ ME\n**輪読会のルールや読んで欲しいことを書きましょう！**\n\n## 開催日時\n- 毎週月曜日 20:00~\n- 毎週水曜日 20:00~\n- 祝日はお休みです\n\n## Discordリンク\n[リンク](https://example.com/)\n"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
