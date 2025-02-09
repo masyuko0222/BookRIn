@@ -4,19 +4,20 @@ import '@hotwired/turbo-rails';
 
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import NoteEditor from './components/NoteEditor';
+import { NoteEditorContainer } from './components/NoteEditorContainer';
 
 document.addEventListener('DOMContentLoaded', () => {
-	const noteEditor = document.getElementById('note-editor');
-	if (noteEditor) {
-		const root = createRoot(noteEditor);
-		const isNew = noteEditor.dataset.isNew === 'true';
-		const id = noteEditor.dataset.id;
-		const content = noteEditor.dataset.content;
+	const container = document.getElementById('note-editor-container');
+	if (container) {
+		const isNew = container.dataset.isNew === 'true';
+		const id = container.dataset.id;
+		const content = container.dataset.content;
+		const template = container.dataset.template;
 
+		const root = createRoot(container);
 		root.render(
 			<StrictMode>
-				<NoteEditor isNew={isNew} id={id} content={content} />
+				<NoteEditorContainer isNew={isNew} id={id} content={content} template={template} />
 			</StrictMode>
 		);
 	}
