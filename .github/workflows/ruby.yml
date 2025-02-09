@@ -2,9 +2,9 @@ name: Ruby
 
 on:
   push:
-    branches: [ main ]
+    branches: ['**']
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   ruby:
@@ -13,14 +13,14 @@ jobs:
       postgres:
         image: postgres:15
         ports:
-          - "5432:5432"
+          - '5432:5432'
         env:
           POSTGRES_DB: booklin_test
           POSTGRES_USER: test
           POSTGRES_PASSWORD: test_password
     env:
       RAILS_ENV: test
-      DATABASE_URL: "postgres://test:test_password@localhost:5432/booklin_test"
+      DATABASE_URL: 'postgres://test:test_password@localhost:5432/booklin_test'
 
     steps:
       - name: Checkout code
