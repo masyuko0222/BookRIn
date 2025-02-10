@@ -16,7 +16,6 @@ class ReadingClubsTest < ApplicationSystemTestCase
 
     assert_text 'OpeningClub' # sleepの代わり
     hit_titles = page.all('ul li').map { |li| li.find('a', match: :first).text }
-    take_screenshot
 
     assert_equal ['OpeningClub'], hit_titles
   end
