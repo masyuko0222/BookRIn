@@ -31,6 +31,11 @@ jobs:
         with:
           ruby-version: '3.3.0'
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version'
+
       - name: Install dependencies
         run: bundle install
 
@@ -40,12 +45,8 @@ jobs:
       - name: Run slim-lint
         run: bundle exec slim-lint app/views -c .slim-lint.yml
 
+      - name: Run websocket
+        run: HOST=localhost PORT=1234 npx y-websocket &
+
       - name: Run test
         run: bin/rails test:all
-
-      - name: Upload Capybara screenshots
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: capybara-screenshots
-          path: tmp/screenshots

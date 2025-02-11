@@ -22,7 +22,6 @@ class OverviewTest < ApplicationSystemTestCase
     within("[data-test-id='participating-status']") { choose('開催中') }
     within("[data-test-id='finished-status']") { choose('参加中のみ') }
     assert_text 'OpeningClub'
-
   end
 
   test 'Cancell participating reading club' do
