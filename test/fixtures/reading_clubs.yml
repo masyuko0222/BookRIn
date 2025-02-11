@@ -10,7 +10,7 @@ opening_club:
     This is a **test**.
 
 participating_club:
-  title: ParticiPatingClub
+  title: ParticipatingClub
   finished: false
   template: 'This is Participating Template'
   read_me: |-
