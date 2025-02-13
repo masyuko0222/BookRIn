@@ -10,14 +10,15 @@ document.addEventListener('DOMContentLoaded', () => {
 	const container = document.getElementById('note-editor-container');
 	if (container) {
 		const isNew = container.dataset.isNew === 'true';
-		const id = container.dataset.id;
+		const clubId = container.dataset.clubId;
+		const noteId = container.dataset.noteId;
 		const content = container.dataset.content;
 		const template = container.dataset.template;
 
 		const root = createRoot(container);
 		root.render(
 			<StrictMode>
-				<NoteEditorContainer isNew={isNew} id={id} content={content} template={template} />
+				<NoteEditorContainer isNew={isNew} clubId={clubId} noteId={noteId} content={content} template={template} />
 			</StrictMode>
 		);
 	}

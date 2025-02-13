@@ -1,13 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TemplateActions } from './TemplateActions';
 import { NoteEditor } from './NoteEditor';
+import { FlashMessage } from './FlashMessage';
 
 import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Collaboration from '@tiptap/extension-collaboration';
 import * as Y from 'yjs';
 
-export const NoteEditorContainer = ({ isNew, id, content, template }) => {
+export const NoteEditorContainer = ({ isNew, clubId, noteId, content, template }) => {
+	const [currentTemplate, setCurrentTemplate] = useState(template);
+	const [flashMessage, setFlashMessage] = useState(null);
+
+	const handleTemplateUpdate = (updatedTemplate) => {
+		const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
+		setCurrentTemplate(updatedTemplate);
+		fetch(`/reading_clubs/${clubId}/template`, {
+			method: 'PATCH',
+			body: JSON.stringify({ template: updatedTemplate, note_id: noteId, reading_club_id: clubId }),
+			headers: {
+				'Content-Type': 'application/json',
+				'X-CSRF-Token': csrfToken,
+				Accept: 'application/json',
+			},
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				if (data.status === 'success') {
+					setFlashMessage(data.flash);
+				} else {
+					setFlashMessage(data.flash);
+				}
+			})
+			.catch(() => {
+				setFlashMessage('ネットワークエラー');
+			});
+	};
+
+	const handleCloseFlash = () => {
+		setFlashMessage(null);
+	};
+
 	const yDoc = new Y.Doc();
 
 	// Railsでform submitをするため、RailsViewのhidden_fieldにcontentを送る
@@ -37,8 +71,9 @@ export const NoteEditorContainer = ({ isNew, id, content, template }) => {
 
 	return (
 		<>
-			<TemplateActions editor={editor} template={template} />
-			<NoteEditor yDoc={yDoc} editor={editor} isNew={isNew} id={id} content={content} template={template} />
+			{flashMessage && <FlashMessage message={flashMessage} onCloseFlash={handleCloseFlash} />}
+			<TemplateActions editor={editor} template={currentTemplate} onTemplateUpdate={handleTemplateUpdate} />
+			<NoteEditor yDoc={yDoc} editor={editor} isNew={isNew} noteId={noteId} content={content} />
 		</>
 	);
 };
