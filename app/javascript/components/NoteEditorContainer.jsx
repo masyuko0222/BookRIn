@@ -12,35 +12,29 @@ export const NoteEditorContainer = ({ isNew, clubId, noteId, content, template }
 	const [currentTemplate, setCurrentTemplate] = useState(template);
 	const [flashMessage, setFlashMessage] = useState(null);
 
-	const handleTemplateUpdate = (updatedTemplate) => {
+	const handleTemplateUpdate = async (updatedTemplate) => {
 		const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
 		setCurrentTemplate(updatedTemplate);
-		fetch(`/reading_clubs/${clubId}/template`, {
-			method: 'PATCH',
-			body: JSON.stringify({ template: updatedTemplate, note_id: noteId, reading_club_id: clubId }),
-			headers: {
-				'Content-Type': 'application/json',
-				'X-CSRF-Token': csrfToken,
-				Accept: 'application/json',
-			},
-		})
-			.then((response) => response.json())
-			.then((data) => {
-				if (data.status === 'success') {
-					setFlashMessage(data.flash);
-				} else {
-					setFlashMessage(data.flash);
-				}
-			})
-			.catch(() => {
-				setFlashMessage('ネットワークエラー');
+		try {
+			const response = await fetch(`/reading_clubs/${clubId}/template`, {
+				method: 'PATCH',
+				body: JSON.stringify({ template: updatedTemplate, note_id: noteId, reading_club_id: clubId }),
+				headers: {
+					'Content-Type': 'application/json',
+					'X-CSRF-Token': csrfToken,
+					Accept: 'application/json',
+				},
 			});
+
+			const data = await response.json();
+			setFlashMessage(data.flash);
+		} catch (error) {
+			setFlashMessage('ネットワークエラー');
+		}
 	};
 
-	const handleCloseFlash = () => {
-		setFlashMessage(null);
-	};
+	const handleCloseFlash = () => setFlashMessage(null);
 
 	const yDoc = new Y.Doc();
 

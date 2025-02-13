@@ -9,16 +9,18 @@ import { NoteEditorContainer } from './components/NoteEditorContainer';
 document.addEventListener('DOMContentLoaded', () => {
 	const container = document.getElementById('note-editor-container');
 	if (container) {
-		const isNew = container.dataset.isNew === 'true';
-		const clubId = container.dataset.clubId;
-		const noteId = container.dataset.noteId;
-		const content = container.dataset.content;
-		const template = container.dataset.template;
+		const { isNew, clubId, noteId, content, template } = container.dataset;
 
 		const root = createRoot(container);
 		root.render(
 			<StrictMode>
-				<NoteEditorContainer isNew={isNew} clubId={clubId} noteId={noteId} content={content} template={template} />
+				<NoteEditorContainer
+					isNew={isNew === 'true'}
+					clubId={clubId}
+					noteId={noteId}
+					content={content}
+					template={template}
+				/>
 			</StrictMode>
 		);
 	}
