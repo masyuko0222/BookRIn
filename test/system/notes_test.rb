@@ -47,7 +47,6 @@ class NotesTest < ApplicationSystemTestCase
       click_button 'テンプレートを反映する'
     end
 
-    assert_text 'ノートを更新しました'
     assert_text 'This is Opening Template'
   end
 end

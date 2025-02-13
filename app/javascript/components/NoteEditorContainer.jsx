@@ -29,7 +29,7 @@ export const NoteEditorContainer = ({ isNew, clubId, noteId, content, template }
 
 			const data = await response.json();
 			setFlashMessage(data.flash);
-		} catch (error) {
+		} catch {
 			setFlashMessage('ネットワークエラー');
 		}
 	};
