@@ -16,8 +16,4 @@ class ReadingClubs::TemplateController < ApplicationController
   def set_reading_club
     @reading_club = ReadingClub.find(params[:reading_club_id])
   end
-
-  def template_params
-    params.permit(:template, :note_id, :reading_club_id)
-  end
 end
