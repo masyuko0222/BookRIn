@@ -12,7 +12,41 @@ export const NoteEditorContainer = ({ isNew, clubId, noteId, content, template }
 	const [currentTemplate, setCurrentTemplate] = useState(template);
 	const [flashMessage, setFlashMessage] = useState(null);
 
-	const handleTemplateUpdate = async (updatedTemplate) => {
+	const yDoc = new Y.Doc();
+	const marked = require('marked');
+
+	const htmlTemplate = marked.parse(template);
+
+	const setContentToHiddenField = (content) => {
+		// Railsでform submitをするため、RailsViewのhidden_fieldにcontentを送る
+		document.getElementById('note-editor-hidden').value = content;
+	};
+
+	const editor = useEditor({
+		extensions: [
+			StarterKit,
+			// DBに保存されて、idを取得しないとWebSocketがどのノートを共同編集しているか判別できないため、
+			// 新規ノート作成のフォーム画面段階ではまだ共同編集はできない
+			...(isNew ? [] : [Collaboration.configure({ document: yDoc })]),
+		],
+		editorProps: {
+			attributes: {
+				class: 'mr-2 border border-gray-300 p-4 rounded focus:ring-blue-500',
+				style: 'height: 70vh; overflow: auto;',
+			},
+		},
+		onCreate({ editor }) {
+			if (isNew) {
+				editor.commands.setContent(htmlTemplate);
+				setContentToHiddenField(htmlTemplate);
+			}
+		},
+		onUpdate({ editor }) {
+			setContentToHiddenField(editor.getHTML());
+		},
+	});
+
+	const handleUpdateTemplate = async (updatedTemplate) => {
 		const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
 		setCurrentTemplate(updatedTemplate);
@@ -36,37 +70,15 @@ export const NoteEditorContainer = ({ isNew, clubId, noteId, content, template }
 
 	const handleCloseFlash = () => setFlashMessage(null);
 
-	const yDoc = new Y.Doc();
-
-	// Railsでform submitをするため、RailsViewのhidden_fieldにcontentを送る
-	const setContentToHiddenField = (content) => {
-		document.getElementById('note-editor-hidden').value = content;
-	};
-
-	const editor = useEditor({
-		extensions: [StarterKit, ...(isNew ? [] : [Collaboration.configure({ document: yDoc })])],
-		editorProps: {
-			attributes: {
-				class: 'mr-2 border border-gray-300 p-4 rounded focus:ring-blue-500',
-				style: 'height: 70vh; overflow: auto;',
-			},
-		},
-		onCreate({ editor }) {
-			if (isNew) {
-				editor.commands.setContent(template);
-				setContentToHiddenField(template);
-			}
-		},
-		onUpdate({ editor }) {
-			const updatedContent = editor.getHTML();
-			setContentToHiddenField(updatedContent);
-		},
-	});
-
 	return (
 		<>
 			{flashMessage && <FlashMessage message={flashMessage} onCloseFlash={handleCloseFlash} />}
-			<TemplateActions editor={editor} template={currentTemplate} onTemplateUpdate={handleTemplateUpdate} />
+			<TemplateActions
+				editor={editor}
+				template={currentTemplate}
+				onUpdateTemplate={handleUpdateTemplate}
+				setHidden={setContentToHiddenField}
+			/>
 			<NoteEditor yDoc={yDoc} editor={editor} isNew={isNew} noteId={noteId} content={content} />
 		</>
 	);

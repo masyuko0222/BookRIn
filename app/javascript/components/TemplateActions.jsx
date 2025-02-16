@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 
-export const TemplateActions = ({ editor, template, onTemplateUpdate }) => {
+export const TemplateActions = ({ editor, template, onUpdateTemplate, setHidden }) => {
 	const [showModal, setShowModal] = useState(false);
 	const [updatedTemplate, setUpdatedTemplate] = useState(template);
 
 	const ApplyTemplateToContent = () => {
 		if (template && window.confirm('ノートの内容を上書きします。よろしいですか？')) {
+			const marked = require('marked');
 			editor.commands.clearContent();
-			editor.commands.setContent(template);
+			const htmlTemplate = marked.parse(updatedTemplate);
+			editor.commands.setContent(htmlTemplate);
+			setHidden(htmlTemplate);
 		}
 	};
 
-	const handleTemplateChange = (event) => setUpdatedTemplate(event.target.value);
+	const handleChangeTemplate = (event) => setUpdatedTemplate(event.target.value);
 
 	return (
 		<>
@@ -36,17 +39,23 @@ export const TemplateActions = ({ editor, template, onTemplateUpdate }) => {
 
 			{showModal && (
 				<div className='modal'>
-					<textarea value={updatedTemplate} onChange={handleTemplateChange} rows='10' cols='50' />
+					<textarea value={updatedTemplate} onChange={handleChangeTemplate} rows='10' cols='50' />
 					<button
 						type='button'
 						onClick={() => {
-							onTemplateUpdate(updatedTemplate);
+							onUpdateTemplate(updatedTemplate);
 							setShowModal(false);
 						}}
 					>
 						更新
 					</button>
-					<button type='button' onClick={() => setShowModal(false)}>
+					<button
+						type='button'
+						onClick={() => {
+							setUpdatedTemplate(template);
+							setShowModal(false);
+						}}
+					>
 						キャンセル
 					</button>
 				</div>
