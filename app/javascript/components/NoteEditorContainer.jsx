@@ -7,24 +7,25 @@ import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Collaboration from '@tiptap/extension-collaboration';
 import * as Y from 'yjs';
+import { marked } from 'marked';
 
 export const NoteEditorContainer = ({ isNew, clubId, noteId, content, template }) => {
 	const [currentTemplate, setCurrentTemplate] = useState(template);
 	const [flashMessage, setFlashMessage] = useState(null);
-
 	const yDoc = new Y.Doc();
-	const marked = require('marked');
 
-	const setContentToHiddenField = (content) => {
-		// Railsでform submitをするため、RailsViewのhidden_fieldにcontentを送る
-		document.getElementById('note-editor-hidden').value = content;
+	const changeContent = (tiptapEditor, text) => {
+		tiptapEditor.commands.clearContent();
+		tiptapEditor.commands.setContent(marked.parse(text));
+
+		// submitはRailsのform_helperで行われるので、RailsViewのhidden_fieldにも値を渡す
+		document.getElementById('note-editor-hidden').value = marked.parse(text);
 	};
 
 	const editor = useEditor({
 		extensions: [
 			StarterKit,
-			// DBに保存されて、idを取得しないとWebSocketがどのノートを共同編集しているか判別できないため、
-			// 新規ノート作成のフォーム画面段階ではまだ共同編集はできない
+			// IDがないとWebsocket通信(共同編集)ができないので、新規作成画面ではコラボ機能はなし
 			...(isNew ? [] : [Collaboration.configure({ document: yDoc })]),
 		],
 		editorProps: {
@@ -34,33 +35,26 @@ export const NoteEditorContainer = ({ isNew, clubId, noteId, content, template }
 			},
 		},
 		onCreate({ editor }) {
-			if (isNew) {
-				const htmlTemplate = marked.parse(currentTemplate);
-				editor.commands.setContent(htmlTemplate);
-				setContentToHiddenField(htmlTemplate);
-			}
+			isNew && changeContent(editor, currentTemplate);
 		},
 		onUpdate({ editor }) {
-			setContentToHiddenField(editor.getHTML());
+			document.getElementById('note-editor-hidden').value = editor.getHTML();
 		},
 	});
 
 	// TemplateAction's handlers
-
 	const handleApplyTemplate = (latestTemplate) => {
-		if (template && window.confirm('ノートの内容を上書きします。よろしいですか？')) {
-			const htmlTemplate = marked.parse(latestTemplate);
-			editor.commands.clearContent();
-			editor.commands.setContent(htmlTemplate);
-			setContentToHiddenField(htmlTemplate);
+		if (latestTemplate && window.confirm('ノートの内容を上書きします。よろしいですか？')) {
+			changeContent(editor, latestTemplate);
 		}
 	};
 
 	const handleUpdateTemplate = async (latestTemplate) => {
-		const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
-
 		setCurrentTemplate(latestTemplate);
+
 		try {
+			const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
 			const response = await fetch(`/reading_clubs/${clubId}/template`, {
 				method: 'PATCH',
 				body: JSON.stringify({ template: latestTemplate, note_id: noteId, reading_club_id: clubId }),
@@ -78,6 +72,7 @@ export const NoteEditorContainer = ({ isNew, clubId, noteId, content, template }
 		}
 	};
 
+	// Flash's handler
 	const handleCloseFlash = () => setFlashMessage(null);
 
 	return (
