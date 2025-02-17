@@ -1,26 +1,20 @@
 import React, { useState } from 'react';
 
-export const TemplateActions = ({ editor, template, onUpdateTemplate, setHidden }) => {
+export const TemplateActions = ({ originalTemplate, onApplyTemplate, onUpdateTemplate }) => {
 	const [showModal, setShowModal] = useState(false);
-	const [updatedTemplate, setUpdatedTemplate] = useState(template);
-
-	const ApplyTemplateToContent = () => {
-		if (template && window.confirm('ノートの内容を上書きします。よろしいですか？')) {
-			const marked = require('marked');
-			editor.commands.clearContent();
-			const htmlTemplate = marked.parse(updatedTemplate);
-			editor.commands.setContent(htmlTemplate);
-			setHidden(htmlTemplate);
-		}
-	};
-
-	const handleChangeTemplate = (event) => setUpdatedTemplate(event.target.value);
+	const [latestTemplate, setLatestTemplate] = useState(originalTemplate);
 
 	return (
 		<>
 			<ul className='flex space-x-2'>
 				<li className='self-end'>
-					<button type='button' onClick={ApplyTemplateToContent} className='font-semibold text-blue-600 underline'>
+					<button
+						type='button'
+						onClick={() => {
+							onApplyTemplate(latestTemplate);
+						}}
+						className='font-semibold text-blue-600 underline'
+					>
 						テンプレートを反映する
 					</button>
 				</li>
@@ -39,11 +33,19 @@ export const TemplateActions = ({ editor, template, onUpdateTemplate, setHidden 
 
 			{showModal && (
 				<>
-					<textarea className='template-modal' value={updatedTemplate} onChange={handleChangeTemplate} rows='10' cols='50' />
+					<textarea
+						className='template-modal'
+						value={latestTemplate}
+						onChange={(e) => {
+							setLatestTemplate(e.target.value);
+						}}
+						rows='10'
+						cols='50'
+					/>
 					<button
 						type='button'
 						onClick={() => {
-							onUpdateTemplate(updatedTemplate);
+							onUpdateTemplate(latestTemplate);
 							setShowModal(false);
 						}}
 					>
@@ -52,7 +54,7 @@ export const TemplateActions = ({ editor, template, onUpdateTemplate, setHidden 
 					<button
 						type='button'
 						onClick={() => {
-							setUpdatedTemplate(template);
+							setLatestTemplate(originalTemplate);
 							setShowModal(false);
 						}}
 					>

@@ -15,8 +15,6 @@ export const NoteEditorContainer = ({ isNew, clubId, noteId, content, template }
 	const yDoc = new Y.Doc();
 	const marked = require('marked');
 
-	const htmlTemplate = marked.parse(template);
-
 	const setContentToHiddenField = (content) => {
 		// Railsでform submitをするため、RailsViewのhidden_fieldにcontentを送る
 		document.getElementById('note-editor-hidden').value = content;
@@ -37,6 +35,7 @@ export const NoteEditorContainer = ({ isNew, clubId, noteId, content, template }
 		},
 		onCreate({ editor }) {
 			if (isNew) {
+				const htmlTemplate = marked.parse(currentTemplate);
 				editor.commands.setContent(htmlTemplate);
 				setContentToHiddenField(htmlTemplate);
 			}
@@ -46,14 +45,25 @@ export const NoteEditorContainer = ({ isNew, clubId, noteId, content, template }
 		},
 	});
 
-	const handleUpdateTemplate = async (updatedTemplate) => {
+	// TemplateAction's handlers
+
+	const handleApplyTemplate = (latestTemplate) => {
+		if (template && window.confirm('ノートの内容を上書きします。よろしいですか？')) {
+			const htmlTemplate = marked.parse(latestTemplate);
+			editor.commands.clearContent();
+			editor.commands.setContent(htmlTemplate);
+			setContentToHiddenField(htmlTemplate);
+		}
+	};
+
+	const handleUpdateTemplate = async (latestTemplate) => {
 		const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
 
-		setCurrentTemplate(updatedTemplate);
+		setCurrentTemplate(latestTemplate);
 		try {
 			const response = await fetch(`/reading_clubs/${clubId}/template`, {
 				method: 'PATCH',
-				body: JSON.stringify({ template: updatedTemplate, note_id: noteId, reading_club_id: clubId }),
+				body: JSON.stringify({ template: latestTemplate, note_id: noteId, reading_club_id: clubId }),
 				headers: {
 					'Content-Type': 'application/json',
 					'X-CSRF-Token': csrfToken,
@@ -75,9 +85,9 @@ export const NoteEditorContainer = ({ isNew, clubId, noteId, content, template }
 			{flashMessage && <FlashMessage message={flashMessage} onCloseFlash={handleCloseFlash} />}
 			<TemplateActions
 				editor={editor}
-				template={currentTemplate}
+				originalTemplate={currentTemplate}
+				onApplyTemplate={handleApplyTemplate}
 				onUpdateTemplate={handleUpdateTemplate}
-				setHidden={setContentToHiddenField}
 			/>
 			<NoteEditor yDoc={yDoc} editor={editor} isNew={isNew} noteId={noteId} content={content} />
 		</>
