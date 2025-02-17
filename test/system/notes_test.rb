@@ -11,9 +11,11 @@ class NotesTest < ApplicationSystemTestCase
     @user = users(:user1)
     @reading_club = reading_clubs(:participating_club)
 
-    # Websocket通信中は、各テストで利用するノートを変えてください(1つ前のテストのノート内容を引き継いでしまうため)
+    # Websocket通信中は、各テストで利用するノートを変える
+    # 1つ目のテストのnote1を更新したとして、2つ目のテストでもnote1を使ったら、1つ目で更新した内容を引き継いでしまうため
     @note1 = notes(:note1)
     @note2 = notes(:note2)
+    @note3 = notes(:note3)
   end
 
   test 'create new note' do
@@ -49,4 +51,9 @@ class NotesTest < ApplicationSystemTestCase
 
     assert_text 'This is Opening Template'
   end
+
+  # 実動作だと更新時にフラッシュメッセージが出るのに、テストだと表示されない
+  # 解決まで一旦保留
+  # test 'update template' do
+  # end
 end
