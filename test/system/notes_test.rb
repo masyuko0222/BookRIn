@@ -28,10 +28,10 @@ class NotesTest < ApplicationSystemTestCase
 
   test 'update note' do
     visit_with_auth(edit_note_path(@note1), @user)
-    assert_text "Content for note 1"
+    assert_text 'Content for note 1'
 
     fill_in 'note[title]', with: 'Updated Note Title'
-    fill_in 'note[held_on]', with:  Date.new(2024, 2, 1)
+    fill_in 'note[held_on]', with: Date.new(2024, 2, 1)
 
     execute_script("document.querySelector('.ProseMirror').innerHTML = ''")
     execute_script("document.querySelector('.ProseMirror').innerHTML = 'Updated content for note 1'")
@@ -43,7 +43,7 @@ class NotesTest < ApplicationSystemTestCase
 
   test 'apply template to note' do
     visit_with_auth(edit_note_path(@note2), @user)
-    assert_text "Content for note 2"
+    assert_text 'Content for note 2'
 
     page.accept_confirm do
       click_button 'テンプレートを反映する'
