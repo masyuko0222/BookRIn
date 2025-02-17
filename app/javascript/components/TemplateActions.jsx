@@ -38,8 +38,8 @@ export const TemplateActions = ({ editor, template, onUpdateTemplate, setHidden 
 			</ul>
 
 			{showModal && (
-				<div className='modal'>
-					<textarea value={updatedTemplate} onChange={handleChangeTemplate} rows='10' cols='50' />
+				<>
+					<textarea className='template-modal' value={updatedTemplate} onChange={handleChangeTemplate} rows='10' cols='50' />
 					<button
 						type='button'
 						onClick={() => {
@@ -58,7 +58,7 @@ export const TemplateActions = ({ editor, template, onUpdateTemplate, setHidden 
 					>
 						キャンセル
 					</button>
-				</div>
+				</>
 			)}
 		</>
 	);
