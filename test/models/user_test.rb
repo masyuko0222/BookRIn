@@ -10,7 +10,7 @@ class UserTest < ActiveSupport::TestCase
 
   test '#participating?(reading_club)' do
     user = users(:user1)
-    reading_club = reading_clubs(:reading_club1)
+    reading_club = reading_clubs(:opening_club)
     Participant.create!(user:, reading_club:)
 
     assert user.participating?(reading_club)

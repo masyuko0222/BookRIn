@@ -2,9 +2,9 @@ name: Ruby
 
 on:
   push:
-    branches: [ main ]
+    branches: ['**']
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   ruby:
@@ -13,14 +13,14 @@ jobs:
       postgres:
         image: postgres:15
         ports:
-          - "5432:5432"
+          - '5432:5432'
         env:
           POSTGRES_DB: booklin_test
           POSTGRES_USER: test
           POSTGRES_PASSWORD: test_password
     env:
       RAILS_ENV: test
-      DATABASE_URL: "postgres://test:test_password@localhost:5432/booklin_test"
+      DATABASE_URL: 'postgres://test:test_password@localhost:5432/booklin_test'
 
     steps:
       - name: Checkout code
@@ -31,6 +31,11 @@ jobs:
         with:
           ruby-version: '3.3.0'
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version'
+
       - name: Install dependencies
         run: bundle install
 
@@ -39,6 +44,9 @@ jobs:
 
       - name: Run slim-lint
         run: bundle exec slim-lint app/views -c .slim-lint.yml
+
+      - name: Run websocket
+        run: HOST=localhost PORT=1234 npx y-websocket &
 
       - name: Run test
         run: bin/rails test:all

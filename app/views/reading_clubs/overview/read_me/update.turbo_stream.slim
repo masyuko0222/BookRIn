@@ -1,4 +1,4 @@
 = turbo_stream.update 'flash', partial: 'application/flash'
 
 = turbo_stream.replace "read_me_#{@reading_club.id}" do
-  = render partial: 'reading_clubs/read_me/read_me', locals: { reading_club: @reading_club }
+  = render partial: 'reading_clubs/overview/read_me/read_me', locals: { reading_club: @reading_club }

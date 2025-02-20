@@ -1,0 +1,39 @@
+.mx-2.mt-4.mb-4
+  = link_to 'ノート一覧へ戻る', overview_reading_club_path(@note.reading_club),
+    class: '\
+            px-4 py-2 \
+            border border-link-border rounded-lg \
+            hover:bg-link-hover'
+
+= form_with model: @note, url: note_form_url(@note) do |f|
+  .ml-2
+    .flex.items-end.space-x-2
+
+      - input_classes = 'border p-2 border-gray-300 rounded'
+      = f.date_field :held_on, class: "#{input_classes} w-36"
+      = f.text_field :title, class: "#{input_classes} w-[24rem]", placeholder: 'タイトルを入力'
+
+    - is_new = @note.new_record?
+    = content_tag :div, '', id: 'note-editor-container',
+      data: { is_new:,
+              club_id: @note.reading_club.id,
+              note_id: (is_new ? nil : @note.id),
+              content: to_html(@note.content),
+              template: @note.reading_club.template }
+    = f.hidden_field :content, id: 'note-editor-hidden'
+
+  .mt-2
+    .flex.items-center.space-x-4.mt-4
+      = f.submit submit_button_text(@note),
+        class: 'inline-flex items-center \
+                px-4 py-2 \
+                text-white bg-blue-600 \
+                border border-blue-600 rounded-lg \
+                cursor-pointer hover:bg-blue-700'
+      - if is_new
+        = link_to 'キャンセル', :back,
+          class: 'inline-flex items-center \
+                  px-3 py-1 \
+                  text-gray-600 bg-gray-100 \
+                  border border-gray-300 rounded-lg \
+                  hover:bg-gray-200'

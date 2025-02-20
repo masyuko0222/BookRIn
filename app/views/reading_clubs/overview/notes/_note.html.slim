@@ -1,6 +1,6 @@
 = turbo_frame_tag(note) do
   li.mb-2.flex.items-center.group
-    = link_to title_with_held_on(note), note_path(note),
+    = link_to title_with_held_on(note), edit_note_path(note),
       data: { turbo: false },
       class: 'px-2 py-1 block \
               text-black underline \
