@@ -9,7 +9,7 @@ class ReadingClubHelperTest < ActiveSupport::TestCase
 
   test '.participant_link as 参加リンク' do
     user = users(:user1)
-    reading_club = reading_clubs(:reading_club1)
+    reading_club = reading_clubs(:opening_club)
     link = participant_link(user, reading_club)
 
     assert_includes link, '参加'
@@ -19,7 +19,7 @@ class ReadingClubHelperTest < ActiveSupport::TestCase
 
   test '.participant_link as 参加取消リンク' do
     user = users(:user1)
-    reading_club = reading_clubs(:reading_club1)
+    reading_club = reading_clubs(:opening_club)
     participant = Participant.create!(user:, reading_club:)
     link = participant_link(user, reading_club)
 

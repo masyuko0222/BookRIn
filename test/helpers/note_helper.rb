@@ -26,7 +26,7 @@ class NoteHelperTest < ActiveSupport::TestCase
   end
 
   test 'note_form_url' do
-    new_note = Note.new(reading_club: reading_clubs(:reading_club1))
+    new_note = Note.new(reading_club: reading_clubs(:opening_club))
     assert_equal reading_club_notes_path(new_note.reading_club), note_form_url(new_note)
 
     exist_note = notes(:note1)
