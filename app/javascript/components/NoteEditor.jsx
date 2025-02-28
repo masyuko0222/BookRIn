@@ -7,7 +7,7 @@ export const NoteEditor = ({ yDoc, editor, isNew, noteId, content }) => {
   useEffect(() => {
     if (isNew) return;
 
-    const wsProvider = new WebsocketProvider('ws://localhost:1234', noteId, yDoc);
+    const wsProvider = new WebsocketProvider('ws://localhost:5678', noteId, yDoc);
     wsProvider.on('sync', (isSynced) => {
       if (isSynced) {
         if (!yDoc.getMap('config').get('initialContentLoaded') && editor) {
