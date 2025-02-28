@@ -46,7 +46,7 @@ jobs:
         run: bundle exec slim-lint app/views -c .slim-lint.yml
 
       - name: Run websocket
-        run: HOST=localhost PORT=1234 npx y-websocket &
+        run: HOST=localhost PORT=5678 npx y-websocket &
 
       - name: Run test
         run: bin/rails test:all
