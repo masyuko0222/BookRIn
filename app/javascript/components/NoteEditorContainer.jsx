@@ -57,7 +57,7 @@ export const NoteEditorContainer = ({ isNew, clubId, noteId, content, template }
 
       const response = await fetch(`/reading_clubs/${clubId}/template`, {
         method: 'PATCH',
-        body: JSON.stringify({ template: latestTemplate, note_id: noteId, reading_club_id: clubId }),
+        body: JSON.stringify({ template: latestTemplate, reading_club_id: clubId }),
         headers: {
           'Content-Type': 'application/json',
           'X-CSRF-Token': csrfToken,
