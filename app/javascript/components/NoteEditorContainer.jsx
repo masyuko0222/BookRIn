@@ -53,7 +53,7 @@ export const NoteEditorContainer = ({ isNew, clubId, noteId, content, template }
     setCurrentTemplate(latestTemplate);
 
     try {
-      const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+      const csrfToken = document.head.querySelector('meta[name=csrf-token]')?.content;
 
       const response = await fetch(`/reading_clubs/${clubId}/template`, {
         method: 'PATCH',
