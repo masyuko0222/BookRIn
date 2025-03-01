@@ -3,8 +3,8 @@
 require 'application_system_test_case'
 
 # NotesTestはyjs-websocketを起動しながらテストをしてください
-# https://github.com/yjs/y-websocket
-# テスト走らせるたびにwebsokcetは起動し直す(ノートの更新状態を引き継いでしまうため)
+# `HOST=localhost PORT=5678 npx y-websocket` https://github.com/yjs/y-websocket
+# Websocket起動中は最後に編集された内容を保持してしまうので、テスト毎に起動しなおしてください
 
 class NotesTest < ApplicationSystemTestCase
   setup do
@@ -12,7 +12,7 @@ class NotesTest < ApplicationSystemTestCase
     @reading_club = reading_clubs(:participating_club)
 
     # Websocket通信中は、各テストで利用するノートを変える
-    # 1つ目のテストのnote1を更新したとして、2つ目のテストでもnote1を使ったら、1つ目で更新した内容を引き継いでしまうため
+    # Websocket起動中は最後に編集された内容を保持してしまうため
     @note1 = notes(:note1)
     @note2 = notes(:note2)
     @note3 = notes(:note3)
