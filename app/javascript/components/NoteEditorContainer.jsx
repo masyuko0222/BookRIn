@@ -53,16 +53,20 @@ export const NoteEditorContainer = ({ isNew, clubId, noteId, content, template }
     setCurrentTemplate(latestTemplate);
 
     try {
+      const headers = {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      };
+
       const csrfToken = document.head.querySelector('meta[name=csrf-token]')?.content;
+      if (csrfToken) {
+        headers['X-CSRF-Token'] = csrfToken;
+      }
 
       const response = await fetch(`/reading_clubs/${clubId}/template`, {
         method: 'PATCH',
         body: JSON.stringify({ template: latestTemplate, reading_club_id: clubId }),
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-Token': csrfToken,
-          Accept: 'application/json',
-        },
+        headers: headers,
       });
 
       const data = await response.json();
