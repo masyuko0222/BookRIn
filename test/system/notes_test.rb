@@ -56,8 +56,21 @@ class NotesTest < ApplicationSystemTestCase
     assert_text 'This is Opening Template'
   end
 
-  # 実動作だと更新時にフラッシュメッセージが出るのに、テストだと表示されない
-  # 解決まで一旦保留
-  # test 'update template' do
-  # end
+  test 'update template' do
+    visit_with_auth(edit_note_path(@note3), @user)
+    assert_text 'Content for note 3'
+
+    click_button 'テンプレートを変更する'
+    assert_text 'This is Opening Template'
+    find('.template-content-area').set('Updated Content')
+
+    click_button '更新'
+    assert_text 'テンプレートを更新しました'
+
+    page.accept_confirm do
+      click_button 'テンプレートを反映する'
+    end
+
+    assert_text 'Updated Content'
+  end
 end
