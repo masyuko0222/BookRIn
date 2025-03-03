@@ -6,13 +6,13 @@ import { FlashMessage } from './FlashMessage';
 import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Collaboration from '@tiptap/extension-collaboration';
+import { WebsocketProvider } from 'y-websocket';
 import * as Y from 'yjs';
 import { marked } from 'marked';
 
 export const NoteEditorContainer = ({ isNew, clubId, noteId, content, template }) => {
   const [currentTemplate, setCurrentTemplate] = useState(template);
   const [flashMessage, setFlashMessage] = useState(null);
-  const yDoc = new Y.Doc();
 
   const changeContent = (tiptapEditor, text) => {
     tiptapEditor.commands.clearContent();
@@ -22,6 +22,9 @@ export const NoteEditorContainer = ({ isNew, clubId, noteId, content, template }
     document.getElementById('note-editor-hidden').value = marked.parse(text);
   };
 
+  // NoteEditor
+  const yDoc = new Y.Doc();
+  const wsProvider = isNew ? null : new WebsocketProvider('ws://localhost:5678', noteId, yDoc);
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -88,7 +91,7 @@ export const NoteEditorContainer = ({ isNew, clubId, noteId, content, template }
         onApplyTemplate={handleApplyTemplate}
         onUpdateTemplate={handleUpdateTemplate}
       />
-      <NoteEditor yDoc={yDoc} editor={editor} isNew={isNew} noteId={noteId} content={content} />
+      <NoteEditor yDoc={yDoc} wsProvider={wsProvider} editor={editor} isNew={isNew} content={content} />
     </>
   );
 };
