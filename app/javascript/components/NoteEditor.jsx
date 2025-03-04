@@ -6,20 +6,21 @@ import Collaboration from '@tiptap/extension-collaboration';
 import { WebsocketProvider } from 'y-websocket';
 import * as Y from 'yjs';
 
+const yDoc = new Y.Doc();
+
 export const NoteEditor = ({ setEditor, isNew, noteId, content, currentTemplate, changeContent }) => {
-  const yDoc = useRef(new Y.Doc());
   const wsProvider = useRef(null);
 
   useEffect(() => {
     setEditor(editor);
     if (isNew) return;
-    wsProvider.current = new WebsocketProvider('ws://localhost:5678', noteId, yDoc.current);
+    wsProvider.current = new WebsocketProvider('ws://localhost:5678', noteId, yDoc);
     wsProvider.current?.connect();
 
     wsProvider.current?.on('sync', (isSynced) => {
       if (isSynced) {
-        if (!yDoc.current.getMap('config').get('initialContentLoaded') && editor) {
-          yDoc.current.getMap('config').set('initialContentLoaded', true);
+        if (!yDoc.getMap('config').get('initialContentLoaded') && editor) {
+          yDoc.getMap('config').set('initialContentLoaded', true);
           editor.commands.setContent(content);
           document.getElementById('note-editor-hidden').value = content;
         }
@@ -28,12 +29,12 @@ export const NoteEditor = ({ setEditor, isNew, noteId, content, currentTemplate,
 
     return () => {
       wsProvider.current?.destroy();
-      yDoc.current?.destroy();
+      yDoc?.destroy();
     };
   }, []);
 
   const editor = useEditor({
-    extensions: [StarterKit, ...(isNew ? [] : [Collaboration.configure({ document: yDoc.current })])],
+    extensions: [StarterKit, ...(isNew ? [] : [Collaboration.configure({ document: yDoc })])],
     editorProps: {
       attributes: {
         class: 'mr-2 border border-gray-300 p-4 rounded focus:ring-blue-500',
