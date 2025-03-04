@@ -22,8 +22,8 @@ export const CollabNoteEditor = ({ yDoc, setEditor, wsProvider, content }) => {
 
     wsProvider.on('sync', (isSynced) => {
       if (isSynced) {
-        if (!wsProvider.doc.getMap('config').get('initialContentLoaded')) {
-          wsProvider.doc.getMap('config').set('initialContentLoaded', true);
+        if (!yDoc.getMap('config').get('initialContentLoaded')) {
+          yDoc.getMap('config').set('initialContentLoaded', true);
           editor.commands.setContent(content);
           document.getElementById('note-editor-hidden').value = content;
         }
