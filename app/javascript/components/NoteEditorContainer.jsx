@@ -3,16 +3,12 @@ import { TemplateActions } from './TemplateActions';
 import { NoteEditor } from './NoteEditor';
 import { FlashMessage } from './FlashMessage';
 
-import { useEditor } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
-import Collaboration from '@tiptap/extension-collaboration';
-import { WebsocketProvider } from 'y-websocket';
-import * as Y from 'yjs';
 import { marked } from 'marked';
 
 export const NoteEditorContainer = ({ isNew, clubId, noteId, content, template }) => {
   const [currentTemplate, setCurrentTemplate] = useState(template);
   const [flashMessage, setFlashMessage] = useState(null);
+  const [editor, setEditor] = useState(null);
 
   const changeContent = (tiptapEditor, text) => {
     tiptapEditor.commands.clearContent();
@@ -21,29 +17,6 @@ export const NoteEditorContainer = ({ isNew, clubId, noteId, content, template }
     // submitはRailsのform_helperで行われるので、RailsViewのhidden_fieldにも値を渡す
     document.getElementById('note-editor-hidden').value = marked.parse(text);
   };
-
-  // NoteEditor
-  const yDoc = new Y.Doc();
-  const wsProvider = isNew ? null : new WebsocketProvider('ws://localhost:5678', noteId, yDoc);
-  const editor = useEditor({
-    extensions: [
-      StarterKit,
-      // IDがないとWebsocket通信(共同編集)ができないので、新規作成画面ではコラボ機能はなし
-      ...(isNew ? [] : [Collaboration.configure({ document: yDoc })]),
-    ],
-    editorProps: {
-      attributes: {
-        class: 'mr-2 border border-gray-300 p-4 rounded focus:ring-blue-500',
-        style: 'height: 70vh; overflow: auto;',
-      },
-    },
-    onCreate({ editor }) {
-      isNew && changeContent(editor, currentTemplate);
-    },
-    onUpdate({ editor }) {
-      document.getElementById('note-editor-hidden').value = editor.getHTML();
-    },
-  });
 
   // TemplateAction's handlers
   const handleApplyTemplate = (latestTemplate) => {
@@ -86,12 +59,18 @@ export const NoteEditorContainer = ({ isNew, clubId, noteId, content, template }
     <>
       {flashMessage && <FlashMessage message={flashMessage} onCloseFlash={handleCloseFlash} />}
       <TemplateActions
-        editor={editor}
         originalTemplate={currentTemplate}
         onApplyTemplate={handleApplyTemplate}
         onUpdateTemplate={handleUpdateTemplate}
       />
-      <NoteEditor yDoc={yDoc} wsProvider={wsProvider} editor={editor} isNew={isNew} content={content} />
+      <NoteEditor
+        setEditor={setEditor}
+        isNew={isNew}
+        noteId={noteId}
+        content={content}
+        currentTemplate={currentTemplate}
+        changeContent={changeContent}
+      />
     </>
   );
 };
