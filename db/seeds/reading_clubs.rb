@@ -26,3 +26,17 @@ reading_clubs.each do |reading_club|
     club.assign_attributes(reading_club)
   end
 end
+
+# 初めから参加しているサンプル輪読会
+sample_read_me = <<~MARKDOWN
+  ### READ ME
+    - この輪読会では、このREAD MEやノートを自由に触ってみましょう
+    - 一通り触ってみたら、右上の「参加取消」から、輪読会の参加をやめることができます
+      - いつでも再参加は可能です
+MARKDOWN
+
+ReadingClub.find_or_create_by!(title: 'サンプル輪読会') do |club|
+  club.finished = false
+  club.read_me = sample_read_me
+  club.updated_at = Date.new(1900, 1, 1) # トップに表示されないよう古い日付
+end

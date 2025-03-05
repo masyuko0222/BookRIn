@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  after_create :join_sample_reading_club
+
   validates :uid, presence: true, uniqueness: { scope: :provider }
   validates :name, presence: true
   validates :provider, presence: true
@@ -36,5 +38,15 @@ class User < ApplicationRecord
         provider: discord_info.provider
       }
     end
+  end
+
+  private
+
+  def join_sample_reading_club
+    sample_club = ReadingClub.find_by(title: 'サンプル輪読会')
+
+    return unless sample_club
+
+    Participant.find_or_create_by!(user: self, reading_club: sample_club)
   end
 end
