@@ -4,7 +4,7 @@ import '@hotwired/turbo-rails';
 
 import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { NoteEditorContainer } from './components/NoteEditorContainer';
+import { EditorContainer } from './components/EditorContainer';
 
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('note-editor-container');
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const root = createRoot(container);
     root.render(
       <StrictMode>
-        <NoteEditorContainer
+        <EditorContainer
           isNew={isNew === 'true'}
           clubId={clubId}
           noteId={noteId}

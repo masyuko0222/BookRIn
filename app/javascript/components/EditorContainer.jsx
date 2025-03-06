@@ -5,7 +5,7 @@ import { FlashMessage } from './FlashMessage';
 
 import { marked } from 'marked';
 
-export const NoteEditorContainer = ({ isNew, clubId, noteId, content, template }) => {
+export const EditorContainer = ({ isNew, clubId, noteId, content, template }) => {
   const [currentTemplate, setCurrentTemplate] = useState(template);
   const [flashMessage, setFlashMessage] = useState(null);
   const [editor, setEditor] = useState(null);
