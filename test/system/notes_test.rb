@@ -30,6 +30,7 @@ class NotesTest < ApplicationSystemTestCase
 
   test 'update note' do
     visit_with_auth(edit_note_path(@note1), @user)
+    assert_current_path edit_note_path(@note1)
     assert_text 'Content for note 1'
 
     fill_in 'note[title]', with: 'Updated Note Title'
@@ -46,6 +47,7 @@ class NotesTest < ApplicationSystemTestCase
 
   test 'apply template to note' do
     visit_with_auth(edit_note_path(@note2), @user)
+    assert_current_path edit_note_path(@note2)
     assert_text 'Content for note 2'
 
     page.accept_confirm do
@@ -58,6 +60,7 @@ class NotesTest < ApplicationSystemTestCase
 
   test 'update template' do
     visit_with_auth(edit_note_path(@note3), @user)
+    assert_current_path edit_note_path(@note3)
     assert_text 'Content for note 3'
 
     click_button 'テンプレートを変更する'
