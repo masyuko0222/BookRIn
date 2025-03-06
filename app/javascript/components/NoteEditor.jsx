@@ -21,9 +21,11 @@ export const NoteEditor = ({ setEditor, isNew, noteId, content, currentTemplate,
     };
   }, []);
 
-  return isNew ? (
-    <NewNoteEditor setEditor={setEditor} currentTemplate={currentTemplate} changeContent={changeContent} />
-  ) : (
-    <CollabNoteEditor yDoc={yDoc} setEditor={setEditor} wsProvider={wsProvider} content={content} />
-  );
+  if (isNew) {
+    return <NewNoteEditor setEditor={setEditor} currentTemplate={currentTemplate} changeContent={changeContent} />;
+  } else if (!wsProvider) {
+    return <h1>Loading...</h1>;
+  } else {
+    return <CollabNoteEditor yDoc={yDoc} setEditor={setEditor} wsProvider={wsProvider} content={content} />;
+  }
 };
