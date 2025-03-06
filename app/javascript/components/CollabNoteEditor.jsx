@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Collaboration from '@tiptap/extension-collaboration';
 
-export const CollabNoteEditor = ({ yDoc, setEditor, wsProvider, content }) => {
+export const CollabNoteEditor = ({ yDoc, setEditor, content }) => {
   const editor = useEditor({
     extensions: [StarterKit, Collaboration.configure({ document: yDoc })],
     editorProps: {
