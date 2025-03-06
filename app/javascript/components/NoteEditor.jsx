@@ -1,28 +1,32 @@
-import React, { useEffect } from 'react';
-
+import React, { useEffect, useState } from 'react';
 import { WebsocketProvider } from 'y-websocket';
-import { EditorContent } from '@tiptap/react';
+import { NewNoteEditor } from './NewNoteEditor';
+import { CollabNoteEditor } from './CollabNoteEditor';
+import * as Y from 'yjs';
 
-export const NoteEditor = ({ yDoc, editor, isNew, noteId, content }) => {
+const yDoc = new Y.Doc();
+
+export const NoteEditor = ({ setEditor, isNew, noteId, content, currentTemplate, changeContent }) => {
+  const [wsProvider, setWsProvider] = useState(null);
+
   useEffect(() => {
     if (isNew) return;
 
-    const wsProvider = new WebsocketProvider('ws://localhost:5678', noteId, yDoc);
-    wsProvider.on('sync', (isSynced) => {
-      if (isSynced) {
-        if (!yDoc.getMap('config').get('initialContentLoaded') && editor) {
-          yDoc.getMap('config').set('initialContentLoaded', true);
-          editor.commands.setContent(content);
-          document.getElementById('note-editor-hidden').value = content;
-        }
-      }
-    });
+    const provider = new WebsocketProvider('ws://localhost:5678', noteId, yDoc);
+    setWsProvider(provider);
 
     return () => {
-      wsProvider?.destroy();
-      yDoc?.destroy();
+      setWsProvider(null);
     };
   }, []);
 
-  return <EditorContent editor={editor} />;
+  if (isNew) {
+    return <NewNoteEditor setEditor={setEditor} currentTemplate={currentTemplate} changeContent={changeContent} />;
+  }
+
+  if (!wsProvider) {
+    return <h1>Loading...</h1>;
+  }
+
+  return <CollabNoteEditor yDoc={yDoc} setEditor={setEditor} wsProvider={wsProvider} content={content} />;
 };
