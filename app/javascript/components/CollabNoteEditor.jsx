@@ -14,26 +14,13 @@ export const CollabNoteEditor = ({ yDoc, setEditor, wsProvider, content }) => {
     },
     onCreate({ editor }) {
       setEditor(editor);
+      if (!yDoc.getMap('config').get('initialContentLoaded')) {
+        yDoc.getMap('config').set('initialContentLoaded', true);
+        editor.commands.setContent(content);
+        document.getElementById('note-editor-hidden').value = content;
+      }
     },
   });
-
-  useEffect(() => {
-    if (!wsProvider || !editor) return;
-
-    wsProvider.on('sync', (isSynced) => {
-      if (isSynced) {
-        if (!yDoc.getMap('config').get('initialContentLoaded')) {
-          yDoc.getMap('config').set('initialContentLoaded', true);
-          editor.commands.setContent(content);
-          document.getElementById('note-editor-hidden').value = content;
-        }
-      }
-    });
-
-    return () => {
-      wsProvider.destroy();
-    };
-  }, [wsProvider, editor]);
 
   return <EditorContent editor={editor} />;
 };
