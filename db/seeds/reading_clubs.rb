@@ -27,7 +27,9 @@ if Rails.env.development?
       club.assign_attributes(reading_club)
     end
   end
-  
+end
+
+if Rails.env.production?
   # 初めから参加しているサンプル輪読会
   sample_read_me = <<~MARKDOWN
     ### READ ME
