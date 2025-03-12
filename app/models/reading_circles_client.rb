@@ -50,7 +50,7 @@ class ReadingCirclesClient
 
     def destroy_clubs(latest_clubs)
       fetched_ids = latest_clubs.map { |club| club['id'] }
-      destroyed_clubs = ReadingClub.where.not(id: fetched_ids)
+      destroyed_clubs = ReadingClub.where.not(id: fetched_ids).where.not(title: 'サンプル輪読会')
       destroyed_clubs.destroy_all
     end
   end
