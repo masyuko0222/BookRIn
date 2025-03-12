@@ -1,20 +1,17 @@
 name: Fetch Latest Reading Clubs
 
-# on:
-#   push:
-#   workflow_dispatch:
-#   schedule:
-#     - cron: "0 21 * * *"
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 18 * * *"
 
 jobs:
   fetch-reading-clubs:
     runs-on: ubuntu-latest
 
     env:
-      RAILS_ENV: development
-      SUPABASE_DEVELOPMENT_DB_URI: ${{ secrets.SUPABASE_DEVELOPMENT_DB_URI }}
-      FBC_LOGIN_NAME: ${{ secrets.FBC_LOGIN_NAME }}
-      FBC_PASSWORD: ${{ secrets.FBC_PASSWORD }}
+      RAILS_ENV: production
+      FLY_SSH_TOKEN: ${{ secrets.FLY_SSH_TOKEN }}
 
     steps:
       - name: Checkout code
@@ -28,5 +25,8 @@ jobs:
       - name: Install dependencies
         run: bundle install
 
+      - name: Install Fly CLI
+        uses: superfly/flyctl-actions/setup-flyctl@master
+
       - name: Run rake fetch task
-        run: rake fetch:reading_clubs
+        run: flyctl ssh console -t  $FLY_SSH_TOKEN --command "rake fetch:reading_clubs"
