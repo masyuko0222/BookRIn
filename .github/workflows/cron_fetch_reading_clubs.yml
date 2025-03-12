@@ -5,14 +5,14 @@ on:
     branches: ['**']
   workflow_dispatch:
   schedule:
-    - cron: "0 21 * * *"
+    - cron: "0 18 * * *"
 
 jobs:
   fetch-reading-clubs:
     runs-on: ubuntu-latest
 
     env:
-      RAILS_ENV: development
+      RAILS_ENV: production
       FLY_SSH_TOKEN: ${{ secrets.FLY_SSH_TOKEN }}
 
     steps:
