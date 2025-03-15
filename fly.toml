@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for bookrin on 2025-03-06T21:28:42+09:00
+# fly.toml app configuration file generated for bookrin on 2025-03-15T23:24:38+09:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -8,41 +8,33 @@ primary_region = 'nrt'
 console_command = '/rails/bin/rails console'
 
 [deploy]
-  release_command = "./bin/rails db:prepare"
+  release_command = './bin/rails db:prepare'
 
 [processes]
-  web = "bin/rails server"
-  # websocket = "npm run start-websocket"
-
-[[vm]]
-  processes = ["web"]
-  # Ruby3.3に必要なメモリ
-  # https://community.fly.io/t/dockerfile-help-for-ruby-3-3-0/17700
-  memory = "512mb"
-  cpu_kind = "shared"
-  cpus = 1
+  web = 'bin/rails server'
 
 [[services]]
-  processes = ["web"]
+  protocol = 'tcp'
   internal_port = 3000
-  protocol = "tcp"
   auto_start_machines = true
   min_machines_running = 0
+  processes = ['web']
 
-[[services.ports]]
-  port = 443
-  handlers = ["tls", "http"]
+  [[services.ports]]
+    port = 443
+    handlers = ['tls', 'http']
 
-[services.concurrency]
-  type = "connections"
-  hard_limit = 25
-  soft_limit = 20
+  [services.concurrency]
+    type = 'connections'
+    hard_limit = 25
+    soft_limit = 20
 
-# [[services]]
-#   processes = ["websocket"]
-#   internal_port = 5678
-#   protocol = "tcp"
+[[vm]]
+  memory = '512mb'
+  cpu_kind = 'shared'
+  cpus = 1
+  processes = ['web']
 
 [[statics]]
-  guest_path = "/rails/public"
-  url_prefix = "/"
+  guest_path = '/rails/public'
+  url_prefix = '/'
