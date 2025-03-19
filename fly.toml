@@ -22,6 +22,14 @@ console_command = '/rails/bin/rails console'
     soft_limit = 200
     hard_limit = 250
 
+[[services]]
+  internal_port = 1234
+  protocol = "tcp"
+
+  [[services.ports]]
+    port = 1234
+    handlers = ["tls"]
+
 [[vm]]
   memory = '512mb'
   cpu_kind = 'shared'
