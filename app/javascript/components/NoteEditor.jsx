@@ -6,13 +6,16 @@ import * as Y from 'yjs';
 
 const yDoc = new Y.Doc();
 
-export const NoteEditor = ({ setEditor, isNew, noteId, content, currentTemplate, changeContent }) => {
+export const NoteEditor = ({ setEditor, isNew, railsEnv, noteId, content, currentTemplate, changeContent }) => {
   const [wsProvider, setWsProvider] = useState(null);
 
   useEffect(() => {
     if (isNew) return;
 
-    const provider = new WebsocketProvider('ws://localhost:5678', noteId, yDoc);
+
+    const wsUrl = railsEnv === 'production' ? 'wss://bookrin.fly.dev:1234/' : 'ws://localhost:5678'
+
+    const provider = new WebsocketProvider(wsUrl, noteId, yDoc);
     setWsProvider(provider);
 
     return () => {

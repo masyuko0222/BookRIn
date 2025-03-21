@@ -9,13 +9,16 @@ import { EditorContainer } from './components/EditorContainer';
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('note-editor-container');
   if (container) {
-    const { isNew, clubId, noteId, content, template } = container.dataset;
+    // NODE_ENVがdevelopmentになってしまうので、解決できるまではRails.envで環境判断をする
+    // https://community.fly.io/t/node-env-is-always-development-regardless-of-my-secrets-and-configuration/4825
+    const { isNew, railsEnv, clubId, noteId, content, template } = container.dataset;
 
     const root = createRoot(container);
     root.render(
       <StrictMode>
         <EditorContainer
           isNew={isNew === 'true'}
+          railsEnv={railsEnv}
           clubId={clubId}
           noteId={noteId}
           content={content}

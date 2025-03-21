@@ -16,6 +16,7 @@
     - is_new = @note.new_record?
     = content_tag :div, '', id: 'note-editor-container',
       data: { is_new:,
+              rails_env: Rails.env,
               club_id: @note.reading_club.id,
               note_id: (is_new ? nil : @note.id),
               content: to_html(@note.content),
