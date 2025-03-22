@@ -12,8 +12,7 @@ export const NoteEditor = ({ setEditor, isNew, railsEnv, noteId, content, curren
   useEffect(() => {
     if (isNew) return;
 
-
-    const wsUrl = railsEnv === 'production' ? 'wss://bookrin.fly.dev:1234/' : 'ws://localhost:5678'
+    const wsUrl = railsEnv === 'production' ? 'wss://bookrin.fly.dev:1234/' : 'ws://localhost:5678';
 
     const provider = new WebsocketProvider(wsUrl, noteId, yDoc);
     setWsProvider(provider);
