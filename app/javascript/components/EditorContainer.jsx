@@ -5,7 +5,7 @@ import { FlashMessage } from './FlashMessage';
 
 import { marked } from 'marked';
 
-export const EditorContainer = ({ isNew, clubId, noteId, content, template }) => {
+export const EditorContainer = ({ isNew, railsEnv, clubId, noteId, content, template }) => {
   const [currentTemplate, setCurrentTemplate] = useState(template);
   const [flashMessage, setFlashMessage] = useState(null);
   const [editor, setEditor] = useState(null);
@@ -66,6 +66,7 @@ export const EditorContainer = ({ isNew, clubId, noteId, content, template }) =>
       <NoteEditor
         setEditor={setEditor}
         isNew={isNew}
+        railsEnv={railsEnv}
         noteId={noteId}
         content={content}
         currentTemplate={currentTemplate}
