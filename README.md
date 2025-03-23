@@ -34,3 +34,12 @@ FBCで開催されている輪読会に、Bookrinからも参加できます！
 5. 参加をやめたい場合は、同様に「Overview」ページから参加取り消しを行うことができます。
 ![image](https://github.com/user-attachments/assets/61141e5a-cf60-4a30-af5e-9e8ef966fa44)
 
+#### ノートの作成と共同編集
+1. 「Overview」ページからノートを新規作成ができます。
+![image](https://github.com/user-attachments/assets/deca7d91-6e7f-4a05-9510-8700e9fdc56d)
+
+2. 開催日・タイトル・フォーマットを入力し、ページ下部の「ノートを新規作成」ボタンをクリックしましょう。
+![image](https://github.com/user-attachments/assets/e77be869-9126-43c4-aa5b-304c566829f6)
+
+3. 作成したノートは、「Overview」ページのノート一覧に表示されます。
+4. ノートのURLを共有すれば、リアルタイムで共同編集ができます。輪読会の記録をみんなで残していきましょう！
