@@ -10,7 +10,7 @@ class OverviewTest < ApplicationSystemTestCase
   test 'Participant reading club' do
     not_participanting_club = reading_clubs(:opening_club)
 
-    visit_with_auth(overview_reading_club_path(not_participanting_club), @user)
+    visit_with_auth(reading_club_overview_path(not_participanting_club), @user)
 
     assert_difference 'Participant.count', 1 do
       click_link '輪読会に参加する'
@@ -27,7 +27,7 @@ class OverviewTest < ApplicationSystemTestCase
   test 'Cancell participating reading club' do
     participating_club = reading_clubs(:participating_club)
 
-    visit_with_auth(overview_reading_club_path(participating_club), @user)
+    visit_with_auth(reading_club_overview_path(participating_club), @user)
 
     assert_difference 'Participant.count', -1 do
       click_link '参加取消'

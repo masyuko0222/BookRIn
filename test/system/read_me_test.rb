@@ -9,8 +9,8 @@ class ReadMeTest < ApplicationSystemTestCase
   end
 
   test 'update read me' do
-    visit_with_auth(overview_reading_club_path(@reading_club), @user)
-    assert_current_path overview_reading_club_path(@reading_club)
+    visit_with_auth(reading_club_overview_path(@reading_club), @user)
+    assert_current_path reading_club_overview_path(@reading_club)
     assert_text "Welcome to Markdown\nThis is a test."
 
     click_link '編集'

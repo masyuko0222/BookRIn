@@ -24,7 +24,7 @@ class NotesTest < ApplicationSystemTestCase
     assert_text 'This is Participating Template'
     click_button 'ノートを新規作成'
     assert_text 'ノートを作成しました'
-    assert_current_path overview_reading_club_path(@reading_club)
+    assert_current_path reading_club_overview_path(@reading_club)
     assert_text 'New Note Title'
   end
 

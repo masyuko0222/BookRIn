@@ -23,7 +23,7 @@ class NotesController < ApplicationController
 
     if @note.save
       flash.notice = 'ノートを作成しました'
-      redirect_to overview_reading_club_path(@note.reading_club_id)
+      redirect_to reading_club_overview_path(@note.reading_club_id)
     else
       render :new, status: :unprocessable_entity
     end
