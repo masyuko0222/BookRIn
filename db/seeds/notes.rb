@@ -2,7 +2,7 @@
 
 if Rails.env.development?
   reading_club = ReadingClub.find_by(title: 'プログラミング基礎読書会')
-  
+
   start_date = Date.new(2024, 7, 1)
   end_date = Date.new(2025, 1, 1)
   (start_date..end_date).step(7).each_with_index do |held_on, i|
@@ -22,12 +22,12 @@ if Rails.env.development?
           puts "Hello"
         end
         ```
-      
+
       ## その他
       - **ディスカッション**: 次回の進め方について
       - **課題の共有**: JavaScriptの基にした個人プロジェクトを進めます。
     MARKDOWN
-      
+
     Note.create!(
       held_on:,
       title:,
