@@ -68,3 +68,19 @@ $ ./bin/dev
 
 上記を実行後、`http://localhost:3000`にアクセス。
 
+#### テスト
+テスト実行には**Websocketの起動**が必須になります。
+1. Websocketサーバの起動
+```
+# https://github.com/yjs/y-websocket
+$ HOST=localhost PORT=5678 npx y-websocket
+```
+
+2. テストの実行
+```
+$ rails test:all
+```
+
+3. Websocketサーバの終了
+- Ctrl + C でWebsocketサーバを終了
+- テスト実行ごとに、Websocketサーバ起動→終了を行ってください
