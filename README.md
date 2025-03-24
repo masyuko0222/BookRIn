@@ -71,8 +71,8 @@ $ ./bin/dev
 #### テスト
 テスト実行には**Websocketの起動**が必須になります。
 1. Websocketサーバの起動
+- 参考：https://github.com/yjs/y-websocket
 ```
-# https://github.com/yjs/y-websocket
 $ HOST=localhost PORT=5678 npx y-websocket
 ```
 
