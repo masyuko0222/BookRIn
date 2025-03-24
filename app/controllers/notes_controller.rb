@@ -10,13 +10,9 @@ class NotesController < ApplicationController
       # そのためDBのdefaultではなく、Controllerでheld_onの値を設定しておく
       held_on: Time.zone.today
     )
-
-    render :form
   end
 
-  def edit
-    render :form
-  end
+  def edit; end
 
   def create
     @note = Note.new(note_params.merge(reading_club_id: params[:reading_club_id]))
