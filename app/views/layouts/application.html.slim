@@ -3,12 +3,14 @@ html
   head
     title
       = content_for?(:title) ? yield(:title) : 'BookRIn'
+    meta name="description" content=(content_for?(:meta_description) ? yield(:meta_description) : 'BookRIn の読書会ノートアプリです。')
     meta[name='viewport' content='width=device-width,initial-scale=1']
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'tailwind', 'application', 'inter-font', 'tiptap_markdown', 'data-turbo-track': 'reload'
     = javascript_include_tag 'application', 'data-turbo-track': 'reload', type: 'module'
     link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&display=swap"
+    = display_meta_tags(default_meta_tags)
 
     = favicon_link_tag('favicon.ico')
   body

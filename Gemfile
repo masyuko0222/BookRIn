@@ -32,6 +32,7 @@ gem 'tzinfo-data', platforms: %i[windows jruby]
 
 gem 'dotenv-rails'
 gem 'kaminari'
+gem 'meta-tags'
 gem 'omniauth-discord'
 gem 'omniauth-rails_csrf_protection'
 gem 'ransack'
