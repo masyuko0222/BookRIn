@@ -6,7 +6,7 @@ export const TemplateActions = ({ originalTemplate, onApplyTemplate, onUpdateTem
 
   return (
     <>
-      <ul className='flex space-x-2'>
+      <ul className='flex mb-2 space-x-2'>
         <li className='self-end'>
           <button
             type='button'

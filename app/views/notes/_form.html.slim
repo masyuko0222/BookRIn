@@ -1,9 +1,10 @@
 = form_with model: @note, url: note_form_url(@note) do |f|
-  .flex.items-end.space-x-2
+  .mb-2
+    .flex.items-end.space-x-2
 
-    - input_classes = 'border p-2 border-gray-300 rounded'
-    = f.date_field :held_on, class: "#{input_classes} w-36"
-    = f.text_field :title, class: "#{input_classes} w-[24rem]", placeholder: 'タイトルを入力'
+      - input_classes = 'border p-2 border-gray-300 rounded'
+      = f.date_field :held_on, class: "#{input_classes} w-36"
+      = f.text_field :title, class: "#{input_classes} w-[24rem]", placeholder: 'タイトルを入力'
 
   = content_tag :div, '', id: 'note-editor-container',
     data: { is_new:,
