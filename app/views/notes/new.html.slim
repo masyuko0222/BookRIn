@@ -1,11 +1,12 @@
 - content_for :title, 'ノート新規作成 | BookRIn'
 - content_for :meta_description, 'ノートの新規作成ページです。開催日やタイトル、フォーマットを記入して新規作成をしましょう。この時点ではまだ共同編集はできません。'
 
-.mx-2.mt-4.mb-4
-  = link_to 'ノート一覧へ戻る', reading_club_overview_path(@note.reading_club),
-    class: '\
-            px-4 py-2 \
-            border border-link-border rounded-lg \
-            hover:bg-link-hover'
+.mx-3
+  .mt-4.mb-4
+    = link_to '◁ ノート一覧へ戻る', reading_club_overview_path(@note.reading_club),
+      class: '\
+              px-4 py-2 \
+              border border-link-border rounded-lg \
+              hover:bg-link-hover'
 
-= render 'form', is_new: true, note: @note
+  = render 'form', is_new: true, note: @note

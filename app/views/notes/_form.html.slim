@@ -1,19 +1,19 @@
 = form_with model: @note, url: note_form_url(@note) do |f|
-  .ml-2
+  .mb-2
     .flex.items-end.space-x-2
 
       - input_classes = 'border p-2 border-gray-300 rounded'
       = f.date_field :held_on, class: "#{input_classes} w-36"
       = f.text_field :title, class: "#{input_classes} w-[24rem]", placeholder: 'タイトルを入力'
 
-    = content_tag :div, '', id: 'note-editor-container',
-      data: { is_new:,
-              rails_env: Rails.env,
-              club_id: note.reading_club.id,
-              note_id: note.id,
-              content: to_html(note.content),
-              template: note.reading_club.template }
-    = f.hidden_field :content, id: 'note-editor-hidden'
+  = content_tag :div, '', id: 'note-editor-container',
+    data: { is_new:,
+            rails_env: Rails.env,
+            club_id: note.reading_club.id,
+            note_id: note.id,
+            content: to_html(note.content),
+            template: note.reading_club.template }
+  = f.hidden_field :content, id: 'note-editor-hidden'
 
   .mt-2
     .flex.items-center.space-x-4.mt-4

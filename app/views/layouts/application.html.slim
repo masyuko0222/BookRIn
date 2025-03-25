@@ -14,7 +14,8 @@ html
 
     = favicon_link_tag('favicon.ico')
   body
-    = render 'application/header'
+    - unless current_page?(login_path)
+      = render 'application/header'
     main
       #flash
         = render 'application/flash'

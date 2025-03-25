@@ -12,7 +12,7 @@ class ReadingClubHelperTest < ActiveSupport::TestCase
     reading_club = reading_clubs(:opening_club)
     link = participant_link(user, reading_club)
 
-    assert_includes link, '参加'
+    assert_includes link, '＋ 輪読会に参加する'
     assert_includes link, reading_club_participants_path(reading_club)
     assert_includes link, 'data-turbo-method="post"'
   end
