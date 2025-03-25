@@ -8,6 +8,9 @@
             border border-link-border rounded-lg \
             hover:bg-link-hover'
 
+  h1.text-2xl.font-bold.text-gray-800.text-center.flex-1
+    = @reading_club.title
+
   = participant_link(current_user, @reading_club)
 
 .grid.grid-cols-2.gap-4
