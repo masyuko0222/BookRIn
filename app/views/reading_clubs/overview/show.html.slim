@@ -1,15 +1,13 @@
 - content_for :title, 'Overview | BookRIn'
 - content_for :meta_description, '輪読会のOverviewです。READ MEや、今まで記録したノートの一覧を確認することができます。'
 
-.relative.flex.items-center.justify-between.mx-2.my-4
-  = link_to '◁ 輪読会一覧に戻る', reading_clubs_path,
-    class: '\
-            px-4 py-2 \
-            border border-link-border rounded-lg \
-            hover:bg-link-hover'
+.flex.items-center.justify-between.mx-2.my-4
+  .flex.items-center.space-x-4
+    = link_to '◁ 輪読会一覧に戻る', reading_clubs_path,
+      class: 'px-4 py-2 border border-link-border rounded-lg hover:bg-link-hover'
 
-  h1.text-2xl.font-bold.text-gray-800.text-center.flex-1
-    = @reading_club.title
+    h1.text-2xl.font-bold.text-gray-800
+      = @reading_club.title
 
   = participant_link(current_user, @reading_club)
 
