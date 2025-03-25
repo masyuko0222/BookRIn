@@ -11,7 +11,7 @@ module ReadingClubHelper
   end
 
   def participant_link(user, reading_club)
-    base_style = 'items-center px-3 py-1 cursor-pointer'
+    base_style = 'items-center px-4 py-2 cursor-pointer border border-link-border rounded-lg'
 
     if participant = user.participants.find_by(reading_club:)
       link_to '参加取消', participant_path(participant), data: { turbo_method: :delete },
