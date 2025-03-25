@@ -25,16 +25,17 @@ export const TemplateActions = ({ originalTemplate, onApplyTemplate, onUpdateTem
 
       {showEditTemplate && (
         <>
-          <div className='mb-2 h-[500px] p-4 border border-gray-300 bg-gray-100 rounded-lg'>
-            <h2 className='text-lg font-semibold mb-3'>テンプレートを編集</h2>
+          <div className='mb-2 h-full p-2 border border-gray-300 bg-gray-100 rounded-lg'>
+            <h2 className='text-lg font-semibold'>テンプレート編集</h2>
 
             <textarea
-              className='template-content-area w-full h-60 p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+              className='mt-2 template-content-area w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+              style={{ height: '200px' }}
               value={latestTemplate}
               onChange={(e) => setLatestTemplate(e.target.value)}
             />
 
-            <div className='mt-4 flex space-x-2'>
+            <div className='mt-2 flex space-x-2'>
               <button
                 className='inline-flex items-center px-4 py-2 bg-blue-600 text-white border border-blue-600 rounded-lg cursor-pointer hover:bg-blue-700'
                 type='button'
