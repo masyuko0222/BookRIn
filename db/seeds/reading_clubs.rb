@@ -29,7 +29,7 @@ if Rails.env.development?
   end
 end
 
-if Rails.env.production?
+if Rails.env.production? || Rails.env.development?
   # 初めから参加しているサンプル輪読会
   sample_read_me = <<~MARKDOWN
     ### READ ME
@@ -38,9 +38,11 @@ if Rails.env.production?
         - いつでも再参加は可能です
   MARKDOWN
 
-  ReadingClub.find_or_create_by!(title: 'サンプル輪読会') do |club|
-    club.finished = false
-    club.read_me = sample_read_me
-    club.updated_at = Date.new(1900, 1, 1) # トップに表示されないよう古い日付
+  ["参加中のサンプル輪読会1", "参加中のサンプル輪読会2", "参加中のサンプル輪読会3"].each do |title|
+    ReadingClub.find_or_create_by!(title: title) do |club|
+      club.finished = false
+      club.read_me = sample_read_me
+      club.updated_at = Date.new(1900, 1, 1) # トップに表示されないよう古い日付
+    end
   end
 end
