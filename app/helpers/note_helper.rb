@@ -6,7 +6,7 @@ module NoteHelper
   end
 
   def submit_button_text(note)
-    note.new_record? ? 'ノートを新規作成' : 'ノートを更新'
+    note.new_record? ? '作成' : 'ノートを更新'
   end
 
   def note_form_url(note)

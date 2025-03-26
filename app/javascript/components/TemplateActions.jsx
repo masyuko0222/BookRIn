@@ -11,14 +11,14 @@ export const TemplateActions = ({ originalTemplate, onApplyTemplate, onUpdateTem
           <button
             type='button'
             onClick={() => onApplyTemplate(latestTemplate)}
-            className='font-semibold text-blue-600 underline'
+            className='text-caution font-semibold underline'
           >
-            テンプレートを反映する
+            テンプレートをノートに反映する
           </button>
         </li>
         <li className='self-end'>
           <button type='button' onClick={() => setShowEditTemplate(true)} className='text-gray-600 underline'>
-            テンプレートを変更する
+            テンプレートを編集する
           </button>
         </li>
       </ul>

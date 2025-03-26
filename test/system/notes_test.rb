@@ -22,7 +22,7 @@ class NotesTest < ApplicationSystemTestCase
     visit_with_auth(new_reading_club_note_path(@reading_club), @user)
     fill_in 'note[title]', with: 'New Note Title'
     assert_text 'This is Participating Template'
-    click_button 'ノートを新規作成'
+    click_button '作成'
     assert_text 'ノートを作成しました'
     assert_current_path reading_club_overview_path(@reading_club)
     assert_text 'New Note Title'
@@ -49,7 +49,7 @@ class NotesTest < ApplicationSystemTestCase
     assert_text 'Content for note 2'
 
     page.accept_confirm do
-      click_button 'テンプレートを反映する'
+      click_button 'テンプレートをノートに反映する'
     end
 
     visit current_path # 更新後も画面遷移しないので、リロードで確認
@@ -60,7 +60,7 @@ class NotesTest < ApplicationSystemTestCase
     visit_with_auth(edit_note_path(@note3), @user)
     assert_text 'Content for note 3'
 
-    click_button 'テンプレートを変更する'
+    click_button 'テンプレートを編集する'
     assert_text 'This is Opening Template'
     find('.template-content-area').set('Updated Content')
 
@@ -68,7 +68,7 @@ class NotesTest < ApplicationSystemTestCase
     assert_text 'テンプレートを更新しました'
 
     page.accept_confirm do
-      click_button 'テンプレートを反映する'
+      click_button 'テンプレートをノートに反映する'
     end
 
     assert_text 'Updated Content'
