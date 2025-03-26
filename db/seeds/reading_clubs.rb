@@ -38,7 +38,7 @@ if Rails.env.production? || Rails.env.development?
         - いつでも再参加は可能です
   MARKDOWN
 
-  ["参加中のサンプル輪読会1", "参加中のサンプル輪読会2", "参加中のサンプル輪読会3"].each do |title|
+  %w[参加中のサンプル輪読会1 参加中のサンプル輪読会2 参加中のサンプル輪読会3].each do |title|
     ReadingClub.find_or_create_by!(title: title) do |club|
       club.finished = false
       club.read_me = sample_read_me
