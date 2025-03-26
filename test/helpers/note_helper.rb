@@ -19,7 +19,7 @@ class NoteHelperTest < ActiveSupport::TestCase
 
   test '.submit_button_text' do
     new_note = Note.new
-    assert_equal 'ノートを新規作成', submit_button_text(new_note)
+    assert_equal '作成', submit_button_text(new_note)
 
     exist_note = notes(:note1)
     assert_equal 'ノートを更新', submit_button_text(exist_note)

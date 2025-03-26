@@ -22,7 +22,7 @@ class NotesTest < ApplicationSystemTestCase
     visit_with_auth(new_reading_club_note_path(@reading_club), @user)
     fill_in 'note[title]', with: 'New Note Title'
     assert_text 'This is Participating Template'
-    click_button 'ノートを新規作成'
+    click_button '作成'
     assert_text 'ノートを作成しました'
     assert_current_path reading_club_overview_path(@reading_club)
     assert_text 'New Note Title'
