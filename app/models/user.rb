@@ -43,10 +43,14 @@ class User < ApplicationRecord
   private
 
   def join_sample_reading_club
-    sample_club = ReadingClub.find_by(title: 'サンプル輪読会')
+    sample_titles = %w[
+      参加中のサンプル輪読会1
+      参加中のサンプル輪読会2
+      参加中のサンプル輪読会3
+    ]
 
-    return unless sample_club
-
-    Participant.find_or_create_by!(user: self, reading_club: sample_club)
+    ReadingClub.where(title: sample_titles).find_each do |club|
+      Participant.find_or_create_by!(user: self, reading_club: club)
+    end
   end
 end
