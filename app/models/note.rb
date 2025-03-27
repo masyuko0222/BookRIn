@@ -7,7 +7,11 @@ class Note < ApplicationRecord
 
   class << self
     def ransackable_attributes(_auth_object = nil)
-      %w[title held_on]
+      %w[title content held_on]
+    end
+
+    def ransackable_associations(auth_object = nil)
+      %w[reading_club]
     end
   end
 end

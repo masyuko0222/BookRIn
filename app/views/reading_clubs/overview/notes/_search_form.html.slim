@@ -10,8 +10,8 @@
   ) do |f|
 
   .mr-2.mb-2.border.rounded-md
-      = f.search_field :title_cont,
-        placeholder: 'ノートのタイトルで検索',
+      = f.search_field :title_or_content_cont,
+        placeholder: 'タイトル・内容で検索',
         class: 'h-8 p-2 w-full \
                 border-gray-300 rounded-md \
                 focus:border-blue-500 focus:ring focus:ring-blue-200'
