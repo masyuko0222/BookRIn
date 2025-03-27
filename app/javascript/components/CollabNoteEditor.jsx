@@ -25,6 +25,9 @@ export const CollabNoteEditor = ({ wsProvider, yDoc, setEditor, content }) => {
     onCreate({ editor }) {
       setEditor(editor);
     },
+    onUpdate({ editor }) {
+      document.getElementById('note-editor-hidden').value = editor.getHTML();
+    },
   });
 
   return <EditorContent editor={editor} />;
