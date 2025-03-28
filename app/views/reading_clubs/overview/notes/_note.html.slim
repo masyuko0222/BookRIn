@@ -7,5 +7,5 @@
               hover:text-blue-600'
 
     - if word
-      p.text-sm.text-gray-600
-        = summary_with_highlight(note.content, word).html_safe
+      p.text-sm.text-gray-600.mx-1
+        = summary_with_highlight(note.content, word)
