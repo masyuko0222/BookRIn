@@ -15,17 +15,39 @@ module NoteHelper
     note.new_record? ? reading_club_notes_path(note.reading_club) : note_path(note)
   end
 
-  def highlight_query_word(text, query_word, select_counts: 100)
-    return if text.nil?
-    plain_text = strip_tags(text.gsub(/<\/(p|li|h[1-6]|br|div|ul|ol)>/, '</\1> '))
+  def summary_with_highlight(html, search_word, around_chars_count: 50)
+    return if html.nil?
 
-    match = plain_text.match(query_word)
+    plain_text = to_plain_text(html)
+
+    match = to_plain_text(html).match(search_word)
     return if match.nil?
 
-    highlight_start_index = [(match.begin(0) - select_counts), 0].max
-    highlight_end_index = [(match.end(0) + select_counts), plain_text.length].min
+    summary = build_summary(match, around_chars_count, plain_text)
 
-    highlight = plain_text[highlight_start_index..highlight_end_index]
-    highlight + '...'
+    to_highlight = Regexp.new(Regexp.escape(search_word), Regexp::IGNORECASE)
+
+    summary_with_highlight = highlight(summary, to_highlight)
+
+    "#{summary_with_highlight}..."
+  end
+
+  private
+
+  def to_plain_text(html)
+    strip_tags(html.gsub(%r{(</(?:p|li|h[1-6]|br|div|ul|ol)>)}, '\0 '))
+  end
+
+  def build_summary(match, around_chars_count, text)
+    summary_start_index = [(match.begin(0) - around_chars_count), 0].max
+    summary_end_index = [(match.end(0) + around_chars_count), text.length].min
+
+    text[summary_start_index..summary_end_index]
+  end
+
+  def highlight(text, to_highlight)
+    text.gsub(to_highlight) do |match|
+      "<span class=\"font-bold bg-yellow-200\">#{match}</span>"
+    end
   end
 end

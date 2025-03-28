@@ -8,4 +8,4 @@
 
     - if word
       p.text-sm.text-gray-600
-        = highlight_query_word(note.content, word)
+        = summary_with_highlight(note.content, word).html_safe
