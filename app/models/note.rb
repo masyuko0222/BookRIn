@@ -10,7 +10,7 @@ class Note < ApplicationRecord
       %w[title content held_on]
     end
 
-    def ransackable_associations(auth_object = nil)
+    def ransackable_associations(_auth_object = nil)
       %w[reading_club]
     end
   end
