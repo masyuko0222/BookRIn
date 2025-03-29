@@ -11,9 +11,9 @@
                 border border-link-border rounded-lg \
                 text-sm \
                 hover:bg-link-hover'
-    ul
+    ul.px-2
       - notes.each do |n|
-        = render 'reading_clubs/overview/notes/note', note: n
+        = render 'reading_clubs/overview/notes/note', note: n, word: @query_word
     = paginate notes
 - else
   = render '/reading_clubs/overview/notes/blank_notes', reading_club:

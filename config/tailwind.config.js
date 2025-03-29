@@ -4,7 +4,8 @@ module.exports = {
     './app/helpers/**/*.rb',
     './app/assets/stylesheets/**/*.css',
     './app/javascript/**/*.js',
-    './app/javascript/**/*.jsx'
+    './app/javascript/**/*.jsx',
+    './app/helpers/**/*.rb',
   ],
   plugins: [
     require('@tailwindcss/typography'),

@@ -6,6 +6,7 @@ class ReadingClubs::OverviewController < ApplicationController
   def show
     @search = @reading_club.notes.ransack(params[:q])
     @notes = @search.result.order(held_on: :desc, id: :desc).page(params[:page])
+    @query_word = params[:q]&.dig(:title_or_content_cont)&.strip.presence
   end
 
   private
