@@ -3,11 +3,12 @@ li class="
     border border-2 border-gray rounded-md \
     transition-all \
     bg-blue-200 border-none \
-  "
-  - if current_user.participating?(reading_club)
-    span.text-sm.font-medium style="color: #475569;"
-      | 参加中
-  h2 class="text-lg font-semibold"
+  " style="min-height: 60px;"
+  h2 class="text-lg font-semibold flex items-center justify-between"
     = link_to reading_club.title, reading_club_overview_path(reading_club),
       class: 'text-blue-600 hover:text-blue-800 hover:underline',
       data: { turbo: false }
+
+    - if current_user.participating?(reading_club)
+      span.text-sm.font-medium style="color: #475569;"
+        | 参加中
