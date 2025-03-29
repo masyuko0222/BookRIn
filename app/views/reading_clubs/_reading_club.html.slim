@@ -1,9 +1,12 @@
 li class="
-    mx-3 my-3 p-4 \
+    mx-3 my-3 px-4 py-1 \
     border border-2 border-gray rounded-md \
     transition-all \
     bg-blue-200 border-none \
   "
+  - if current_user.participating?(reading_club)
+    span.text-sm.font-medium style="color: #475569;"
+      | 参加中
   h2 class="text-lg font-semibold"
     = link_to reading_club.title, reading_club_overview_path(reading_club),
       class: 'text-blue-600 hover:text-blue-800 hover:underline',
