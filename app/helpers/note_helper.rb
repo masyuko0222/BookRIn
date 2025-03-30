@@ -29,7 +29,7 @@ module NoteHelper
 
     summary_with_highlight = highlight(summary, to_highlight)
 
-    sanitize("#{summary_with_highlight}...", tags: %w(span), attributes: %w(class))
+    sanitize("#{summary_with_highlight}...", tags: %w[span], attributes: %w[class])
   end
 
   private
