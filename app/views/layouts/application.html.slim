@@ -22,6 +22,5 @@ html
       .mb-2
       = yield
 
-  .mt-2
-    - if current_page?(login_path)
-      = render 'application/footer'
+  - if current_page?(login_path)
+    = render 'application/footer'

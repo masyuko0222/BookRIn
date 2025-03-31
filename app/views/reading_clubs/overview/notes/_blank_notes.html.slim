@@ -1,16 +1,15 @@
 p-2.mt-10.flex.flex-col.space-y-4.items-center
   = image_tag 'crying.png',
-    class: 'object-contain',
-    style: 'opacity: 0.5;',
+    class: 'object-contain opacity-50',
     alt: '泣いている顔のイラスト'
   .text-center
     .text-center.text-lg.text-gray-500
-      span style="color: #6B7280;"
+      span
         | 輪読会ノートはまだありません。
       br
 
       = link_to 'ノートを作成', new_reading_club_note_path(reading_club),
         data: { turbo: false },
         class: 'text-blue-500 hover:underline font-medium'
-      span style="color: #6B7280;"
+      span
         | しましょう！

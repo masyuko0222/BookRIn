@@ -7,8 +7,7 @@ export const NewNoteEditor = ({ setEditor, currentTemplate, changeContent }) => 
     extensions: [StarterKit],
     editorProps: {
       attributes: {
-        class: 'border border-gray-300 p-4 rounded focus:ring-blue-500',
-        style: 'height: 70vh; overflow: auto;',
+        class: 'border border-gray-300 p-4 rounded focus:ring-blue-500 h-[70vh] overflow-auto'
       },
     },
     onCreate({ editor }) {
