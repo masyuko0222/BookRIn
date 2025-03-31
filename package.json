@@ -14,10 +14,13 @@
     "prettier:write": "prettier app/javascript/**/*.{js,jsx} --write",
     "lint": "run-s lint:*",
     "lint:eslint": "eslint 'app/javascript/**/*.{js,jsx}' --max-warnings=0",
-    "lint:prettier": "prettier app/javascript/**/*.{js,jsx} --check",
-    "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets --loader:.js=jsx",
+    "lint:prettier": "prettier app/javascript/**/*.{js,jsx}' --check",
+    "build": "npm-run-all build:js build:css",
+    "build:js": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets --loader:.js=jsx",
     "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --minify",
-    "watch": "esbuild app/javascript/*.* --watch --bundle --outdir=app/assets/builds --loader:.js=jsx"
+    "watch": "npm-run-all --parallel watch:js watch:css",
+    "watch:js": "esbuild app/javascript/*.* --watch --bundle --outdir=app/assets/builds --loader:.js=jsx",
+    "watch:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --watch"
   },
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
