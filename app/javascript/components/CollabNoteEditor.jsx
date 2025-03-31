@@ -18,7 +18,7 @@ export const CollabNoteEditor = ({ wsProvider, yDoc, setEditor, content }) => {
     extensions: [StarterKit, Collaboration.configure({ document: yDoc })],
     editorProps: {
       attributes: {
-        class: 'border border-gray-300 p-4 rounded focus:ring-blue-500 h-[70vh] overflow-auto'
+        class: 'border border-gray-300 p-4 rounded focus:ring-blue-500 h-[70vh] overflow-auto',
       },
     },
     onCreate({ editor }) {

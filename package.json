@@ -14,7 +14,7 @@
     "prettier:write": "prettier app/javascript/**/*.{js,jsx} --write",
     "lint": "run-s lint:*",
     "lint:eslint": "eslint 'app/javascript/**/*.{js,jsx}' --max-warnings=0",
-    "lint:prettier": "prettier app/javascript/**/*.{js,jsx}' --check",
+    "lint:prettier": "prettier 'app/javascript/**/*.{js,jsx}' --check",
     "build": "npm-run-all build:js build:css",
     "build:js": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets --loader:.js=jsx",
     "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --minify",
