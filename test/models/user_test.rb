@@ -14,6 +14,9 @@ class UserTest < ActiveSupport::TestCase
     Participant.create!(user:, reading_club:)
 
     assert user.participating?(reading_club)
+
+    Participant.find_by(user:, reading_club:).destroy!
+    refute user.participating?(reading_club)
   end
 
   test '.find_or_create_from_discord_info finds existing user' do
