@@ -34,7 +34,6 @@ module MyNewApp
     # in config/environments, which are processed later.
     #
     config.time_zone = 'Tokyo'
-    config.active_record.default_timezone = :local
 
     # Don't generate system test files.
     config.generators.system_tests = nil
