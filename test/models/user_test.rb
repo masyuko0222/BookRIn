@@ -4,12 +4,12 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   setup do
-    @exist_user_info = build_discord_auth_hash(uid: '12345678', name: 'TestMan')
+    @exist_user_info = build_discord_auth_hash(uid: '12345678', name: 'Alice')
     @new_user_info = build_discord_auth_hash(uid: '987654321', name: 'NewTestMan')
   end
 
   test '#participating?(reading_club)' do
-    user = users(:user1)
+    user = users(:alice)
     reading_club = reading_clubs(:opening_club)
     Participant.create!(user:, reading_club:)
 
@@ -18,7 +18,7 @@ class UserTest < ActiveSupport::TestCase
 
   test '.find_or_create_from_discord_info finds existing user' do
     oauth_user = User.find_or_create_from_discord_info(@exist_user_info)
-    exist_user = users(:user1)
+    exist_user = users(:alice)
 
     assert_equal oauth_user, exist_user
   end

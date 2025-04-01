@@ -8,7 +8,7 @@ class ReadingClubHelperTest < ActiveSupport::TestCase
   include ActionView::Helpers::UrlHelper
 
   test '.participant_link as 参加リンク' do
-    user = users(:user1)
+    user = users(:alice)
     reading_club = reading_clubs(:opening_club)
     link = participant_link(user, reading_club)
 
@@ -18,7 +18,7 @@ class ReadingClubHelperTest < ActiveSupport::TestCase
   end
 
   test '.participant_link as 参加取消リンク' do
-    user = users(:user1)
+    user = users(:alice)
     reading_club = reading_clubs(:opening_club)
     participant = Participant.create!(user:, reading_club:)
     link = participant_link(user, reading_club)

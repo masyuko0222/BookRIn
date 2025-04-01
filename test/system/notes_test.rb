@@ -8,7 +8,7 @@ require 'application_system_test_case'
 
 class NotesTest < ApplicationSystemTestCase
   setup do
-    @user = users(:user1)
+    @user = users(:alice)
     @reading_club = reading_clubs(:participating_club)
 
     # Websocket通信中は、各テストで利用するノートを変える
