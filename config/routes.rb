@@ -13,6 +13,6 @@ Rails.application.routes.draw do
     resource :overview, only: [:show], controller: 'reading_clubs/overview'
     resource :read_me, only: [:edit, :update], controller: 'reading_clubs/overview/read_me'
     resource :template, only: [:update], controller: 'reading_clubs/template'
-    resources :notes, only: [:new, :edit, :create, :update, :destroy], shallow: true, controller: 'notes'
+    resources :notes, only: [:new, :edit, :create, :update], shallow: true, controller: 'notes'
   end
 end
