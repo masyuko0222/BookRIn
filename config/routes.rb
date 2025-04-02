@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     scope module: :reading_clubs do
       resource :overview, only: [:show], controller: 'overview'
       resource :template, only: [:update], controller: 'template'
-      resource :read_me, only: [:edit, :update], controller: 'overview/read_me'
+      resource :read_me, only: [:edit, :update], controller: 'read_me'
 
       resources :participants, only: [:create, :destroy], shallow: true
     end
