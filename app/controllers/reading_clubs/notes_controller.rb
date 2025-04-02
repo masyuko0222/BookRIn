@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class NotesController < ApplicationController
+class ReadingClubs::NotesController < ApplicationController
   before_action :set_note, only: %i[edit update]
 
   def new
