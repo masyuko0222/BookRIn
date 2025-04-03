@@ -38,8 +38,8 @@ class ReadingCirclesClientTest < ActiveSupport::TestCase
       title: 'アップデート予定の輪読会',
       finished: true,
       updated_at: Time.zone.parse('2000-01-01'),
-      template: nil,
-      read_me: nil
+      template: 'update template',
+      read_me: 'update read me'
     )
 
     original_club = ReadingClub.find(1000)
@@ -78,8 +78,8 @@ class ReadingCirclesClientTest < ActiveSupport::TestCase
       title: '削除予定の輪読会',
       finished: true,
       updated_at: Time.zone.parse('2000-01-01'),
-      template: nil,
-      read_me: nil
+      template: 'destroy template',
+      read_me: 'destroy read me'
     )
 
     assert ReadingClub.find(3000)

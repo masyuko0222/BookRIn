@@ -16,8 +16,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_29_124313) do
 
   create_table "notes", force: :cascade do |t|
     t.date "held_on", null: false
-    t.string "title"
-    t.text "content"
+    t.string "title", null: false
+    t.text "content", null: false
     t.bigint "reading_club_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -30,14 +30,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_29_124313) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["reading_club_id"], name: "index_participants_on_reading_club_id"
+    t.index ["user_id", "reading_club_id"], name: "index_participants_on_user_id_and_reading_club_id", unique: true
     t.index ["user_id"], name: "index_participants_on_user_id"
   end
 
   create_table "reading_clubs", force: :cascade do |t|
     t.string "title", null: false
-    t.boolean "finished", null: false
-    t.text "template"
-    t.text "read_me"
+    t.boolean "finished", default: false, null: false
+    t.text "template", null: false
+    t.text "read_me", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

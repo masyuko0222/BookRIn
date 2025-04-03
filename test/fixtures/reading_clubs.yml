@@ -21,5 +21,8 @@ participating_club:
 finished_reading_club:
   title: FinishedClub
   finished: true
-  template: null
-  read_me: null
+  template: 'This is Finished Template'
+  read_me: |-
+    # Welcome to Finished Markdown
+
+    This is a **test**.
