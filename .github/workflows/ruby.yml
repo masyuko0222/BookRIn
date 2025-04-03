@@ -45,6 +45,9 @@ jobs:
       - name: Run slim-lint
         run: bundle exec slim-lint app/views -c .slim-lint.yml
 
+      - name: Install Websocket
+        run: npm i y-websocket --no-save
+
       - name: Run websocket
         run: HOST=localhost PORT=5678 npx y-websocket &
 
