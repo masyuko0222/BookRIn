@@ -422,7 +422,6 @@ DEPENDENCIES
   table_print
   tailwindcss-rails (~> 3.0)
   turbo-rails
-  tzinfo-data
   vcr
   webmock
 

@@ -10,10 +10,10 @@ gem 'rails', '~> 7.2.2.1'
 gem 'sprockets-rails'
 
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 1.1'
+gem 'pg'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem 'puma', '>= 5.0'
+gem 'puma'
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem 'jsbundling-rails'
@@ -27,9 +27,6 @@ gem 'cssbundling-rails'
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: %i[windows jruby]
-
 gem 'dotenv-rails'
 gem 'kaminari'
 gem 'meta-tags'
@@ -39,7 +36,7 @@ gem 'ransack'
 gem 'redcarpet'
 gem 'slim-rails'
 gem 'stimulus-rails'
-gem 'tailwindcss-rails', '~> 3.0'
+gem 'tailwindcss-rails'
 gem 'turbo-rails'
 
 group :development, :test do
