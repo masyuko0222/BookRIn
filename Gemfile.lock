@@ -403,8 +403,8 @@ DEPENDENCIES
   meta-tags
   omniauth-discord
   omniauth-rails_csrf_protection
-  pg (~> 1.1)
-  puma (>= 5.0)
+  pg
+  puma
   rails (~> 7.2.2.1)
   ransack
   redcarpet
@@ -420,7 +420,7 @@ DEPENDENCIES
   sprockets-rails
   stimulus-rails
   table_print
-  tailwindcss-rails (~> 3.0)
+  tailwindcss-rails
   turbo-rails
   vcr
   webmock
