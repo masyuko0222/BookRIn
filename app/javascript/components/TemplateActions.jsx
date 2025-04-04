@@ -29,8 +29,7 @@ export const TemplateActions = ({ originalTemplate, onApplyTemplate, onUpdateTem
             <h2 className='text-lg font-semibold'>テンプレート編集</h2>
 
             <textarea
-              className='mt-2 template-content-area w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
-              style={{ height: '200px' }}
+              className='mt-2 template-content-area w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 h-[200px]'
               value={latestTemplate}
               onChange={(e) => setLatestTemplate(e.target.value)}
             />
