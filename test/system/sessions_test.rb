@@ -9,7 +9,7 @@ class SessionsTest < ApplicationSystemTestCase
       provider: 'discord',
       uid: '12345678',
       info: {
-        name: 'TestMan'
+        name: 'Alice'
       }
     )
   end

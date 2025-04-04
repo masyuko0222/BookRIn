@@ -8,14 +8,14 @@ require 'application_system_test_case'
 
 class NotesTest < ApplicationSystemTestCase
   setup do
-    @user = users(:user1)
+    @user = users(:alice)
     @reading_club = reading_clubs(:participating_club)
 
     # Websocket通信中は、各テストで利用するノートを変える
     # Websocket起動中は最後に編集された内容を保持してしまうため
-    @note1 = notes(:note1)
-    @note2 = notes(:note2)
-    @note3 = notes(:note3)
+    @existing_note = notes(:existing_note)
+    @note_to_apply_template = notes(:note_to_apply_template)
+    @note_to_update_template = notes(:note_to_update_template)
   end
 
   test 'create new note' do
@@ -29,8 +29,8 @@ class NotesTest < ApplicationSystemTestCase
   end
 
   test 'update note' do
-    visit_with_auth(edit_note_path(@note1), @user)
-    assert_text 'Content for note 1'
+    visit_with_auth(edit_note_path(@existing_note), @user)
+    assert_text 'Content for existing note'
 
     fill_in 'note[title]', with: 'Updated Note Title'
     fill_in 'note[held_on]', with: Date.new(2024, 2, 1)
@@ -45,8 +45,8 @@ class NotesTest < ApplicationSystemTestCase
   end
 
   test 'apply template to note' do
-    visit_with_auth(edit_note_path(@note2), @user)
-    assert_text 'Content for note 2'
+    visit_with_auth(edit_note_path(@note_to_apply_template), @user)
+    assert_text 'Content for note to apply template'
 
     page.accept_confirm do
       click_button 'テンプレートをノートに反映する'
@@ -57,8 +57,8 @@ class NotesTest < ApplicationSystemTestCase
   end
 
   test 'update template' do
-    visit_with_auth(edit_note_path(@note3), @user)
-    assert_text 'Content for note 3'
+    visit_with_auth(edit_note_path(@note_to_update_template), @user)
+    assert_text 'Content for note to update template'
 
     click_button 'テンプレートを編集する'
     assert_text 'This is Opening Template'

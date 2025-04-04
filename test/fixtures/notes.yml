@@ -1,9 +1,23 @@
-<% 20.times do |i| %>
-note<%= i + 1 %>:
-  held_on: <%= Date.new(2024, 1, 1) + i.days %>
-  title: "Note <%= i + 1 %>"
-  content: "Content for note <%= i + 1 %>"
+existing_note:
+  held_on: <%= Date.new(2024, 1, 1) %>
+  title: "Existing Note"
+  content: "Content for existing note"
   reading_club: opening_club
-  created_at: <%= Time.zone.local(2024, 1, 1) + i.days %>
-  updated_at: <%= Time.zone.local(2024, 1, 1) + i.days %>
-<% end %>
+  created_at: <%= Time.zone.local(2024, 1, 1) %>
+  updated_at: <%= Time.zone.local(2024, 1, 1) %>
+
+note_to_apply_template:
+  held_on: <%= Date.new(2024, 1, 1) %>
+  title: "Note to apply template"
+  content: "Content for note to apply template"
+  reading_club: opening_club
+  created_at: <%= Time.zone.local(2024, 1, 1) %>
+  updated_at: <%= Time.zone.local(2024, 1, 1) %>
+
+note_to_update_template:
+  held_on: <%= Date.new(2024, 1, 1) %>
+  title: "Note to update template"
+  content: "Content for note to update template"
+  reading_club: opening_club
+  created_at: <%= Time.zone.local(2024, 1, 1) %>
+  updated_at: <%= Time.zone.local(2024, 1, 1) %>

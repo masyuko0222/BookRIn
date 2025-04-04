@@ -4,7 +4,7 @@ require 'application_system_test_case'
 
 class OverviewTest < ApplicationSystemTestCase
   setup do
-    @user = users(:user1)
+    @user = users(:alice)
   end
 
   test 'Participant reading club' do

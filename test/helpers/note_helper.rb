@@ -24,7 +24,7 @@ class NoteHelperTest < ActiveSupport::TestCase
     new_note = Note.new
     assert_equal '作成', submit_button_text(new_note)
 
-    exist_note = notes(:note1)
+    exist_note = notes(:existing_note)
     assert_equal 'ノートを更新', submit_button_text(exist_note)
   end
 
@@ -32,7 +32,7 @@ class NoteHelperTest < ActiveSupport::TestCase
     new_note = Note.new(reading_club: reading_clubs(:opening_club))
     assert_equal reading_club_notes_path(new_note.reading_club), note_form_url(new_note)
 
-    exist_note = notes(:note1)
+    exist_note = notes(:existing_note)
     assert_equal note_path(exist_note), note_form_url(exist_note)
   end
 
