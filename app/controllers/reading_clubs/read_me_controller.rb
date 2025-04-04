@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ReadingClubs::Overview::ReadMeController < ApplicationController
+class ReadingClubs::ReadMeController < ApplicationController
   before_action :set_reading_club, only: %i[edit update]
 
   def edit; end
