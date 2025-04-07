@@ -32,7 +32,6 @@ class ReadingClub < ApplicationRecord
   attribute :read_me, default: DEFAULT_READ_ME
 
   validates :title, presence: true
-  validates :finished, inclusion: { in: [true, false] }
 
   has_many :participants, dependent: :destroy
   has_many :users, through: :participants
