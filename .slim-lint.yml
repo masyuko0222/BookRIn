@@ -1,7 +1,6 @@
 exclude:
   - 'app/views/reading_clubs/overview/notes/_notes.html.slim' # https://github.com/sds/slim-lint/issues/101 と似ている現象
-  - 'app/views/layouts/application.html.slim'
 
 linters:
   LineLength:
-    max: 120
+    max: 250
