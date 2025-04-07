@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  # rubocop:disable Metrics/MethodLength, Layout/LineLength
+  # meta_tagが多く、description部分でどうしてもメソッドが長くなってしまうため、上記のrubocopルールを除外
   def default_meta_tags
     {
       site: 'BookRIn',
@@ -27,4 +29,5 @@ module ApplicationHelper
       }
     }
   end
+  # rubocop:enable Metrics/MethodLength, Layout/LineLength
 end

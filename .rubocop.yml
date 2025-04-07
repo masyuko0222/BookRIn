@@ -20,7 +20,6 @@ AllCops:
     - 'storage/**/*'
     - 'tmp/**/*'
     - 'bin/**/*'
-    - 'app/helpers/application_helper.rb'
 
 Metrics/ClassLength:
   Exclude:
