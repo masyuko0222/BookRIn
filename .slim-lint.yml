@@ -1,5 +1,10 @@
 exclude:
-  - 'app/views/reading_clubs/overview/notes/_notes.html.slim' # https://github.com/sds/slim-lint/issues/101 と似ている現象
+  # 以下のエラーが発生する。調査&修正ができるまでは一時的にexclude
+  # app/views/reading_clubs/overview/notes/_notes.html.slim:4 [W] RuboCop: Lint/Syntax: unexpected token kDO_BLOCK
+  # app/views/reading_clubs/overview/notes/_notes.html.slim:15 [W] RuboCop: Lint/Syntax: unexpected token kDO_BLOCK
+  # app/views/reading_clubs/overview/notes/_notes.html.slim:16 [W] RuboCop: Lint/Syntax: unexpected token tSTRING
+  # app/views/reading_clubs/overview/notes/_notes.html.slim:18 [W] RuboCop: Lint/Syntax: unexpected token kEND
+  - 'app/views/reading_clubs/overview/notes/_notes.html.slim'
 
 linters:
   LineLength:
