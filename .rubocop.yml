@@ -5,7 +5,7 @@ require:
   - rubocop-rails
 
 AllCops:
-  TargetRubyVersion: 3.3
+  TargetRubyVersion: 3.4.2
   NewCops: disable
   SuggestExtensions: false
   Exclude:
@@ -20,8 +20,6 @@ AllCops:
     - 'storage/**/*'
     - 'tmp/**/*'
     - 'bin/**/*'
-    - 'app/helpers/application_helper.rb'
-    - 'app/helpers/reading_club_helper.rb' # 要検討
 
 Metrics/ClassLength:
   Exclude:
