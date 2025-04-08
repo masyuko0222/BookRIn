@@ -16,9 +16,11 @@ class ReadingCirclesClient
     end
 
     def save(latest_clubs)
-      update_clubs(latest_clubs)
-      create_clubs(latest_clubs)
-      destroy_clubs(latest_clubs)
+      ActiveRecord::Base.transaction do
+        update_clubs(latest_clubs)
+        create_clubs(latest_clubs)
+        destroy_clubs(latest_clubs)
+      end
     end
 
     private
@@ -56,7 +58,7 @@ class ReadingCirclesClient
         参加中のサンプル輪読会3
       ]
       destroyed_clubs = ReadingClub.where.not(id: fetched_ids).where.not(title: sample_titles)
-      destroyed_clubs.destroy_all
+      destroyed_clubs.each(&:destroy!)
     end
   end
 end
