@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (container) {
     // NODE_ENVがdevelopmentになってしまうので、解決できるまではRails.envで環境判断をする
     // https://community.fly.io/t/node-env-is-always-development-regardless-of-my-secrets-and-configuration/4825
-    const { isNew, railsEnv, clubId, noteId, content, template } = container.dataset;
+    const { isNew, railsEnv, userName, clubId, noteId, content, template } = container.dataset;
 
     const root = createRoot(container);
     root.render(
@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <EditorContainer
           isNew={isNew === 'true'}
           railsEnv={railsEnv}
+          userName={userName}
           clubId={clubId}
           noteId={noteId}
           content={content}

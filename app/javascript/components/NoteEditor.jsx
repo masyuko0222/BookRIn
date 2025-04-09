@@ -6,7 +6,16 @@ import * as Y from 'yjs';
 
 const yDoc = new Y.Doc();
 
-export const NoteEditor = ({ setEditor, isNew, railsEnv, noteId, content, currentTemplate, changeContent }) => {
+export const NoteEditor = ({
+  setEditor,
+  isNew,
+  railsEnv,
+  userName,
+  noteId,
+  content,
+  currentTemplate,
+  changeContent,
+}) => {
   const [wsProvider, setWsProvider] = useState(null);
 
   useEffect(() => {
@@ -30,5 +39,7 @@ export const NoteEditor = ({ setEditor, isNew, railsEnv, noteId, content, curren
     return <h1>Loading...</h1>;
   }
 
-  return <CollabNoteEditor yDoc={yDoc} setEditor={setEditor} wsProvider={wsProvider} content={content} />;
+  return (
+    <CollabNoteEditor yDoc={yDoc} setEditor={setEditor} wsProvider={wsProvider} content={content} userName={userName} />
+  );
 };
