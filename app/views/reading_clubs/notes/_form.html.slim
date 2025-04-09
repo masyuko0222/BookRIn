@@ -9,6 +9,7 @@
   = content_tag :div, '', id: 'note-editor-container',
     data: { is_new:,
             rails_env: Rails.env,
+            user_name: current_user.name,
             club_id: note.reading_club.id,
             note_id: note.id,
             content: to_html(note.content),
