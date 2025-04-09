@@ -1,7 +1,7 @@
 - content_for :title, 'ログイン | BookRIn'
 - content_for :meta_description, 'BookRInのログイン画面です。Discordアカウントを使ってログインが出来ます。'
 
-.flex.items-center.justify-center.min-h-screen
+.flex.items-center.justify-center.mt-20
   .p-8.border-2.border-gray-300.rounded-lg.bg-white.text-center.max-w-md.min-h-64.min-w-[24rem]
     = image_tag 'logo_212x212.png', class: 'h-32 w-auto mx-auto mb-4'
 
@@ -16,3 +16,20 @@
              ' focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mx-auto' do
         = image_tag 'discord.svg', class: 'h-6 w-6 mr-2'
         span Login with Discord
+
+.section.my-8.px-5
+  .flex.justify-center.gap-12.space-x-4
+    .flex.flex-col.items-center
+      = image_tag '積み上げた本.jpg', alt: '本が積み上がったアイコン', class: 'w-20 h-20 object-contain mb-4'
+      p.text-center.text-gray-700.text-sm
+        | 輪読会の学びをノートに記録
+
+    .flex.flex-col.items-center
+      = image_tag '鉛筆で書いている.jpg', alt: '鉛筆で書いているアイコン', class: 'w-20 h-20 object-contain mb-4'
+      p.text-center.text-gray-700.text-sm
+        | 複数人でリアルタイム編集
+
+    .flex.flex-col.items-center
+      = image_tag 'コピー.jpg', alt: 'テンプレートのコピーアイコン', class: 'w-20 h-20 object-contain mb-4'
+      p.text-center.text-gray-700.text-sm
+        | テンプレートでノートの準備がスムーズに
