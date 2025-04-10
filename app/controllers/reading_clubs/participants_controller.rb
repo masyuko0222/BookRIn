@@ -22,7 +22,7 @@ class ReadingClubs::ParticipantsController < ApplicationController
   private
 
   def set_participant
-    @participant = Participant.find(params[:id])
+    @participant = current_user.participants.find(params[:id])
   end
 
   def participant_params
