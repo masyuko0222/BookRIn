@@ -1,37 +1,39 @@
-.flex.flex-col.items-center.justify-center.px-4.pt-4
-  .text-center.mb-10
-    h1.text-2xl.font-bold.mb-4.text-gray-800
-      | BookRIn は、FBC生の輪読会記録をサポートするノートアプリです
-    p.text-gray-700.text-sm
-      | 毎回の開催日時・読んだ範囲・出欠・感想を記録する作業をもっとラクに。テンプレートと共同編集で効率よく記録が残せます。
+.flex.flex-col.items-center.justify-center.px-4.pt-10
+  = image_tag 'logo_212x212.png', class: 'h-32 w-auto mx-auto mb-4'
 
-  .flex.justify-center.mb-8.space-x-8
+  h1.text-3xl.font-bold.mb-2.mt-4 style="font-family: 'Noto Sans JP', sans-serif;"
+    | BookRin
+
+  h2.text-4xl.font-bold.text-center.mb-2.mt-6 FBC生の輪読会記録をサポート
+  p.text-sm.text-gray-700.text-center.mb-6.mt-2
+    | 開催日時、読んだ範囲、出欠、感想... 輪読会の記録をラクに
+
+  = button_to '/auth/discord',
+    method: :post,
+    data: { turbo: false },
+    class: 'flex items-center bg-white border border-gray-300 rounded-lg px-6 py-2 mt-4' \
+           'text-sm font-medium text-gray-800 hover:bg-gray-200'
+      = image_tag 'discord.svg', class: 'h-6 w-6 mr-2'
+      span Login with Discord
+
+  .flex.justify-center.space-x-10.mt-12.mb-3
     .flex.flex-col.items-center.text-center
-      = image_tag '積み上げた本.jpg', alt: '本が積み上がったアイコン', class: 'w-14 h-14 object-contain mb-3'
-      p.text-gray-700.text-sm
-        | 輪読会ごとに記録を蓄積
+      = image_tag '積み上げた本.jpg', alt: '本が積み上がったアイコン', class: 'w-14 h-14 mb-3'
+      p.text-sm.text-gray-700
+        | 輪読会ごとの
+        br
+        | 記録を蓄積
 
     .flex.flex-col.items-center.text-center
-      = image_tag '鉛筆で書いている.jpg', alt: '鉛筆で書いているアイコン', class: 'w-14 h-14 object-contain mb-3'
-      p.text-gray-700.text-sm
-        | 参加メンバーとリアルタイムでノートを共同編集
+      = image_tag '鉛筆で書いている.jpg', alt: '鉛筆で書いているアイコン', class: 'w-14 h-14 mb-3'
+      p.text-sm.text-gray-700
+        | 参加者全員で
+        br
+        | リアルタイムに共同編集
 
-    .flex.flex-col.items-center.text-center.
-      = image_tag 'コピー.jpg', alt: 'テンプレートのコピーアイコン', class: 'w-14 h-14 object-contain mb-3'
-      p.text-gray-700.text-sm
-        | テンプレートでノートの準備を一瞬で
-
-  .p-8.border-2.border-gray-300.rounded-lg.bg-white.text-center.max-w-md.min-h-64.min-w-[24rem]
-    = image_tag 'logo_212x212.png', class: 'h-32 w-auto mx-auto mb-4'
-
-    p.text-base.text-black.text-opacity-100.p-4.rounded-md.mb-6
-      | 輪読会の記録を残しましょう！
-
-    = button_to '/auth/discord',
-      method: :post,
-      data: { turbo: false },
-      class: 'flex items-center bg-white border border-gray-300 rounded-lg px-6 py-2' \
-             ' text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none' \
-             ' focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 mx-auto' do
-        = image_tag 'discord.svg', class: 'h-6 w-6 mr-2'
-        span Login with Discord
+    .flex.flex-col.items-center.text-center
+      = image_tag 'コピー.jpg', alt: 'テンプレートのコピーアイコン', class: 'w-14 h-14 mb-3'
+      p.text-sm.text-gray-700
+        | テンプレートを使って
+        br
+        | 一瞬で準備完了
