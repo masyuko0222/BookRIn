@@ -9,10 +9,11 @@ class SessionsController < ApplicationController
     user = User.find_or_create_from_discord_info(request.env['omniauth.auth'])
 
     if user.persisted?
+      redirect_path = session.delete(:previous_url) || root_path
       reset_session
       login(user)
       flash[:notice] = 'ログインしました'
-      redirect_to root_path
+      redirect_to redirect_path
     else
       flash[:alert] = 'ログインに失敗しました 再度お試しください。'
       redirect_to login_path
