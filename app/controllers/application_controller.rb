@@ -8,11 +8,8 @@ class ApplicationController < ActionController::Base
 
   def store_location
     return unless request.get?
-    return if request.xhr? 
-    return if request.path.in?([
-      login_path,
-      '/auth/discord/callback'
-    ])
+    return if request.xhr?
+    return if request.path.in?([login_path, '/auth/discord/callback'])
 
     session[:previous_url] = request.fullpath
   end

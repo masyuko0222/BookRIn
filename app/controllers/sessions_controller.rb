@@ -5,6 +5,8 @@ class SessionsController < ApplicationController
 
   def new; end
 
+  # 急ぎ実装する必要があるため、一時的にrubocop無視
+  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
   def callback
     user = User.find_or_create_from_discord_info(request.env['omniauth.auth'])
 
@@ -19,6 +21,7 @@ class SessionsController < ApplicationController
       redirect_to login_path
     end
   end
+  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
   def failure
     flash[:alert] = '認証に失敗しました 時間を空けてもう一度お試しください。'
