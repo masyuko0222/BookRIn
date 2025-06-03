@@ -24,6 +24,11 @@ class SessionsController < ApplicationController
     redirect_to login_path
   end
 
+  def destroy
+    logout
+    redirect_to login_path
+  end
+
   private
 
   def process_login(user)
