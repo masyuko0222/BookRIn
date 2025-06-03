@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root to: "reading_clubs#index"
 
   get '/login', to: 'sessions#new'
+  delete '/logout', to: 'sessions#destroy', as: :logout
   get '/auth/:provider/callback', to: 'sessions#callback'
   get '/auth/failure', to: 'sessions#failure'
 

@@ -1,7 +1,11 @@
 header class='bg-main-color'
-  .flex.h-14.items-center.p-2
+  .flex.h-14.items-center.px-4.justify-between
     = link_to root_path do
       .flex.items-center
         = image_tag 'logo_212x212.png', alt: 'Logo', class: 'h-11 w-11 object-cover rounded-full'
         span class="ml-3 text-2xl font-light text-white" style="font-family: 'Noto Sans JP', sans-serif;"
           | BookRIn
+
+    - if current_user
+      = button_to logout_path, method: :delete, class: 'cursor-pointer text-white' do
+        | ログアウト
