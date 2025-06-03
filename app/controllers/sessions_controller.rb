@@ -5,15 +5,12 @@ class SessionsController < ApplicationController
 
   def new; end
 
-  # 急ぎ実装する必要があるため、一時的にrubocop無視
-  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
   def callback
     user = User.find_or_create_from_discord_info(request.env['omniauth.auth'])
 
     if user.persisted?
       redirect_path = session.delete(:previous_url) || root_path
-      reset_session
-      login(user)
+      process_login(user)
       flash[:notice] = 'ログインしました'
       redirect_to redirect_path
     else
@@ -21,10 +18,16 @@ class SessionsController < ApplicationController
       redirect_to login_path
     end
   end
-  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
   def failure
     flash[:alert] = '認証に失敗しました 時間を空けてもう一度お試しください。'
     redirect_to login_path
+  end
+
+  private
+
+  def process_login(user)
+    reset_session
+    login(user)
   end
 end
