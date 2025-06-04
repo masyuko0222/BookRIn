@@ -46,7 +46,7 @@
 .tiptap > ul,
 .tiptap > ol {
   margin-left: 1rem;
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
@@ -54,20 +54,20 @@
 .tiptap ol {
   padding-top: 0;
   padding-left: 1rem;
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
 .tiptap ul li,
 .tiptap ol li {
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
 .tiptap p {
   line-height: 1.75;
   margin-top: 0.1rem;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.1rem;
 }
 
 .tiptap h1 {
