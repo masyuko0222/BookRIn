@@ -35,33 +35,59 @@
   border: 1px solid #111827;
 }
 
-.tiptap ol {
-  list-style-type: decimal;
-}
-
-.tiptap ul {
-  list-style-type: disc;
-}
-
-.tiptap > ul,
-.tiptap > ol {
-  margin-left: 1rem;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
 .tiptap ul,
 .tiptap ol {
-  padding-top: 0;
-  padding-left: 1rem;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+  padding-left: 1.25rem;
+}
+
+/* 第一階層 */
+.tiptap ul {
+  list-style-type: disc;
+  color: #111827;
+}
+.tiptap ol {
+  list-style-type: decimal;
+  color: #111827;
+}
+
+/* 第二階層 */
+.tiptap ul ul {
+  list-style-type: circle;
+  color: #1f2937;
+}
+.tiptap ol ol {
+  list-style-type: lower-alpha;
+  color: #1f2937;
+}
+
+/* 第三階層 */
+.tiptap ul ul ul {
+  list-style-type: square;
+  color: #374151;
+}
+.tiptap ol ol ol {
+  list-style-type: lower-roman;
+  color: #374151;
+}
+
+/* 第四階層以降（同じスタイルを継承）*/
+.tiptap ul ul ul ul,
+.tiptap ul ul ul ul ul {
+  list-style-type: disc;
+  color: #4b5563;
+}
+.tiptap ol ol ol ol,
+.tiptap ol ol ol ol ol {
+  list-style-type: decimal;
+  color: #4b5563;
 }
 
 .tiptap ul li,
 .tiptap ol li {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
 }
 
 .tiptap p {
