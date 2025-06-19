@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       resource :template, only: [:update], controller: 'template'
       resource :read_me, only: [:edit, :update], controller: 'read_me'
 
-      resources :notes, only: [:new, :edit, :create, :update], shallow: true
+      resources :notes, only: [:new, :edit, :create, :update, :destroy], shallow: true
       resources :participants, only: [:create, :destroy], shallow: true
     end
 
