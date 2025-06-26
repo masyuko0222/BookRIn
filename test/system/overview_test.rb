@@ -40,4 +40,26 @@ class OverviewTest < ApplicationSystemTestCase
 
     assert_text '参加中の輪読会はありません'
   end
+
+  test 'destroy note' do
+    reading_club = reading_clubs(:opening_club)
+    note = notes(:existing_note)
+
+    visit_with_auth(reading_club_overview_path(reading_club), @user)
+    assert_current_path reading_club_overview_path(reading_club)
+
+    within("turbo-frame##{dom_id(note)}") do
+      assert_selector 'a', text: '削除', visible: :hidden
+      find('#hoverable-note').hover
+
+      assert_selector 'a', text: '削除', visible: true
+
+      accept_confirm do
+        click_link '削除'
+      end
+    end
+
+    assert_no_selector "turbo-frame##{dom_id(note)}"
+    assert_no_text 'テストノート'
+  end
 end
