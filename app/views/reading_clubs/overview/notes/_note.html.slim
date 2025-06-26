@@ -1,10 +1,18 @@
 = turbo_frame_tag(note) do
   li.flex.flex-col.items-start
-    = link_to title_with_held_on(note), edit_note_path(note),
-      data: { turbo: false },
-      class: 'py-1 block \
-              text-black underline \
-              hover:text-blue-600'
+    #hoverable-note
+      .flex.items-center.gap-2.group
+        = link_to title_with_held_on(note), edit_note_path(note),
+          data: { turbo: false },
+          class: 'py-1 block \
+                  text-black underline \
+                  hover:text-blue-600'
+        = link_to '削除', note_path(note),
+          method: :delete,
+          data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' },
+          class: 'ml-4 opacity-0 \
+                  text-xs \
+                  group-hover:opacity-100 hover:text-red-700'
 
     - if word
       p.text-sm.text-gray-600.mx-1

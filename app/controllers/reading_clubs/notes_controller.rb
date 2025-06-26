@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ReadingClubs::NotesController < ApplicationController
-  before_action :set_note, only: %i[edit update]
+  before_action :set_note, only: %i[edit update destroy]
 
   def new
     @note = Note.new(
@@ -31,6 +31,11 @@ class ReadingClubs::NotesController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @note.destroy
+    flash.now.notice = 'ノートを削除しました'
   end
 
   private
