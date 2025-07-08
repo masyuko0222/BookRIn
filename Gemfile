@@ -28,6 +28,7 @@ gem 'cssbundling-rails'
 # gem "bcrypt", "~> 3.1.7"
 
 gem 'dotenv-rails'
+gem 'jbuilder'
 gem 'kaminari'
 gem 'meta-tags'
 gem 'omniauth-discord'
