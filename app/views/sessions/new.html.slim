@@ -16,6 +16,10 @@
       = image_tag 'discord.svg', class: 'h-6 w-6 mr-2'
       span Login with Discord
 
+  .flex.items-center.mt-4
+    = check_box_tag :remember_me, '1', true, class: 'mr-2'
+    = label_tag :remember_me, '次回から自動的にログイン', class: 'text-lg text-black hover:underline cursor-pointer'
+
   .flex.justify-center.space-x-10.mt-12.mb-3
     .flex.flex-col.items-center.text-center
       = image_tag '積み上げた本.jpg', alt: '本が積み上がったアイコン', class: 'w-14 h-14 mb-3'
