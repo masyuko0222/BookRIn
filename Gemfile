@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 ruby '3.4.2'
 
-# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 7.2.2.1'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
@@ -22,10 +22,10 @@ gem 'jsbundling-rails'
 gem 'cssbundling-rails'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
-# gem "kredis"
+# gem 'kredis'
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
+# gem 'bcrypt', '~> 3.1.7'
 
 gem 'dotenv-rails'
 gem 'kaminari'
@@ -41,6 +41,8 @@ gem 'turbo-rails'
 
 group :development, :test do
   gem 'debug', platforms: %i[mri windows]
+  gem 'factory_bot_rails'
+  gem 'rspec-rails'
 end
 
 group :development do
