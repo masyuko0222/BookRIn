@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   def new; end
 
   def callback
-    user = User.find_or_create_from_discord_info(request.env['omniauth.auth'])
+    user = User.authenticate_from_omniauth(request.env['omniauth.auth'])
 
     if user.persisted?
       redirect_path = session.delete(:previous_url) || root_path
