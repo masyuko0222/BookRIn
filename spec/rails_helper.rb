@@ -2,6 +2,9 @@
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
+require 'vcr'
+require 'webmock/rspec'
+
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
@@ -71,4 +74,13 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+end
+
+VCR.configure do |config|
+  config.ignore_hosts '127.0.0.1', 'localhost'
+  config.cassette_library_dir = 'fixtures/vcr_cassettes'
+  config.hook_into :webmock
+
+  config.filter_sensitive_data('<FBC_LOGIN_NAME>') { ENV['FBC_LOGIN_NAME'] }
+  config.filter_sensitive_data('<FBC_PASSWORD>') { ENV['FBC_PASSWORD'] }
 end
