@@ -6,13 +6,13 @@ RSpec.describe User, type: :model do
   describe '.authenticate_from_omniauth' do
     context 'when the user already exists' do
       let!(:existing_user) { FactoryBot.create(:user, :alice) }
-      let(:auth) {
+      let(:auth) do
         OmniAuth::AuthHash.new(
           provider: existing_user.provider,
           uid: existing_user.uid,
           info: { name: existing_user.name }
         )
-      }
+      end
 
       it 'returns the existing user' do
         user = User.authenticate_from_omniauth(auth)
@@ -25,13 +25,13 @@ RSpec.describe User, type: :model do
     end
 
     context 'when the user does not exist' do
-      let(:auth) {
+      let(:auth) do
         OmniAuth::AuthHash.new(
           provider: 'discord',
           uid: '987654321',
           info: { name: 'New Test Person' }
         )
-      }
+      end
 
       it 'creates a new user' do
         expect do

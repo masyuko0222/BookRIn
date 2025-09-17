@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 # spec/clients/reading_circles_client_spec.rb
 require 'rails_helper'
 
 RSpec.describe ReadingCirclesClient, type: :model do
   describe '.fetch' do
-    it 'fetches all reading circles data from FBC API'do
+    it 'fetches all reading circles data from FBC API' do
       VCR.use_cassette('fetch_reading_circles') do
         result = ReadingCirclesClient.fetch
         json_fixture = Rails.root.join('spec/factories/reading_clubs_api.json')
@@ -15,26 +17,28 @@ RSpec.describe ReadingCirclesClient, type: :model do
   end
 
   describe '.save' do
-    let!(:to_update_club) {
+    let!(:to_update_club) do
       ReadingClub.create!(
         id: 1000,
         title: 'アップデート予定の輪読会',
         finished: false,
         updated_at: Time.zone.parse('2000-01-01')
       )
-    }
-    let!(:to_destroy_club) {
+    end
+    let!(:to_destroy_club) do
       ReadingClub.create!(
         id: 3000,
         title: '削除予定の輪読会',
         finished: true,
         updated_at: Time.zone.parse('2000-01-01')
       )
-    }
-    let(:clubs_api) { [
-      { 'id' => 1000, 'title' => 'アップデートした輪読会', 'finished' => true, 'updated_at' => Time.zone.parse('2024-01-01') },
-      { 'id' => 2000, 'title' => '新規作成輪読会', 'finished' => false, 'updated_at' => Time.zone.parse('2025-01-01') },
-    ] }
+    end
+    let(:clubs_api) do
+      [
+        { 'id' => 1000, 'title' => 'アップデートした輪読会', 'finished' => true, 'updated_at' => Time.zone.parse('2024-01-01') },
+        { 'id' => 2000, 'title' => '新規作成輪読会', 'finished' => false, 'updated_at' => Time.zone.parse('2025-01-01') }
+      ]
+    end
 
     context 'if created new club on FBC' do
       it 'creates new record on BookRIn' do
@@ -50,7 +54,6 @@ RSpec.describe ReadingCirclesClient, type: :model do
     end
 
     context 'if existing on BookRIn and updated on FBC ' do
-
       it 'updates record on BookRIn' do
         expect(to_update_club.title).to eq('アップデート予定の輪読会')
 
