@@ -17,9 +17,9 @@ class ReadingCirclesClient
 
     def save(latest_clubs)
       ActiveRecord::Base.transaction do
-        update_clubs(latest_clubs)
-        create_clubs(latest_clubs)
-        destroy_clubs(latest_clubs)
+        update_clubs!(latest_clubs)
+        create_clubs!(latest_clubs)
+        destroy_clubs!(latest_clubs)
       end
     end
 
@@ -34,7 +34,7 @@ class ReadingCirclesClient
       JSON.parse(res.body)['token']
     end
 
-    def update_clubs(latest_clubs)
+    def update_clubs!(latest_clubs)
       latest_clubs.each do |club|
         exist = ReadingClub.find_by(id: club['id'])
 
@@ -42,7 +42,7 @@ class ReadingCirclesClient
       end
     end
 
-    def create_clubs(latest_clubs)
+    def create_clubs!(latest_clubs)
       latest_clubs.each do |club|
         exist = ReadingClub.find_by(id: club['id'])
 
@@ -50,7 +50,7 @@ class ReadingCirclesClient
       end
     end
 
-    def destroy_clubs(latest_clubs)
+    def destroy_clubs!(latest_clubs)
       fetched_ids = latest_clubs.map { |club| club['id'] }
       sample_titles = %w[
         参加中のサンプル輪読会1
