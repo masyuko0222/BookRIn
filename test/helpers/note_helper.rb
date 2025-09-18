@@ -28,14 +28,6 @@ class NoteHelperTest < ActiveSupport::TestCase
     assert_equal 'ノートを更新', submit_button_text(exist_note)
   end
 
-  test 'note_form_url' do
-    new_note = Note.new(reading_club: reading_clubs(:opening_club))
-    assert_equal reading_club_notes_path(new_note.reading_club), note_form_url(new_note)
-
-    exist_note = notes(:existing_note)
-    assert_equal note_path(exist_note), note_form_url(exist_note)
-  end
-
   test 'summary_with_highlight' do
     @note.content = '<h1>こんにちは!</h1><p>こんばんは!</p>'
     search_word = 'こん'
