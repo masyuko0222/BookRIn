@@ -12,11 +12,5 @@ FactoryBot.define do
       template { 'This is Opening Template' }
       read_me { "# Welcome to Markdown\n\nThis is a **test**." }
     end
-
-    trait :participating_club do
-      title { 'ParticipatingClub' }
-      template { 'This is Participating Template' }
-      read_me { "# Welcome to Participating Markdown\n\nThis is a **test**." }
-    end
   end
 end
