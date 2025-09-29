@@ -29,6 +29,10 @@ Metrics/MethodLength:
   Exclude:
     - test/**/*
 
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/**' # specは階層が多くなり行数が多くなるので
+
 Performance:
   Exclude:
     - '**/test/**/*'

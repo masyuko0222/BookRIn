@@ -4,10 +4,10 @@ class ReadingClubs::NotesController < ApplicationController
   before_action :set_note, only: %i[edit update destroy]
 
   def new
+    @reading_club = ReadingClub.find(params[:reading_club_id])
     @note = Note.new(
       reading_club_id: params[:reading_club_id],
       # newページにアクセスしたタイミングで、開催日の値が入っているようにする
-      # そのためDBのdefaultではなく、Controllerでheld_onの値を設定しておく
       held_on: Time.zone.today
     )
   end
