@@ -8,13 +8,13 @@ RSpec.describe NoteHelper, type: :helper do
 
   let(:note) { Note.new(held_on: Date.new(2024, 1, 1), title: '新年ノート') }
 
-  describe '.title_with_held_on' do
+  describe '#title_with_held_on' do
     it 'returns a string with date and title' do
       expect(title_with_held_on(note)).to eq '1月1日 新年ノート'
     end
   end
 
-  describe '.submit_button_text' do
+  describe '#submit_button_text' do
     let(:new_note) { Note.new }
     let(:reading_club) { FactoryBot.create(:reading_club, :opening_club) }
     let(:existing_note) { FactoryBot.create(:note, reading_club: reading_club) }
@@ -32,7 +32,7 @@ RSpec.describe NoteHelper, type: :helper do
     end
   end
 
-  describe '.summary_with_highlight' do
+  describe '#summary_with_highlight' do
     it 'returns summary with highlighted search word' do
       note.content = '<h1>こんにちは!</h1><p>こんばんは!</p>'
       search_word = 'こん'
