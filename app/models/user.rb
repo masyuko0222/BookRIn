@@ -34,7 +34,6 @@ class User < ApplicationRecord
     def user_discord_info(discord_info)
       {
         uid: discord_info.uid,
-        name: discord_info.info.name,
         provider: discord_info.provider
       }
     end
