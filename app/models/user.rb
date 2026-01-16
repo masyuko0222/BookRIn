@@ -23,20 +23,17 @@ class User < ApplicationRecord
       %w[participants reading_clubs]
     end
 
-    def find_or_create_from_discord_info(discord_info)
-      user_info = user_discord_info(discord_info)
+    def get_user_from(discord_info)
+      uid = discord_info.uid
+      provider = discord_info.provider
+      name = discord_info.info.name
 
-      where(user_info).first_or_create(user_info)
-    end
+      user = find_or_create_by!(uid:, provider:) do |u|
+        u.name = name
+      end
 
-    private
-
-    def user_discord_info(discord_info)
-      {
-        uid: discord_info.uid,
-        name: discord_info.info.name,
-        provider: discord_info.provider
-      }
+      user.update!(name:) if user.name != name
+      user
     end
   end
 

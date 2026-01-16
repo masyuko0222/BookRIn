@@ -5,6 +5,7 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
   setup do
     @exist_user_info = build_discord_auth_hash(uid: '12345678', name: 'Alice')
+    @changed_user_info = build_discord_auth_hash(uid: '12345678', name: 'Changed Alice')
     @new_user_info = build_discord_auth_hash(uid: '987654321', name: 'NewTestMan')
   end
 
@@ -19,16 +20,24 @@ class UserTest < ActiveSupport::TestCase
     assert_not user.participating?(reading_club)
   end
 
-  test '.find_or_create_from_discord_info finds existing user' do
-    oauth_user = User.find_or_create_from_discord_info(@exist_user_info)
+  test '.get_user_from finds existing user' do
+    oauth_user = User.get_user_from(@exist_user_info)
     exist_user = users(:alice)
 
     assert_equal oauth_user, exist_user
   end
 
-  test '.find_or_create_from_discord_info creates new user when not found' do
+  test '.get_user_from update name if user changed discord name' do
+    assert_no_difference 'User.count' do
+      oauth_user = User.get_user_from(@changed_user_info)
+      exist_user = users(:alice)
+      assert_equal 'Changed Alice', exist_user.reload.name
+    end
+  end
+
+  test '.get_user_from creates new user when not found' do
     assert_difference 'User.count', +1 do
-      oauth_user = User.find_or_create_from_discord_info(@new_user_info)
+      oauth_user = User.get_user_from(@new_user_info)
 
       assert_equal 'discord', oauth_user.provider
       assert_equal '987654321', oauth_user.uid
